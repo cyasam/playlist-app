@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoListItem Component renders properly 1`] = `
+<div
+  className="video-list-item col-md-4 card"
+>
+  <img
+    alt="Video Title"
+    height={90}
+    src="https://i.ytimg.com/vi/b6hoBp7Hk-A/default.jpg"
+    width={120}
+  />
+  <div
+    className="card-body"
+  >
+    <h5
+      className="card-title"
+    >
+      Video Title
+    </h5>
+    <p
+      className="card-text"
+    >
+      Lorem ipsum dolor sit amed.
+    </p>
+  </div>
+</div>
+`;
+
+exports[`VideoListItem Component renders properly if video prop is also empty 1`] = `
+<div
+  className="video-list-item col-md-4 card"
+>
+  <div
+    className="card-body"
+  >
+    <h5
+      className="card-title"
+    />
+    <p
+      className="card-text"
+    />
+  </div>
+</div>
+`;

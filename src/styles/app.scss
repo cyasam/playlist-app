@@ -1,0 +1,23 @@
+.search-form {
+  display: flex;
+  align-items: stretch;
+  width: 30%;
+
+  .form-control {
+    width: 100%;
+  }
+
+  button {
+    min-width: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.video-list {
+  img {
+    width: 100%;
+    height: auto;
+  }
+}

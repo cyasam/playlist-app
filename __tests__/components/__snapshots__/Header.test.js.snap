@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Header Component renders properly 1`] = `
+<header>
+  <nav
+    className="navbar navbar-expand-lg navbar-dark bg-primary"
+  >
+    <Link
+      className="navbar-brand"
+      replace={false}
+      to="/"
+    >
+      Playlist App
+    </Link>
+    <Connect(Searchbox) />
+    <Link
+      className="login-btn btn btn-secondary"
+      replace={false}
+      to="/login"
+    >
+      Login
+    </Link>
+  </nav>
+</header>
+`;

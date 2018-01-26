@@ -1,0 +1,81 @@
+{
+  "name": "playlist-app",
+  "version": "1.0.0",
+  "main": "src/index.js",
+  "author": "Cagdas ISIK",
+  "license": "MIT",
+  "dependencies": {
+    "axios": "^0.17.1",
+    "babel-polyfill": "^6.26.0",
+    "prop-types": "^15.6.0",
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0",
+    "react-redux": "^5.0.6",
+    "react-router-dom": "^4.2.2",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
+  },
+  "devDependencies": {
+    "axios-mock-adapter": "^1.12.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.2.1",
+    "babel-jest": "^22.1.0",
+    "babel-loader": "^7.1.2",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-es2015": "^6.24.1",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.8",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.1",
+    "eslint": "^4.16.0",
+    "eslint-config-standard": "^11.0.0-beta.0",
+    "eslint-config-standard-react": "^5.0.0",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.1",
+    "eslint-plugin-promise": "^3.6.0",
+    "eslint-plugin-react": "^7.5.1",
+    "eslint-plugin-standard": "^3.0.1",
+    "extract-text-webpack-plugin": "^3.0.2",
+    "file-loader": "^1.1.6",
+    "html-loader": "^0.5.4",
+    "html-webpack-plugin": "^2.30.1",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^22.1.4",
+    "node-sass": "^4.7.2",
+    "npm-run-all": "^4.1.2",
+    "redux-mock-store": "^1.4.0",
+    "resolve-url-loader": "^2.2.1",
+    "rimraf": "^2.6.2",
+    "sass-loader": "^6.0.6",
+    "sinon": "^4.2.1",
+    "style-loader": "^0.19.1",
+    "uglifyjs-webpack-plugin": "^1.1.6",
+    "url-loader": "^0.6.2",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.10.1",
+    "webpack-merge": "^4.1.1"
+  },
+  "scripts": {
+    "rmDist": "rimraf ./dist",
+    "prod:start": "webpack -p --config webpack.production.js --progress",
+    "prod": "npm-run-all rmDist prod:start",
+    "dev:start": "webpack-dev-server --config webpack.development.js --progress",
+    "start": "npm-run-all -p dev:*",
+    "test": "jest --watchAll"
+  },
+  "jest": {
+    "setupTestFrameworkScriptFile": "./src/scripts/setupTests.js",
+    "testPathIgnorePatterns": [
+      "./__tests__/mockData"
+    ],
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ],
+    "moduleNameMapper": {
+      ".+\\.(css|scss|png|jpg|svg|woff|woff2)$": "identity-obj-proxy"
+    }
+  }
+}

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Searchbox Component renders properly 1`] = `
+<form
+  className="search-form mr-auto"
+  onSubmit={[Function]}
+>
+  <input
+    className="form-control mr-sm-2"
+    onChange={[Function]}
+    placeholder="Search videos on youtube"
+    type="text"
+  />
+  <button
+    className="btn btn-secondary my-2 my-sm-0"
+    type="submit"
+  >
+    <img
+      alt="Search"
+      height="16"
+      src={null}
+      width="16"
+    />
+  </button>
+</form>
+`;

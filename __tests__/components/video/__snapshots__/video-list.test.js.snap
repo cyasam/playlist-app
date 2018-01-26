@@ -1,0 +1,38 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoList Component renders properly 1`] = `
+<div
+  className="video-list row"
+>
+  <VideoListItem
+    key="0"
+    video={
+      Object {
+        "description": "Lorem ipsum dolor sit amed.",
+        "id": "lZoA5ZX4wC0",
+        "thubmnail": "video-thumbnail.jpg",
+        "title": "Video Title",
+      }
+    }
+  />
+  <VideoListItem
+    key="1"
+    video={
+      Object {
+        "description": "Lorem ipsum dolor sit amed.",
+        "id": "lZoA5ZX4wC01",
+        "thubmnail": "video-thumbnail-2.jpg",
+        "title": "Video Title 2",
+      }
+    }
+  />
+</div>
+`;
+
+exports[`VideoList Component renders properly if videos prop is empty 1`] = `
+<div>
+  No result
+</div>
+`;
+
+exports[`VideoList Component renders properly if videos prop is undefined 1`] = `""`;
