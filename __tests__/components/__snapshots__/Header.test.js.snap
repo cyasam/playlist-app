@@ -12,7 +12,7 @@ exports[`Header Component renders properly 1`] = `
     >
       Playlist App
     </Link>
-    <Connect(Searchbox) />
+    <withRouter(Connect(Searchbox)) />
     <Link
       className="login-btn btn btn-secondary"
       replace={false}

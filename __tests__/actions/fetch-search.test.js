@@ -2,7 +2,8 @@ import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
-import fetchSearch, { filterVideoResult, fetchSearchRequestAction, fetchSearchSuccessAction, fetchSearchErrorAction, 
+import { filterVideoResult } from '../../src/scripts/helpers'
+import fetchSearch, { fetchSearchRequestAction, fetchSearchSuccessAction, fetchSearchErrorAction, 
   FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../../src/scripts/actions/fetch-search'
 
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
@@ -29,21 +30,24 @@ describe('Fetch Search Action', () => {
     request: {
       type: FETCH_SEARCH_REQUEST,
       payload: {
-        isFetching: true
+        isFetching: true,
+        query: 'youtube'
       }
     },
     success: {
       type: FETCH_SEARCH_SUCCESS,
       payload: {
         isFetching: false,
-        response: filterVideoResult(successResponse)
+        response: filterVideoResult(successResponse),
+        query: 'youtube'
       }
     },
     error: {
       type: FETCH_SEARCH_ERROR,
       payload: {
         isFetching: false,
-        error: errorResponse
+        error: errorResponse,
+        query: 'youtube'
       }
     }
   }
@@ -59,15 +63,15 @@ describe('Fetch Search Action', () => {
   })
   
   it('return `FETCH_SEARCH_REQUEST` type action', () => {
-    expect(fetchSearchRequestAction()).toEqual(expectedAction.request)
+    expect(fetchSearchRequestAction(mockAxiosConfig.params.q)).toEqual(expectedAction.request)
   })
 
   it('return `FETCH_SEARCH_SUCCESS` type action', () => {
-    expect(fetchSearchSuccessAction(expectedAction.success.payload.response)).toEqual(expectedAction.success)
+    expect(fetchSearchSuccessAction(expectedAction.success.payload.response, mockAxiosConfig.params.q)).toEqual(expectedAction.success)
   })
 
   it('return `FETCH_SEARCH_ERROR` type action', () => {
-    expect(fetchSearchErrorAction(expectedAction.error.payload.error)).toEqual(expectedAction.error)
+    expect(fetchSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q)).toEqual(expectedAction.error)
   })
 
   it('creates search request and get result successfully', () => {
@@ -77,8 +81,8 @@ describe('Fetch Search Action', () => {
     return store.dispatch(fetchSearch(value)).then(
       () => {
         const receivedAction = store.getActions();
-        expect(receivedAction[0]).toEqual(fetchSearchRequestAction(expectedAction.request.payload))
-        expect(receivedAction[1]).toEqual(fetchSearchSuccessAction(expectedAction.success.payload.response))
+        expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
+        expect(receivedAction[1]).toEqual(fetchSearchSuccessAction(expectedAction.success.payload.response, mockAxiosConfig.params.q))
       }
     )
   })
@@ -91,8 +95,8 @@ describe('Fetch Search Action', () => {
       () => {
         const receivedAction = store.getActions();
 
-        expect(receivedAction[0]).toEqual(fetchSearchRequestAction(expectedAction.request.payload))
-        expect(receivedAction[1]).toEqual(fetchSearchErrorAction(expectedAction.error.payload.error))
+        expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
+        expect(receivedAction[1]).toEqual(fetchSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q))
       }
     )
   })

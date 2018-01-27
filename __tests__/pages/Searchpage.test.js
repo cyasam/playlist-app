@@ -21,12 +21,17 @@ describe('SearchPage Component', () => {
             description: 'Lorem ipsum dolor sit amed.',
             thubmnail: 'video-thumbnail-2.jpg'
           }
-        ]
+        ],
+        query: 'abc'
       }
     }
 
     const props = {
       searchResult: state.search,
+      fetchSearch: jest.fn(),
+      history: { 
+        location: { search: '?query=serdar' },
+      },
       ...propOverrides
     }
     const wrapper = shallow(<Searchpage { ...props } />)
@@ -40,6 +45,15 @@ describe('SearchPage Component', () => {
   it('renders properly', () => {
     const { wrapper } = setup()
     expect(wrapper).toMatchSnapshot()
+  })
+
+  it('renders properly when search query is not exist', () => {
+    const { wrapper, props } = setup({
+      history: { 
+        location: { search: null }
+      },
+    })
+    expect(props.fetchSearch()).toMatchSnapshot()
   })
 
   it('returns searchResult object when initialize component', () => {

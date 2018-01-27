@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`SearchPage Component renders properly 1`] = `
-<div>
+<React.Fragment>
   <h2>
     Search Results
   </h2>
@@ -23,5 +23,7 @@ exports[`SearchPage Component renders properly 1`] = `
       ]
     }
   />
-</div>
+</React.Fragment>
 `;
+
+exports[`SearchPage Component renders properly when search query is not exist 1`] = `undefined`;

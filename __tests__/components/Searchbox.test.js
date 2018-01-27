@@ -3,8 +3,14 @@ import { shallow } from 'enzyme'
 import { Searchbox } from '../../src/scripts/components/Searchbox'
 
 describe('Searchbox Component', () => {
-  const setup = () => {
-    const props = { fetchSearch: jest.fn() }
+  const setup = (propsOverride) => {
+    const props = {
+      fetchSearch: jest.fn(),
+      history: { 
+        location: { pathname: '/' },
+        push: jest.fn()
+      }, ...propsOverride
+    }
     const wrapper = shallow(<Searchbox {...props} />)
 
     return {
@@ -41,6 +47,18 @@ describe('Searchbox Component', () => {
       const { wrapper } = setup()
       expect(wrapper.state().input).toEqual('')
     })
+    
+    it('loads initial state if page is search', () => {
+      const { wrapper, props } = setup({
+        history: { 
+          location: {
+            pathname: '/search',
+            search: `?query=abc`
+          }
+        }
+      })
+      expect(wrapper.state().input).toEqual('abc')
+    })
 
     it('saves input value into state when typing', () => {
       const { wrapper } = setup()
@@ -53,6 +71,7 @@ describe('Searchbox Component', () => {
     it('fire handleSubmit event when submitting', () => {
       const { wrapper, props } = setup()
       wrapper.find('form').simulate('submit', { preventDefault: jest.fn()})
+      expect(props.history.push).toHaveBeenCalled()
       expect(props.fetchSearch).toHaveBeenCalledWith(wrapper.state().input)
     })
   })

@@ -3,7 +3,7 @@ import rootReducer from '../../src/scripts/reducers/index'
 
 describe('Root Reducer', () => {
   it('returns initial state', () => {
-    const expectedState = { search: {} }
+    const expectedState = { search: {}, trendings: {} }
     expect(rootReducer({}, {})).toEqual(expectedState)
   })
 })

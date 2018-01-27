@@ -10,6 +10,7 @@ exports[`Searchbox Component renders properly 1`] = `
     onChange={[Function]}
     placeholder="Search videos on youtube"
     type="text"
+    value=""
   />
   <button
     className="btn btn-secondary my-2 my-sm-0"

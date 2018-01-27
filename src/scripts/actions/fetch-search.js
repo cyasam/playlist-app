@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { YOUTUBE_API_KEY } from '../config'
+import { filterVideoResult } from '../helpers'
 
 export const FETCH_SEARCH_REQUEST = 'FETCH_SEARCH_REQUEST'
 export const FETCH_SEARCH_SUCCESS = 'FETCH_SEARCH_SUCCESS'
@@ -17,57 +18,49 @@ export default (value) => {
       }
     }
 
-    dispatch(fetchSearchRequestAction())
+    dispatch(fetchSearchRequestAction(value))
 
     const promise = axios.get(axiosUrl, axiosConfig)
 
     return promise.then(
       response => {
-        dispatch(fetchSearchSuccessAction(filterVideoResult(response.data)))
+        dispatch(fetchSearchSuccessAction(filterVideoResult(response.data), value))
       },
       error => {
-        dispatch(fetchSearchErrorAction(error.message))
+        dispatch(fetchSearchErrorAction(error.message, value))
       }
     )
   }
 }
 
-export const fetchSearchRequestAction = () => (
+export const fetchSearchRequestAction = (value) => (
   {
     type: FETCH_SEARCH_REQUEST,
     payload: {
-      isFetching: true
+      isFetching: true,
+      query: value
     }
   }
 )
 
-export const fetchSearchSuccessAction = (response) => (
+export const fetchSearchSuccessAction = (response, value) => (
   {
     type: FETCH_SEARCH_SUCCESS,
     payload: {
       isFetching: false,
-      response
+      response,
+      query: value
     }
   }
 )
 
-export const fetchSearchErrorAction = (error) => (
+export const fetchSearchErrorAction = (error, value) => (
   {
     type: FETCH_SEARCH_ERROR,
     payload: {
       isFetching: false,
-      error
+      error,
+      query: value
     }
   }
 )
-
-export const filterVideoResult = (result) => {
-  return result.items.map(item => {
-    return {
-      id: item.id.videoId,
-      title: item.snippet.title,
-      description: item.snippet.description,
-      thumbnail: item.snippet.thumbnails.medium
-    }
-  })
-}

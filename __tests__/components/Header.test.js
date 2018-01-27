@@ -17,7 +17,7 @@ describe('Header Component', () => {
 
   it('has Searchbox Component', () => {
     const { wrapper } = setup()
-    expect(wrapper.find('Connect(Searchbox)').exists()).toBe(true)
+    expect(wrapper.find('withRouter(Connect(Searchbox))').exists()).toBe(true)
   })
 
   it('has login button', () => {
