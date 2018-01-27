@@ -1,34 +1,12 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Homepage } from '../../src/scripts/pages/Homepage'
+import Homepage from '../../src/scripts/pages/Homepage'
 
-describe('Searchbox Component', () => {
+describe('Homepage Component', () => {
   const setup = (propOverrides) => {
-    const props = {
-      searchResult: {
-        isfetching: false,
-        response: [
-          {
-            id: 'lZoA5ZX4wC0',
-            title: 'Video Title',
-            description: 'Lorem ipsum dolor sit amed.',
-            thubmnail: 'video-thumbnail.jpg'
-          },
-          
-          {
-            id: 'lZoA5ZX4wC01',
-            title: 'Video Title 2',
-            description: 'Lorem ipsum dolor sit amed.',
-            thubmnail: 'video-thumbnail-2.jpg'
-          }
-        ]
-      },
-      ...propOverrides
-    }
-    const wrapper = shallow(<Homepage { ...props } />)
+    const wrapper = shallow(<Homepage />)
     return {
-      wrapper,
-      props
+      wrapper
     }
   }
   

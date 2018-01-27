@@ -8,7 +8,12 @@ exports[`App Component renders properly 1`] = `
   <Container>
     <Route
       component={[Function]}
+      exact={true}
       path="/"
+    />
+    <Route
+      component={[Function]}
+      path="/search"
     />
   </Container>
 </div>

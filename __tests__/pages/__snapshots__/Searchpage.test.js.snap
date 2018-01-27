@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SearchPage Component renders properly 1`] = `
+<div>
+  <h2>
+    Search Results
+  </h2>
+  <VideoList
+    videos={
+      Array [
+        Object {
+          "description": "Lorem ipsum dolor sit amed.",
+          "id": "lZoA5ZX4wC0",
+          "thubmnail": "video-thumbnail.jpg",
+          "title": "Video Title",
+        },
+        Object {
+          "description": "Lorem ipsum dolor sit amed.",
+          "id": "lZoA5ZX4wC01",
+          "thubmnail": "video-thumbnail-2.jpg",
+          "title": "Video Title 2",
+        },
+      ]
+    }
+  />
+</div>
+`;
