@@ -17,14 +17,14 @@ const mockAxiosUrl = 'https://www.googleapis.com/youtube/v3/search'
 const mockAxiosConfig = {
   params: {
     part: 'snippet',
-    q: 'surfing',
+    q: 'youtube',
     type: 'video',
     key: YOUTUBE_API_KEY
   }
 }
 
 describe('Fetch Search Action', () => {
-  const value = 'surfing'
+  const value = 'youtube'
   const expectedAction = {
     request: {
       type: FETCH_SEARCH_REQUEST,
