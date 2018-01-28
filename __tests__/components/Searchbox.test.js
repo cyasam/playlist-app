@@ -70,7 +70,8 @@ describe('Searchbox Component', () => {
   describe('Form element', () => {
     it('fire handleSubmit event when submitting', () => {
       const { wrapper, props } = setup()
-      wrapper.find('form').simulate('submit', { preventDefault: jest.fn()})
+      wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
+      
       expect(props.history.push).toHaveBeenCalled()
       expect(props.fetchSearch).toHaveBeenCalledWith(wrapper.state().input)
     })

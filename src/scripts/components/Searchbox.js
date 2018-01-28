@@ -19,7 +19,7 @@ export class Searchbox extends Component {
 
   componentDidMount () {
     const { history } = this.props
-    if (history.location.pathname.includes('/search') && history.location.search.includes('query')) {
+    if (history.location.pathname.includes('/search') && history.location.search.includes('query=')) {
       const queryStr = queryString.parse(history.location.search)
       this.setState({ input: queryStr.query })
     }
@@ -29,15 +29,12 @@ export class Searchbox extends Component {
     e.preventDefault()
 
     const { history, fetchSearch } = this.props
-    const queryStr = queryString.parse(history.location.search)
-    if (queryStr.query !== this.state.input) {
-      const historyPush = {
-        pathname: '/search',
-        search: `?query=${this.state.input}`
-      }
-      history.push(historyPush)
-      fetchSearch(this.state.input)
+    const historyPush = {
+      pathname: '/search',
+      search: `?query=${this.state.input}`
     }
+    history.push(historyPush)
+    fetchSearch(this.state.input)
   }
 
   render () {
