@@ -2,9 +2,11 @@
 
 exports[`SearchPage Component renders properly 1`] = `
 <React.Fragment>
-  <h2>
+  <h3
+    className="main-title"
+  >
     Search Results
-  </h2>
+  </h3>
   <VideoList
     videos={
       Array [

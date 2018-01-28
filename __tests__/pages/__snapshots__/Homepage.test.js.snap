@@ -2,9 +2,11 @@
 
 exports[`Homepage Component renders properly 1`] = `
 <React.Fragment>
-  <h2>
+  <h3
+    className="main-title"
+  >
     Trend Videos
-  </h2>
+  </h3>
   <VideoList
     videos={
       Array [

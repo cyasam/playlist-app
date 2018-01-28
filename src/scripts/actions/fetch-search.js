@@ -14,6 +14,7 @@ export default (value) => {
         part: 'snippet',
         q: value,
         type: 'video',
+        maxResults: 24,
         key: YOUTUBE_API_KEY
       }
     }

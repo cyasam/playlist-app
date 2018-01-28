@@ -7,7 +7,7 @@ describe('VideoListItem Component', () => {
     const props = {
       video: {
         title: 'Video Title',
-        description: 'Lorem ipsum dolor sit amed.',
+        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur finibus dui libero, sit amet facilisis urna iaculis ac. Nulla vehicula magna pulvinar dolor placerat, eget consectetur purus porttitor. Nunc arcu quam, ornare sit amet ultrices ac, cursus pellentesque tortor.`,
         thumbnail: {
           url: 'https://i.ytimg.com/vi/b6hoBp7Hk-A/default.jpg',
           width: 120,
@@ -17,10 +17,13 @@ describe('VideoListItem Component', () => {
       ...propOverrides
     }
 
+    const descStr = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur finibus dui l...'
+
     const wrapper = shallow(<VideoListItem video={props.video} />)
     return {
       wrapper,
-      props
+      props,
+      descStr
     }
   }
 
@@ -54,8 +57,8 @@ describe('VideoListItem Component', () => {
     })
 
     it('has description', () => {
-      const { wrapper, props } = setup()
-      expect(wrapper.find('.card-text').text()).toEqual(props.video.description)
+      const { wrapper, descStr } = setup()
+      expect(wrapper.find('.card-text').text()).toEqual(descStr)
     })
   })
 })

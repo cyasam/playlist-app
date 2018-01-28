@@ -13,7 +13,7 @@ export class Homepage extends Component {
     const { trendings: { response: videos } } = this.props
     return (
       <Fragment>
-        <h2>Trend Videos</h2>
+        <h3 className='main-title'>Trend Videos</h3>
         <VideoList videos={videos} />
       </Fragment>
     )

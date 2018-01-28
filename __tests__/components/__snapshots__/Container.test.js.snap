@@ -2,6 +2,6 @@
 
 exports[`Container Component renders properly 1`] = `
 <div
-  className="container"
+  className="main container"
 />
 `;

@@ -17,7 +17,7 @@ export class Searchpage extends Component {
     const { searchResult: { response: videos } } = this.props
     return (
       <Fragment>
-        <h2>Search Results</h2>
+        <h3 className='main-title'>Search Results</h3>
         <VideoList videos={videos} />
       </Fragment>
     )
