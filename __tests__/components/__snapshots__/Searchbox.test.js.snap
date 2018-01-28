@@ -6,14 +6,14 @@ exports[`Searchbox Component renders properly 1`] = `
   onSubmit={[Function]}
 >
   <input
-    className="form-control mr-sm-2"
+    className="form-control"
     onChange={[Function]}
     placeholder="Search videos on youtube"
     type="text"
     value=""
   />
   <button
-    className="btn btn-secondary my-2 my-sm-0"
+    className="btn btn-secondary my-sm-0"
     type="submit"
   >
     <img

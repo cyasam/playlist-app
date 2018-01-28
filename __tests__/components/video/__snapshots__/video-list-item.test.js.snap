@@ -24,8 +24,10 @@ exports[`VideoListItem Component renders properly 1`] = `
       >
         Video Title
       </h5>
-      <p />
-      <p>
+      <p
+        className="card-info"
+      >
+         - 
         <TimeAgo
           component="time"
           formatter={[Function]}
@@ -60,8 +62,10 @@ exports[`VideoListItem Component renders properly if video prop is also empty 1`
       <h5
         className="card-title"
       />
-      <p />
-      <p>
+      <p
+        className="card-info"
+      >
+         - 
         <TimeAgo
           component="time"
           formatter={[Function]}
