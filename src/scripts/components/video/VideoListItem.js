@@ -3,13 +3,17 @@ import PropTypes from 'prop-types'
 import TimeAgo from 'react-timeago'
 import { Link } from 'react-router-dom'
 import { shorthenText } from '../../helpers'
+import ProgressiveImage from 'react-progressive-image'
+import imagePlaceholder from '../../../images/icons/image-placeholder.jpg'
 
 const VideoListItem = ({video}) => {
   return (
     <Link to={`/watch?v=${video.id}`} className='video-list-item col-xl-3 col-lg-4 col-md-6 col-sm-6'>
       <div className='card'>
         { video.thumbnail &&
-          <img className='card-img-top' src={video.thumbnail.url} alt={video.title} width={video.thumbnail.width} height={video.thumbnail.height} />
+          <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>
+            {(src) => <img className='card-img-top' src={src} alt={video.title} />}
+          </ProgressiveImage>
         }
         <div className='card-body'>
           <h5 className='card-title'>{video.title}</h5>

@@ -51,6 +51,11 @@
   }
 }
 
+.loading {
+  display: flex;
+  justify-content: center;
+}
+
 .main {
   padding-top: 30px;
   padding-bottom: 30px;

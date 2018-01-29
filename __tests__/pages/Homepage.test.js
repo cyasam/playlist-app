@@ -43,8 +43,16 @@ describe('Homepage Component', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
+  it('renders Loading when isFetching is true', () => {
+    const { wrapper } = setup({
+      trendings: { isFetching: true }
+    })
+    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('Loading').exists()).toBe(true)
+  })
+
   it('returns trendings object when initialize component', () => {
-    const { wrapper, state } = setup()
+    const { state } = setup()
     expect(mapStateToProps(state).trendings).toEqual(state.trendings)
   })
 })

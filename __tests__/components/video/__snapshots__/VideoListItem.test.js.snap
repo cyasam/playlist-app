@@ -9,12 +9,9 @@ exports[`VideoListItem Component renders properly 1`] = `
   <div
     className="card"
   >
-    <img
-      alt="Video Title"
-      className="card-img-top"
-      height={90}
+    <ProgressiveImage
+      placeholder={null}
       src="https://i.ytimg.com/vi/b6hoBp7Hk-A/default.jpg"
-      width={120}
     />
     <div
       className="card-body"

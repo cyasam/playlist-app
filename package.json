@@ -11,6 +11,7 @@
     "query-string": "^5.0.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
+    "react-progressive-image": "^0.3.0",
     "react-redux": "^5.0.6",
     "react-router-dom": "^4.2.2",
     "react-timeago": "^3.4.3",
@@ -64,7 +65,7 @@
     "rmDist": "rimraf ./dist",
     "prod:start": "webpack -p --config webpack.production.js --progress",
     "prod": "npm-run-all rmDist prod:start",
-    "dev:start": "webpack-dev-server --config webpack.development.js --progress",
+    "dev:start": "webpack-dev-server --config webpack.development.js --progress --host 0.0.0.0",
     "start": "npm-run-all -p dev:*",
     "test": "jest --watchAll"
   },

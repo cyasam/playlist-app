@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import VideoListItem from './video-list-item'
+import VideoListItem from './VideoListItem'
 
 const VideoList = ({ videos }) => {
   if (!videos) {

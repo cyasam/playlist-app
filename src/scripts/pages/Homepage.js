@@ -2,7 +2,8 @@ import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import fetchTrendings from '../actions/fetch-trendings'
-import VideoList from '../components/video/video-list'
+import VideoList from '../components/video/VideoList'
+import Loading from '../components/Loading'
 
 export class Homepage extends Component {
   componentDidMount () {
@@ -10,7 +11,12 @@ export class Homepage extends Component {
   }
 
   render () {
-    const { trendings: { response: videos } } = this.props
+    const { trendings: { isFetching, response: videos } } = this.props
+
+    if (isFetching) {
+      return <Loading />
+    }
+
     return (
       <Fragment>
         <h3 className='main-title'>Trend Videos</h3>

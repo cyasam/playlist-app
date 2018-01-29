@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`SearchPage Component renders Loading when isFetching is true 1`] = `<Loading />`;
+
 exports[`SearchPage Component renders properly 1`] = `
 <React.Fragment>
   <h3

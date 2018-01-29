@@ -4,7 +4,8 @@ import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import fetchSearch from '../actions/fetch-search'
-import VideoList from '../components/video/video-list'
+import VideoList from '../components/video/VideoList'
+import Loading from '../components/Loading'
 
 export class Searchpage extends Component {
   componentDidMount () {
@@ -14,7 +15,11 @@ export class Searchpage extends Component {
   }
 
   render () {
-    const { searchResult: { response: videos } } = this.props
+    const { searchResult: { isFetching, response: videos } } = this.props
+
+    if (isFetching) {
+      return <Loading />
+    }
     return (
       <Fragment>
         <h3 className='main-title'>Search Results</h3>

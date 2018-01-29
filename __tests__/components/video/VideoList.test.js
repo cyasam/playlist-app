@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import VideoList from '../../../src/scripts/components/video/video-list'
+import VideoList from '../../../src/scripts/components/video/VideoList'
 
 describe('VideoList Component', () => {
   const setup = (propOverrides) => {

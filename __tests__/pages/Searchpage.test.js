@@ -56,6 +56,14 @@ describe('SearchPage Component', () => {
     expect(props.fetchSearch()).toMatchSnapshot()
   })
 
+  it('renders Loading when isFetching is true', () => {
+    const { wrapper } = setup({
+      searchResult: { isFetching: true }
+    })
+    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('Loading').exists()).toBe(true)
+  })
+
   it('returns searchResult object when initialize component', () => {
     const { wrapper, state } = setup()
     expect(mapStateToProps(state).searchResult).toEqual(state.search)

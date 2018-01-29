@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Homepage Component renders Loading when isFetching is true 1`] = `<Loading />`;
+
 exports[`Homepage Component renders properly 1`] = `
 <React.Fragment>
   <h3
