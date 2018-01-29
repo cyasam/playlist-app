@@ -19,6 +19,7 @@ const mockAxiosConfig = {
   params: {
     part: 'snippet,contentDetails,statistics',
     chart: 'mostPopular',
+    regionCode: 'TR',
     maxResults: 24,
     key: YOUTUBE_API_KEY
   }

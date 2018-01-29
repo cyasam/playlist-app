@@ -36,6 +36,7 @@ exports[`VideoListItem Component renders properly 1`] = `
           minPeriod={0}
           now={[Function]}
         />
+         - 
       </p>
       <p
         className="card-text"
@@ -74,6 +75,7 @@ exports[`VideoListItem Component renders properly if video prop is also empty 1`
           minPeriod={0}
           now={[Function]}
         />
+         - 
       </p>
       <p
         className="card-text"

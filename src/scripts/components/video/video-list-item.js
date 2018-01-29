@@ -13,7 +13,7 @@ const VideoListItem = ({video}) => {
         }
         <div className='card-body'>
           <h5 className='card-title'>{video.title}</h5>
-          <p className='card-info'>{video.channelTitle} - <TimeAgo date={video.publishedAt} /></p>
+          <p className='card-info'>{video.channelTitle} - <TimeAgo date={video.publishedAt} /> - {video.viewCount}</p>
           <p className='card-text'>{shorthenText(video.description, 80)}</p>
         </div>
       </div>

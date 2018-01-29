@@ -31,7 +31,7 @@ export class Searchbox extends Component {
     const { history, fetchSearch } = this.props
     const historyPush = {
       pathname: '/search',
-      search: `?query=${this.state.input}`
+      search: this.state.input ? `?query=${this.state.input}` : null
     }
     history.push(historyPush)
     fetchSearch(this.state.input)

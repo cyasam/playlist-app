@@ -14,6 +14,7 @@ export default (value) => {
         part: 'snippet',
         q: value,
         type: 'video',
+        regionCode: 'TR',
         maxResults: 24,
         key: YOUTUBE_API_KEY
       }
@@ -25,7 +26,10 @@ export default (value) => {
 
     return promise.then(
       response => {
-        dispatch(fetchSearchSuccessAction(filterVideoResult(response.data), value))
+        const videoPromise = getVideoDetails(response.data)
+        videoPromise.then(response => {
+          dispatch(fetchSearchSuccessAction(filterVideoResult(response), value))
+        })
       },
       error => {
         dispatch(fetchSearchErrorAction(error.message, value))
@@ -65,3 +69,35 @@ export const fetchSearchErrorAction = (error, value) => (
     }
   }
 )
+
+export const getVideoDetails = (response) => {
+  const axiosVideosUrl = 'https://www.googleapis.com/youtube/v3/videos'
+  const axiosVideosConfig = (id) => ({
+    params: {
+      part: 'statistics',
+      id,
+      regionCode: 'TR',
+      key: YOUTUBE_API_KEY
+    }
+  })
+  const promises = []
+  const newItem = { ...response }
+  newItem.items.forEach((item, index) => {
+    const promise = axios(axiosVideosUrl, axiosVideosConfig(item.id.videoId)).then(
+      video => {
+        const { viewCount } = video.data.items[0].statistics
+        newItem.items[index].viewCount = viewCount
+        return newItem.items[index]
+      }
+    )
+
+    promises.push(promise)
+  })
+  const resultPromise = Promise.all(promises)
+  return resultPromise.then(
+    result => {
+      newItem.items = result
+      return newItem
+    }
+  )
+}

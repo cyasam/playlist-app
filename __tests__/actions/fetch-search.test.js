@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { filterVideoResult } from '../../src/scripts/helpers'
-import fetchSearch, { fetchSearchRequestAction, fetchSearchSuccessAction, fetchSearchErrorAction, 
+import fetchSearch, { getVideoDetails, fetchSearchRequestAction, fetchSearchSuccessAction, fetchSearchErrorAction, 
   FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../../src/scripts/actions/fetch-search'
 
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
@@ -20,9 +20,43 @@ const mockAxiosConfig = {
     part: 'snippet',
     q: 'youtube',
     type: 'video',
+    regionCode: 'TR',
     maxResults: 24,
     key: YOUTUBE_API_KEY
   }
+}
+
+const mockAxiosVideosUrl = 'https://www.googleapis.com/youtube/v3/videos'
+const mockAxiosVideosConfig = (id) => ({
+  params: {
+    part: 'statistics',
+    id,
+    regionCode: 'TR',
+    key: YOUTUBE_API_KEY
+  }
+})
+
+const succesVideoResponse = {
+  kind: 'youtube#videoListResponse',
+  etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/9snSbrGeQ3FASDu6fgFrUJnvpLg"',
+  pageInfo: {
+    totalResults: 1,
+    resultsPerPage: 1
+  },
+  items: [
+    {
+      kind: 'youtube#video',
+      etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/15xGMSiz4CowqfgWYnpcjEE4W_I"',
+      id: 'MoylTKIuK1A',
+      statistics: {
+        viewCount: '1890045',
+        likeCount: '2304',
+        dislikeCount: '96',
+        favoriteCount: '0',
+        commentCount: '88'
+      }
+    }
+  ]
 }
 
 describe('Fetch Search Action', () => {
@@ -78,20 +112,29 @@ describe('Fetch Search Action', () => {
   it('creates search request and get result successfully', () => {
 
     mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(200, successResponse);
+    mock.onGet(mockAxiosVideosUrl, mockAxiosVideosConfig).reply(200, succesVideoResponse);
 
-    return store.dispatch(fetchSearch(value)).then(
-      () => {
+    return store.dispatch(fetchSearch(value)).then(() => {
+      const videoPromise = new Promise(resolve => {
+        const newItem = { ...successResponse }
+        newItem.items.forEach((item, index) => {
+          const { viewCount } = succesVideoResponse.items[0].statistics
+          newItem.items[index].viewCount = viewCount
+        });
+        return newItem
+      })
+
+      videoPromise.then(response => {
         const receivedAction = store.getActions();
         expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
         expect(receivedAction[1]).toEqual(fetchSearchSuccessAction(expectedAction.success.payload.response, mockAxiosConfig.params.q))
-      }
-    )
+      })
+    })
   })
 
   it('creates search request and returns error', () => {
     
     mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse);
-
     return store.dispatch(fetchSearch(value)).then(
       () => {
         const receivedAction = store.getActions();
