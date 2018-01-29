@@ -26,10 +26,15 @@ export default (value) => {
 
     return promise.then(
       response => {
-        const videoPromise = getVideoDetails(response.data)
-        videoPromise.then(response => {
-          dispatch(fetchSearchSuccessAction(filterVideoResult(response), value))
-        })
+        return getVideoDetails(response.data)
+      },
+      error => {
+        dispatch(fetchSearchErrorAction(error.message, value))
+        throw error
+      }
+    ).then(
+      response => {
+        dispatch(fetchSearchSuccessAction(filterVideoResult(response), value))
       },
       error => {
         dispatch(fetchSearchErrorAction(error.message, value))
@@ -85,8 +90,9 @@ export const getVideoDetails = (response) => {
   newItem.items.forEach((item, index) => {
     const promise = axios(axiosVideosUrl, axiosVideosConfig(item.id.videoId)).then(
       video => {
-        const { viewCount } = video.data.items[0].statistics
-        newItem.items[index].viewCount = viewCount
+        const { id, statistics } = video.data.items[0]
+        newItem.items[index].statistics = statistics
+        newItem.items[index].id = id
         return newItem.items[index]
       }
     )

@@ -5,6 +5,7 @@ import Container from './components/container'
 
 import Homepage from './pages/Homepage'
 import Searchpage from './pages/Searchpage'
+import VideoDetailpage from './pages/VideoDetailpage'
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
       <Container>
         <Route path='/' exact component={Homepage} />
         <Route path='/search' component={Searchpage} />
+        <Route path='/watch' component={VideoDetailpage} />
       </Container>
     </div>
   )

@@ -59,6 +59,16 @@ const succesVideoResponse = {
   ]
 }
 
+const manipulateResult = (data) => {
+  const newItem = { ...data }
+  newItem.items.forEach((item, index) => {
+    const { id, statistics } = succesVideoResponse.items[0]
+    newItem.items[index].statistics = statistics
+    newItem.items[index].id = id
+  });
+  return newItem
+}
+
 describe('Fetch Search Action', () => {
   const value = 'youtube'
   const expectedAction = {
@@ -73,7 +83,7 @@ describe('Fetch Search Action', () => {
       type: FETCH_SEARCH_SUCCESS,
       payload: {
         isFetching: false,
-        response: filterVideoResult(successResponse),
+        response: filterVideoResult(manipulateResult(successResponse)),
         query: 'youtube'
       }
     },
@@ -115,20 +125,9 @@ describe('Fetch Search Action', () => {
     mock.onGet(mockAxiosVideosUrl, mockAxiosVideosConfig).reply(200, succesVideoResponse);
 
     return store.dispatch(fetchSearch(value)).then(() => {
-      const videoPromise = new Promise(resolve => {
-        const newItem = { ...successResponse }
-        newItem.items.forEach((item, index) => {
-          const { viewCount } = succesVideoResponse.items[0].statistics
-          newItem.items[index].viewCount = viewCount
-        });
-        return newItem
-      })
-
-      videoPromise.then(response => {
         const receivedAction = store.getActions();
         expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
         expect(receivedAction[1]).toEqual(fetchSearchSuccessAction(expectedAction.success.payload.response, mockAxiosConfig.params.q))
-      })
     })
   })
 

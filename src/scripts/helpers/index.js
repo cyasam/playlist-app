@@ -4,7 +4,7 @@ export const filterVideoResult = (result) => {
       id: item.id,
       title: item.snippet.title,
       channelTitle: item.snippet.channelTitle,
-      viewCount: item.viewCount,
+      viewCount: item.statistics.viewCount,
       publishedAt: item.snippet.publishedAt,
       description: item.snippet.description,
       thumbnail: item.snippet.thumbnails.medium

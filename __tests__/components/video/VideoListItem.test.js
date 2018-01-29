@@ -1,6 +1,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import VideoListItem from '../../../src/scripts/components/video/VideoListItem'
+import { truncate } from 'fs';
 
 describe('VideoListItem Component', () => {
   const setup = (propOverrides) => {
@@ -46,6 +47,7 @@ describe('VideoListItem Component', () => {
     it('has thumbnail', () => {
       const { wrapper, props } = setup()
       expect(wrapper.find('ProgressiveImage').props().src).toEqual(props.video.thumbnail.url)
+      expect(wrapper.find('ProgressiveImage').props().children().props.className).toEqual('card-img-top')
     })
 
     it('has title', () => {
