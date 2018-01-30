@@ -1,13 +1,14 @@
 import { FETCH_TRENDINGS_REQUEST, FETCH_TRENDINGS_SUCCESS, FETCH_TRENDINGS_ERROR } from '../actions/fetch-trendings'
 
-export default (state = {}, action) => {
+export default (state = { isFetching: true, videos: [] }, action) => {
   switch (action.type) {
     case FETCH_TRENDINGS_REQUEST:
-      return { ...action.payload }
+      return { ...state, ...action.payload }
     case FETCH_TRENDINGS_SUCCESS:
-      return { ...action.payload }
+      const allVideos = state.videos.concat(action.payload.videos)
+      return { ...state, ...action.payload, videos: allVideos }
     case FETCH_TRENDINGS_ERROR:
-      return { ...action.payload }
+      return { ...state, ...action.payload }
     default:
       return state
   }

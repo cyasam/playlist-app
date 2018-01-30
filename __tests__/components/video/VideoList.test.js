@@ -5,7 +5,8 @@ import VideoList from '../../../src/scripts/components/video/VideoList'
 describe('VideoList Component', () => {
   const setup = (propOverrides) => {
     const props = {
-      videos: [
+      loadMoreVideos: jest.fn(),
+      videoData: [
         {
           id: 'lZoA5ZX4wC0',
           title: 'Video Title',
@@ -19,7 +20,8 @@ describe('VideoList Component', () => {
           description: 'Lorem ipsum dolor sit amed.',
           thubmnail: 'video-thumbnail-2.jpg'
         }
-      ], ...propOverrides
+      ],
+        ...propOverrides
     }
     const wrapper = shallow(<VideoList { ...props } />)
     return {
@@ -34,14 +36,14 @@ describe('VideoList Component', () => {
   })
 
   it('renders properly if videos prop is undefined', () => {
-    const { wrapper } = setup({ videos: undefined })
+    const { wrapper } = setup({ videoData: undefined })
     expect(wrapper).toMatchSnapshot()
 
     expect(wrapper.find('div').exists()).toBe(false)
   })
 
   it('renders properly if videos prop is empty', () => {
-    const { wrapper } = setup({ videos: [] })
+    const { wrapper } = setup({ videoData: [] })
     expect(wrapper).toMatchSnapshot()
 
     expect(wrapper.find('div').text()).toEqual('No result')
@@ -50,5 +52,17 @@ describe('VideoList Component', () => {
   it('creates two videos', () => {
     const { wrapper } = setup()
     expect(wrapper.find('VideoListItem').length).toBe(2)
+  })
+
+  it('returns loadmore button', () => {
+    const { wrapper } = setup()
+    wrapper.find('button')
+    expect(wrapper.find('.btn').exists()).toBe(true)
+  })
+
+  it('calls loadMoreVideos when clicking loadmore button', () => {
+    const { wrapper, props } = setup()
+    wrapper.find('.btn').simulate('click')
+    expect(props.loadMoreVideos).toHaveBeenCalled()
   })
 })

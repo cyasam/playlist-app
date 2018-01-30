@@ -11,7 +11,7 @@ export class Homepage extends Component {
   }
 
   render () {
-    const { trendings: { isFetching, response: videos } } = this.props
+    const { trendings: { isFetching, videos } } = this.props
 
     if (isFetching) {
       return <Loading />
@@ -20,7 +20,7 @@ export class Homepage extends Component {
     return (
       <Fragment>
         <h3 className='main-title'>Trend Videos</h3>
-        <VideoList videos={videos} />
+        <VideoList videoData={videos} loadMoreVideos={this.props.fetchTrendings} />
       </Fragment>
     )
   }

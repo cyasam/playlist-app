@@ -7,7 +7,7 @@ import fetchTrendings, { fetchTrendingsRequestAction, fetchTrendingsSuccessActio
   FETCH_TRENDINGS_REQUEST, FETCH_TRENDINGS_SUCCESS, FETCH_TRENDINGS_ERROR } from '../../src/scripts/actions/fetch-trendings'
 
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
-import successResponse from '../mockData/youtube-trendings.js'
+import successResponseJson from '../mockData/youtube-trendings.js'
 
 const errorResponse = 'Request failed with status code 400'
 
@@ -25,7 +25,41 @@ const mockAxiosConfig = {
   }
 }
 
+const successVideoResponse = {
+  kind: 'youtube#videoListResponse',
+  etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/9snSbrGeQ3FASDu6fgFrUJnvpLg"',
+  pageInfo: {
+    totalResults: 1,
+    resultsPerPage: 1
+  },
+  items: [
+    {
+      kind: 'youtube#video',
+      etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/15xGMSiz4CowqfgWYnpcjEE4W_I"',
+      id: 'MoylTKIuK1A',
+      statistics: {
+        viewCount: '1890045',
+        likeCount: '2304',
+        dislikeCount: '96',
+        favoriteCount: '0',
+        commentCount: '88'
+      }
+    }
+  ]
+}
+
+const manipulateResult = (data) => {
+  const newItem = { ...data }
+  newItem.items.forEach((item, index) => {
+    const { id, statistics } = successVideoResponse.items[0]
+    newItem.items[index].statistics = statistics
+    newItem.items[index].id = id
+  });
+  return newItem
+}
+
 describe('Fetch Trendings Action', () => {
+  const successResponse = filterVideoResult(manipulateResult(successResponseJson))
   const expectedAction = {
     request: {
       type: FETCH_TRENDINGS_REQUEST,
@@ -37,7 +71,7 @@ describe('Fetch Trendings Action', () => {
       type: FETCH_TRENDINGS_SUCCESS,
       payload: {
         isFetching: false,
-        response: filterVideoResult(successResponse)
+        ...successResponse
       }
     },
     error: {
@@ -52,7 +86,8 @@ describe('Fetch Trendings Action', () => {
   let store
   
   beforeEach(() => {
-    store = createMockStore({ trendings: {} })
+    const defaultState = { isFetching: true, videos: [] }
+    store = createMockStore({ trendings: defaultState })
   })
 
   afterEach (() => {
@@ -64,7 +99,7 @@ describe('Fetch Trendings Action', () => {
   })
 
   it('return `FETCH_TRENDINGS_SUCCESS` type action', () => {
-    expect(fetchTrendingsSuccessAction(expectedAction.success.payload.response)).toEqual(expectedAction.success)
+    expect(fetchTrendingsSuccessAction(successResponse)).toEqual(expectedAction.success)
   })
 
   it('return `FETCH_TRENDINGS_ERROR` type action', () => {
@@ -73,13 +108,13 @@ describe('Fetch Trendings Action', () => {
 
   it('creates trendings request and get result successfully', () => {
 
-    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(200, successResponse);
+    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(200, successResponseJson);
 
     return store.dispatch(fetchTrendings()).then(
       () => {
         const receivedAction = store.getActions();
         expect(receivedAction[0]).toEqual(fetchTrendingsRequestAction())
-        expect(receivedAction[1]).toEqual(fetchTrendingsSuccessAction(expectedAction.success.payload.response))
+        expect(receivedAction[1]).toEqual(fetchTrendingsSuccessAction(successResponse))
       }
     )
   })

@@ -7,20 +7,20 @@ describe('SearchPage Component', () => {
     const state = {
       search: {
         isfetching: false,
-        response: [
-          {
-            id: 'lZoA5ZX4wC0',
-            title: 'Video Title',
-            description: 'Lorem ipsum dolor sit amed.',
-            thubmnail: 'video-thumbnail.jpg'
-          },
-          
-          {
-            id: 'lZoA5ZX4wC01',
-            title: 'Video Title 2',
-            description: 'Lorem ipsum dolor sit amed.',
-            thubmnail: 'video-thumbnail-2.jpg'
-          }
+        videoData: [
+            {
+              id: 'lZoA5ZX4wC0',
+              title: 'Video Title',
+              description: 'Lorem ipsum dolor sit amed.',
+              thubmnail: 'video-thumbnail.jpg'
+            },
+            
+            {
+              id: 'lZoA5ZX4wC01',
+              title: 'Video Title 2',
+              description: 'Lorem ipsum dolor sit amed.',
+              thubmnail: 'video-thumbnail-2.jpg'
+            }
         ],
         query: 'abc'
       }

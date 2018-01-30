@@ -2,30 +2,40 @@
 
 exports[`VideoList Component renders properly 1`] = `
 <div
-  className="video-list row"
+  className="video-list"
 >
-  <VideoListItem
-    key="0"
-    video={
-      Object {
-        "description": "Lorem ipsum dolor sit amed.",
-        "id": "lZoA5ZX4wC0",
-        "thubmnail": "video-thumbnail.jpg",
-        "title": "Video Title",
+  <div
+    className="video-list-inner row"
+  >
+    <VideoListItem
+      key="0"
+      video={
+        Object {
+          "description": "Lorem ipsum dolor sit amed.",
+          "id": "lZoA5ZX4wC0",
+          "thubmnail": "video-thumbnail.jpg",
+          "title": "Video Title",
+        }
       }
-    }
-  />
-  <VideoListItem
-    key="1"
-    video={
-      Object {
-        "description": "Lorem ipsum dolor sit amed.",
-        "id": "lZoA5ZX4wC01",
-        "thubmnail": "video-thumbnail-2.jpg",
-        "title": "Video Title 2",
+    />
+    <VideoListItem
+      key="1"
+      video={
+        Object {
+          "description": "Lorem ipsum dolor sit amed.",
+          "id": "lZoA5ZX4wC01",
+          "thubmnail": "video-thumbnail-2.jpg",
+          "title": "Video Title 2",
+        }
       }
-    }
-  />
+    />
+  </div>
+  <button
+    className="btn btn-secondary"
+    onClick={[Function]}
+  >
+    Load More
+  </button>
 </div>
 `;
 

@@ -15,7 +15,7 @@ export default (value) => {
         q: value,
         type: 'video',
         regionCode: 'TR',
-        maxResults: 24,
+        maxResults: 5,
         key: YOUTUBE_API_KEY
       }
     }
@@ -58,7 +58,7 @@ export const fetchSearchSuccessAction = (response, value) => (
     type: FETCH_SEARCH_SUCCESS,
     payload: {
       isFetching: false,
-      response,
+      ...response,
       query: value
     }
   }

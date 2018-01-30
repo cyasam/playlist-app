@@ -7,7 +7,7 @@ describe('Homepage Component', () => {
     const state = {
       trendings: {
         isfetching: false,
-        response: [
+        videoData: [
           {
             id: 'lZoA5ZX4wC0',
             title: 'Video Title',

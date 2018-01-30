@@ -3,14 +3,15 @@ import fetchTrendingsReducer from '../../src/scripts/reducers/fetch-trendings'
 import { successResponse } from '../mockData/youtube-trendings.js'
 
 describe('Fetch Trendings Reducer', () => {
+  const defaultState = { isFetching: true, videos: [] }
+
   it('returns initial state handling with unknown type', () => {
-    const expectedState = {}
-    expect(fetchTrendingsReducer(undefined, {})).toEqual(expectedState)
+    expect(fetchTrendingsReducer(undefined, {})).toEqual(defaultState)
   })
 
   it('returns state of `FETCH_TRENDINGS_REQUEST` type action', () => {
     const expectedState = {
-      isFetching: true
+      isFetching: true, videos: []
     }
 
     const expectedAction = {
@@ -20,48 +21,58 @@ describe('Fetch Trendings Reducer', () => {
       }
     }
 
-    expect(fetchTrendingsReducer({}, expectedAction)).toEqual(expectedState)
+    expect(fetchTrendingsReducer(defaultState, expectedAction)).toEqual(expectedState)
   })
 
   it('returns state of `FETCH_TRENDINGS_SUCCESS` type action', () => {
     const expectedState = {
       isFetching: false,
-      payload: successResponse
+      videos: [
+        {
+          id: 'xyz',
+          title: 'Video Title',
+          channelTitle: 'Channel Title'
+        }
+      ],
+      nextPageToken: 'abcxy23'
     }
 
     const expectedAction = {
       type: FETCH_TRENDINGS_SUCCESS,
       payload: {
         isFetching: false,
-        payload: successResponse
+        videos: [
+          {
+            id: 'xyz',
+            title: 'Video Title',
+            channelTitle: 'Channel Title'
+          }
+        ],
+        nextPageToken: 'abcxy23'
       }
     }
 
-    expect(fetchTrendingsReducer({}, expectedAction)).toEqual(expectedState)
+    expect(fetchTrendingsReducer(defaultState, expectedAction)).toEqual(expectedState)
   })
 
   it('returns state of `FETCH_TRENDINGS_ERROR` type action', () => {
     const expectedState = {
       isFetching: false,
-      payload: {
-        error: {
-          message: 'Error'
-        }
-      }
+      error: {
+        message: 'Error'
+      }, videos: []
     }
 
     const expectedAction = {
       type: FETCH_TRENDINGS_ERROR,
       payload: {
         isFetching: false,
-        payload: {
-          error: {
-            message: 'Error'
-          }
+        error: {
+          message: 'Error'
         }
       }
     }
 
-    expect(fetchTrendingsReducer({}, expectedAction)).toEqual(expectedState)
+    expect(fetchTrendingsReducer(defaultState, expectedAction)).toEqual(expectedState)
   })
 })

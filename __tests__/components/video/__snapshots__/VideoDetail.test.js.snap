@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VideoDetail Component renders properly 1`] = `
+<div>
+  <iframe
+    allow="encrypted-media"
+    allowFullScreen={true}
+    frameBorder="0"
+    height="315"
+    src="https://www.youtube.com/embed/g884wLr9gNc?autoplay=1"
+    width="560"
+  />
+</div>
+`;
+
+exports[`VideoDetail Component renders properly if videos prop is empty 1`] = `
+<div>
+  Error: Video not found.
+</div>
+`;

@@ -1,5 +1,5 @@
 export const filterVideoResult = (result) => {
-  return result.items.map(item => {
+  const videos = result.items.map(item => {
     return {
       id: item.id,
       title: item.snippet.title,
@@ -10,6 +10,11 @@ export const filterVideoResult = (result) => {
       thumbnail: item.snippet.thumbnails.medium
     }
   })
+
+  return {
+    videos,
+    nextPageToken: result.nextPageToken
+  }
 }
 
 export const shorthenText = (text, maxLength = 100) => {

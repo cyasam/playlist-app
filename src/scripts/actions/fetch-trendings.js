@@ -6,7 +6,7 @@ export const FETCH_TRENDINGS_REQUEST = 'FETCH_TRENDINGS_REQUEST'
 export const FETCH_TRENDINGS_SUCCESS = 'FETCH_TRENDINGS_SUCCESS'
 export const FETCH_TRENDINGS_ERROR = 'FETCH_TRENDINGS_ERROR'
 
-export default () => {
+export default (pageToken = null) => {
   return dispatch => {
     const axiosUrl = 'https://www.googleapis.com/youtube/v3/videos'
     const axiosConfig = {
@@ -17,6 +17,10 @@ export default () => {
         maxResults: 24,
         key: YOUTUBE_API_KEY
       }
+    }
+
+    if (pageToken) {
+      axiosConfig.params.pageToken = pageToken
     }
 
     dispatch(fetchTrendingsRequestAction())
@@ -48,7 +52,7 @@ export const fetchTrendingsSuccessAction = (response) => (
     type: FETCH_TRENDINGS_SUCCESS,
     payload: {
       isFetching: false,
-      response
+      ...response
     }
   }
 )

@@ -1,67 +1,81 @@
 import { FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../../src/scripts/actions/fetch-search'
 import fetchSearchReducer from '../../src/scripts/reducers/fetch-search'
-import { successResponse } from '../mockData/youtube-search.js'
 
 describe('Fetch Search Reducer', () => {
+  const defaultState = { isFetching: true, videos: [] }
+  
   it('returns initial state handling with unknown type', () => {
-    const expectedState = {}
-    expect(fetchSearchReducer(undefined, {})).toEqual(expectedState)
+    expect(fetchSearchReducer(undefined, {})).toEqual(defaultState)
   })
 
   it('returns state of `FETCH_SEARCH_REQUEST` type action', () => {
     const expectedState = {
-      isFetching: true
+      isFetching: true,
+      videos: [],
+      query: 'abc'
     }
 
     const expectedAction = {
       type: FETCH_SEARCH_REQUEST,
       payload: {
-        isFetching: true
+        isFetching: true,
+        query: 'abc'
       }
     }
 
-    expect(fetchSearchReducer({}, expectedAction)).toEqual(expectedState)
+    expect(fetchSearchReducer(defaultState, expectedAction)).toEqual(expectedState)
   })
 
   it('returns state of `FETCH_SEARCH_SUCCESS` type action', () => {
     const expectedState = {
       isFetching: false,
-      payload: successResponse
+      videos: [
+        {
+          id: 'xyz',
+          title: 'Video Title',
+          channelTitle: 'Channel Title'
+        }
+      ],
+      nextPageToken: 'abcxy23'
     }
 
     const expectedAction = {
       type: FETCH_SEARCH_SUCCESS,
       payload: {
         isFetching: false,
-        payload: successResponse
+        videos: [
+          {
+            id: 'xyz',
+            title: 'Video Title',
+            channelTitle: 'Channel Title'
+          }
+        ],
+        nextPageToken: 'abcxy23'
       }
     }
 
-    expect(fetchSearchReducer({}, expectedAction)).toEqual(expectedState)
+    expect(fetchSearchReducer(defaultState, expectedAction)).toEqual(expectedState)
   })
 
   it('returns state of `FETCH_SEARCH_ERROR` type action', () => {
     const expectedState = {
       isFetching: false,
-      payload: {
-        error: {
-          message: 'Error',
-        }
-      }
+      error: {
+        message: 'Error',
+      },
+      videos: []
     }
 
     const expectedAction = {
       type: FETCH_SEARCH_ERROR,
       payload: {
         isFetching: false,
-        payload: {
-          error: {
-            message: 'Error',
-          }
+        error: {
+          message: 'Error',
         }
       }
     }
 
-    expect(fetchSearchReducer({}, expectedAction)).toEqual(expectedState)
+    expect(fetchSearchReducer(defaultState, expectedAction)).toEqual(expectedState)
   })
 })

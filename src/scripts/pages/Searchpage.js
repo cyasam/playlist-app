@@ -9,13 +9,13 @@ import Loading from '../components/Loading'
 
 export class Searchpage extends Component {
   componentDidMount () {
-    const { fetchSearch, history } = this.props
+    const { history } = this.props
     const queryStr = queryString.parse(history.location.search)
     fetchSearch(queryStr.query)
   }
 
   render () {
-    const { searchResult: { isFetching, response: videos } } = this.props
+    const { searchResult: { isFetching, videos }, fetchSearch } = this.props
 
     if (isFetching) {
       return <Loading />
@@ -23,7 +23,7 @@ export class Searchpage extends Component {
     return (
       <Fragment>
         <h3 className='main-title'>Search Results</h3>
-        <VideoList videos={videos} />
+        <VideoList videoData={videos} loadMoreVideos={fetchSearch} />
       </Fragment>
     )
   }

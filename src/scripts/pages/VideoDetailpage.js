@@ -2,20 +2,18 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { withRouter } from 'react-router-dom'
+import VideoDetail from '../components/video/VideoDetail'
 
-const VideoDetail = ({history}) => {
+const VideoDetailPage = ({history}) => {
   const queryStr = queryString.parse(history.location.search)
   document.title = queryStr.v
   return (
-    <div>
-      <iframe width='560' height='315' src={`https://www.youtube.com/embed/${queryStr.v}?autoplay=1`}
-        frameBorder='0' allow='autoplay; encrypted-media' allowFullScreen />
-    </div>
+    <VideoDetail videoId={queryStr.v} />
   )
 }
 
-VideoDetail.propTypes = {
+VideoDetailPage.propTypes = {
   history: PropTypes.object.isRequired
 }
 
-export default withRouter(VideoDetail)
+export default withRouter(VideoDetailPage)
