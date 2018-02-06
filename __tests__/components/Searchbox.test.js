@@ -68,12 +68,23 @@ describe('Searchbox Component', () => {
   })
 
   describe('Form element', () => {
+    it('doesn`t fire handleSubmit event when submitting', () => {
+      const { wrapper, props } = setup()
+      wrapper.find('input').simulate('change', {target: { value: '' }})
+      wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
+      
+      expect(props.history.push.mock.calls.length).toBe(0)
+      expect(wrapper.state().input.length).toBe(0)
+      expect(props.fetchSearch.mock.calls.length).toBe(0)
+    })
+
     it('fire handleSubmit event when submitting', () => {
       const { wrapper, props } = setup()
       wrapper.find('input').simulate('change', {target: { value: 'abc' }})
       wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
       
       expect(props.history.push).toHaveBeenCalled()
+      expect(wrapper.state().input.length).toBe(3)
       expect(props.fetchSearch).toHaveBeenCalledWith(wrapper.state().input)
     })
   })
