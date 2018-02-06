@@ -69,3 +69,44 @@
     margin-bottom: 20px;
   }
 }
+
+/* Layout */
+
+$header: 72px;
+header {
+  display: flex;
+  position: fixed;
+  top:0;
+  width: 100%;
+  z-index: 100;
+  height: $header;
+
+  .navbar {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.main {
+  margin-top: $header;
+}
+
+@media (max-width: 575px) {
+  $header: 128px;
+  header {
+    height: $header;
+
+    .navbar-brand {
+      margin-bottom: 10px;
+    }
+
+    .search-form {
+      width: 100%;
+      order: 1;
+    }
+  }
+
+  .main {
+    margin-top: $header;
+  }
+}

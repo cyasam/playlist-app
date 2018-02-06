@@ -14,6 +14,13 @@ export class Searchpage extends Component {
   }
 
   componentDidMount () {
+    const { searchResult: { query } } = this.props
+    if (!query) {
+      this.mountPage()
+    }
+  }
+
+  mountPage () {
     const { history, fetchSearch } = this.props
     const queryStr = queryString.parse(history.location.search)
     fetchSearch(queryStr.query)

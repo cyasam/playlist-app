@@ -3,7 +3,7 @@ import { shallow } from 'enzyme'
 import { Searchpage, mapStateToProps } from '../../src/scripts/pages/Searchpage'
 
 describe('SearchPage Component', () => {
-  const setup = (propOverrides) => {
+  const setup = (propOverrides, stateOverrides) => {
     const state = {
       search: {
         isFetching: false,
@@ -24,7 +24,8 @@ describe('SearchPage Component', () => {
         ],
         query: 'abc',
         nextPageToken: 'CBgQAA'
-      }
+      },
+      ...stateOverrides
     }
 
     const props = {
@@ -47,6 +48,14 @@ describe('SearchPage Component', () => {
   it('renders properly', () => {
     const { wrapper } = setup()
     expect(wrapper).toMatchSnapshot()
+  })
+
+  it('calls mountPage method when first page load', () => {
+    const { wrapper } = setup(null, { search: { isFetching: true, videos: [] } })
+    const mockMountPage = jest.spyOn(wrapper.instance(), 'mountPage')
+
+    wrapper.instance().componentDidMount()
+    expect(mockMountPage.mock.calls.length).toEqual(1)
   })
 
   it('renders properly when search query is not exist', () => {
