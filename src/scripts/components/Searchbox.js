@@ -28,13 +28,15 @@ export class Searchbox extends Component {
   handleSubmit (e) {
     e.preventDefault()
 
-    const { history, fetchSearch } = this.props
-    const historyPush = {
-      pathname: '/search',
-      search: `?query=${this.state.input}`
+    if (this.state.input.length) {
+      const { history, fetchSearch } = this.props
+      const historyPush = {
+        pathname: '/search',
+        search: `?query=${this.state.input}`
+      }
+      history.push(historyPush)
+      fetchSearch(this.state.input)
     }
-    history.push(historyPush)
-    fetchSearch(this.state.input)
   }
 
   render () {
