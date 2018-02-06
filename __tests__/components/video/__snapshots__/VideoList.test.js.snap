@@ -1,5 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`VideoList Component renders Loading when isFetching is true 1`] = `<Loading />`;
+
 exports[`VideoList Component renders properly 1`] = `
 <div
   className="video-list"
@@ -39,10 +41,24 @@ exports[`VideoList Component renders properly 1`] = `
 </div>
 `;
 
-exports[`VideoList Component renders properly if videos prop is empty 1`] = `
-<div>
-  No result
+exports[`VideoList Component renders properly if any video is not found. 1`] = `
+<div
+  className="video-list"
+>
+  <div
+    className="video-list-inner row"
+  >
+    <div
+      className="no-result"
+    >
+      No result
+    </div>
+  </div>
+  <button
+    className="btn btn-secondary"
+    onClick={[Function]}
+  >
+    Load More
+  </button>
 </div>
 `;
-
-exports[`VideoList Component renders properly if videos prop is undefined 1`] = `""`;

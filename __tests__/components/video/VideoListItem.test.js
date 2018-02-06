@@ -54,10 +54,5 @@ describe('VideoListItem Component', () => {
       const { wrapper, props } = setup()
       expect(wrapper.find('.card-title').text()).toEqual(props.video.title)
     })
-
-    it('has description', () => {
-      const { wrapper, descStr } = setup()
-      expect(wrapper.find('.card-text').text()).toEqual(descStr)
-    })
   })
 })

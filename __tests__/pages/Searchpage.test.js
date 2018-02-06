@@ -6,8 +6,8 @@ describe('SearchPage Component', () => {
   const setup = (propOverrides) => {
     const state = {
       search: {
-        isfetching: false,
-        videoData: [
+        isFetching: false,
+        videos: [
             {
               id: 'lZoA5ZX4wC0',
               title: 'Video Title',
@@ -22,13 +22,15 @@ describe('SearchPage Component', () => {
               thubmnail: 'video-thumbnail-2.jpg'
             }
         ],
-        query: 'abc'
+        query: 'abc',
+        nextPageToken: 'CBgQAA'
       }
     }
 
     const props = {
       searchResult: state.search,
       fetchSearch: jest.fn(),
+      loadmoreSearch: jest.fn(),
       history: { 
         location: { search: '?query=serdar' },
       },
@@ -56,16 +58,14 @@ describe('SearchPage Component', () => {
     expect(props.fetchSearch()).toMatchSnapshot()
   })
 
-  it('renders Loading when isFetching is true', () => {
-    const { wrapper } = setup({
-      searchResult: { isFetching: true }
-    })
-    expect(wrapper).toMatchSnapshot()
-    expect(wrapper.find('Loading').exists()).toBe(true)
-  })
-
   it('returns searchResult object when initialize component', () => {
     const { wrapper, state } = setup()
     expect(mapStateToProps(state).searchResult).toEqual(state.search)
+  })
+
+  it('calls loadmoreSearch when calling loadMore', () => {
+    const { wrapper, props, state } = setup()
+    wrapper.instance().loadMore('abc')
+    expect(props.loadmoreSearch).toHaveBeenCalledWith(state.search.query, 'abc')
   })
 })

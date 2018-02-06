@@ -86,7 +86,7 @@ describe('Fetch Trendings Action', () => {
   let store
   
   beforeEach(() => {
-    const defaultState = { isFetching: true, videos: [] }
+    const defaultState = { isFetching: true }
     store = createMockStore({ trendings: defaultState })
   })
 

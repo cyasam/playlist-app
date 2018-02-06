@@ -5,8 +5,7 @@ export default (state = { isFetching: true, videos: [] }, action) => {
     case FETCH_TRENDINGS_REQUEST:
       return { ...state, ...action.payload }
     case FETCH_TRENDINGS_SUCCESS:
-      const allVideos = state.videos.concat(action.payload.videos)
-      return { ...state, ...action.payload, videos: allVideos }
+      return { ...state, ...action.payload }
     case FETCH_TRENDINGS_ERROR:
       return { ...state, ...action.payload }
     default:

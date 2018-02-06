@@ -6,8 +6,8 @@ describe('Homepage Component', () => {
   const setup = (propsOverride) => {
     const state = {
       trendings: {
-        isfetching: false,
-        videoData: [
+        isFetching: false,
+        videos: [
           {
             id: 'lZoA5ZX4wC0',
             title: 'Video Title',
@@ -41,14 +41,6 @@ describe('Homepage Component', () => {
   it('renders properly', () => {
     const { wrapper } = setup()
     expect(wrapper).toMatchSnapshot()
-  })
-
-  it('renders Loading when isFetching is true', () => {
-    const { wrapper } = setup({
-      trendings: { isFetching: true }
-    })
-    expect(wrapper).toMatchSnapshot()
-    expect(wrapper.find('Loading').exists()).toBe(true)
   })
 
   it('returns trendings object when initialize component', () => {

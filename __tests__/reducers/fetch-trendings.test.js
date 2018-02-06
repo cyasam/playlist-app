@@ -11,7 +11,8 @@ describe('Fetch Trendings Reducer', () => {
 
   it('returns state of `FETCH_TRENDINGS_REQUEST` type action', () => {
     const expectedState = {
-      isFetching: true, videos: []
+      isFetching: true,
+      videos: []
     }
 
     const expectedAction = {
@@ -58,9 +59,10 @@ describe('Fetch Trendings Reducer', () => {
   it('returns state of `FETCH_TRENDINGS_ERROR` type action', () => {
     const expectedState = {
       isFetching: false,
+      videos: [],
       error: {
         message: 'Error'
-      }, videos: []
+      }
     }
 
     const expectedAction = {

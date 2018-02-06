@@ -35,11 +35,6 @@ exports[`VideoListItem Component renders properly 1`] = `
         />
          - 
       </p>
-      <p
-        className="card-text"
-      >
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur finibus dui l...
-      </p>
     </div>
   </div>
 </Link>
@@ -74,9 +69,6 @@ exports[`VideoListItem Component renders properly if video prop is also empty 1`
         />
          - 
       </p>
-      <p
-        className="card-text"
-      />
     </div>
   </div>
 </Link>

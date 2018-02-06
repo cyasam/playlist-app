@@ -1,38 +1,59 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import VideoListItem from './VideoListItem'
+import Loading from '../Loading'
 
 class VideoList extends Component {
-  loadMoreVideos (nextPageToken) {
-    this.props.loadMoreVideos(nextPageToken)
+  constructor () {
+    super()
+    this.loadMoreCallback = this.loadMoreCallback.bind(this)
+  }
+
+  renderVideoResult (videos) {
+    let result
+    if (videos.length) {
+      result = videos.map((video, index) => (
+        <VideoListItem key={index} video={video} />
+      ))
+    } else {
+      result = <div className='no-result'>No result</div>
+    }
+
+    return result
+  }
+
+  loadMoreCallback (e) {
+    e.preventDefault()
+    const { loadMoreCallback, nextPageToken } = this.props
+    loadMoreCallback(nextPageToken)
   }
 
   render () {
-    const { videoData: videos } = this.props
-    if (!videos) {
-      return null
-    } else if (!videos.length) {
-      return <div>No result</div>
+    const { isFetching, videos, nextPageToken } = this.props
+
+    if (isFetching && !videos.length) {
+      return <Loading />
     }
 
     return (
       <div className='video-list'>
         <div className='video-list-inner row'>
-          {
-            videos.map((video, index) => (
-              <VideoListItem key={index} video={video} />
-            ))
-          }
+          { this.renderVideoResult(videos) }
         </div>
-        <button onClick={() => this.loadMoreVideos('ss')} className='btn btn-secondary'>Load More</button>
+        { isFetching && <Loading /> }
+        { !isFetching && nextPageToken &&
+          <button onClick={this.loadMoreCallback} className='btn btn-secondary'>Load More</button>
+        }
       </div>
     )
   }
 }
 
 VideoList.propTypes = {
-  videoData: PropTypes.array,
-  loadMoreVideos: PropTypes.func.isRequired
+  isFetching: PropTypes.bool.isRequired,
+  videos: PropTypes.array.isRequired,
+  nextPageToken: PropTypes.string,
+  loadMoreCallback: PropTypes.func
 }
 
 export default VideoList

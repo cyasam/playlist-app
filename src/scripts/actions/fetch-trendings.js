@@ -1,31 +1,15 @@
-import axios from 'axios'
-import { YOUTUBE_API_KEY } from '../config'
 import { filterVideoResult } from '../helpers'
+import { axiosYoutubeMostPopular } from '../helpers/async-promises'
 
 export const FETCH_TRENDINGS_REQUEST = 'FETCH_TRENDINGS_REQUEST'
 export const FETCH_TRENDINGS_SUCCESS = 'FETCH_TRENDINGS_SUCCESS'
 export const FETCH_TRENDINGS_ERROR = 'FETCH_TRENDINGS_ERROR'
 
-export default (pageToken = null) => {
+export default () => {
   return dispatch => {
-    const axiosUrl = 'https://www.googleapis.com/youtube/v3/videos'
-    const axiosConfig = {
-      params: {
-        part: 'snippet,contentDetails,statistics',
-        chart: 'mostPopular',
-        regionCode: 'TR',
-        maxResults: 24,
-        key: YOUTUBE_API_KEY
-      }
-    }
-
-    if (pageToken) {
-      axiosConfig.params.pageToken = pageToken
-    }
-
     dispatch(fetchTrendingsRequestAction())
 
-    const promise = axios.get(axiosUrl, axiosConfig)
+    const promise = axiosYoutubeMostPopular()
 
     return promise.then(
       response => {

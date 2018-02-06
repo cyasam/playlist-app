@@ -1,7 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Homepage Component renders Loading when isFetching is true 1`] = `<Loading />`;
-
 exports[`Homepage Component renders properly 1`] = `
 <React.Fragment>
   <h3
@@ -10,12 +8,22 @@ exports[`Homepage Component renders properly 1`] = `
     Trend Videos
   </h3>
   <VideoList
-    loadMoreVideos={
-      [MockFunction] {
-        "calls": Array [
-          Array [],
-        ],
-      }
+    isFetching={false}
+    videos={
+      Array [
+        Object {
+          "description": "Lorem ipsum dolor sit amed.",
+          "id": "lZoA5ZX4wC0",
+          "thubmnail": "video-thumbnail.jpg",
+          "title": "Video Title",
+        },
+        Object {
+          "description": "Lorem ipsum dolor sit amed.",
+          "id": "lZoA5ZX4wC01",
+          "thubmnail": "video-thumbnail-2.jpg",
+          "title": "Video Title 2",
+        },
+      ]
     }
   />
 </React.Fragment>

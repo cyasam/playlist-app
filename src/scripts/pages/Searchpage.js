@@ -4,26 +4,36 @@ import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import fetchSearch from '../actions/fetch-search'
+import loadmoreSearch from '../actions/loadmore-search'
 import VideoList from '../components/video/VideoList'
-import Loading from '../components/Loading'
 
 export class Searchpage extends Component {
+  constructor () {
+    super()
+    this.loadMore = this.loadMore.bind(this)
+  }
+
   componentDidMount () {
-    const { history } = this.props
+    const { history, fetchSearch } = this.props
     const queryStr = queryString.parse(history.location.search)
     fetchSearch(queryStr.query)
   }
 
-  render () {
-    const { searchResult: { isFetching, videos }, fetchSearch } = this.props
+  loadMore (nextPageToken) {
+    const { searchResult: { query }, loadmoreSearch } = this.props
+    loadmoreSearch(query, nextPageToken)
+  }
 
-    if (isFetching) {
-      return <Loading />
-    }
+  render () {
+    const { searchResult: { isFetching, videos, nextPageToken } } = this.props
+
     return (
       <Fragment>
         <h3 className='main-title'>Search Results</h3>
-        <VideoList videoData={videos} loadMoreVideos={fetchSearch} />
+        <VideoList isFetching={isFetching}
+          videos={videos}
+          nextPageToken={nextPageToken}
+          loadMoreCallback={this.loadMore} />
       </Fragment>
     )
   }
@@ -32,6 +42,7 @@ export class Searchpage extends Component {
 Searchpage.propTypes = {
   searchResult: PropTypes.object.isRequired,
   fetchSearch: PropTypes.func.isRequired,
+  loadmoreSearch: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 }
 
@@ -39,4 +50,4 @@ export const mapStateToProps = state => ({
   searchResult: state.search
 })
 
-export default withRouter(connect(mapStateToProps, { fetchSearch })(Searchpage))
+export default withRouter(connect(mapStateToProps, { fetchSearch, loadmoreSearch })(Searchpage))
