@@ -10,33 +10,6 @@ const successResponse = {
   items: [
     {
       kind: 'youtube#searchResult',
-      etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/MW7adjy1QkFTe55IW15hbkFkToU"',
-      id: {
-        kind: 'youtube#channel',
-        channelId: 'UC-9-kyTW8ZkZNDHQJ6FgpwQ'
-      },
-      snippet: {
-        publishedAt: '2013-09-24T12:58:02.000Z',
-        channelId: 'UC-9-kyTW8ZkZNDHQJ6FgpwQ',
-        title: 'Music',
-        description: 'YouTube\'s music destination featuring top tracks and popular hits from a variety of genres. This channel was generated automatically by YouTube\'s video discovery system.',
-        thumbnails: {
-          'default': {
-            url: 'https://yt3.ggpht.com/-YxMG_OBxoIM/AAAAAAAAAAI/AAAAAAAAAAA/p5Z_4Wofbmk/s88-c-k-no-mo-rj-c0xffffff/photo.jpg'
-          },
-          medium: {
-            url: 'https://yt3.ggpht.com/-YxMG_OBxoIM/AAAAAAAAAAI/AAAAAAAAAAA/p5Z_4Wofbmk/s240-c-k-no-mo-rj-c0xffffff/photo.jpg'
-          },
-          high: {
-            url: 'https://yt3.ggpht.com/-YxMG_OBxoIM/AAAAAAAAAAI/AAAAAAAAAAA/p5Z_4Wofbmk/s240-c-k-no-mo-rj-c0xffffff/photo.jpg'
-          }
-        },
-        channelTitle: 'Music',
-        liveBroadcastContent: 'none'
-      }
-    },
-    {
-      kind: 'youtube#searchResult',
       etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/pCHSxPmzhLaUAJnFH9MmtBhIDK4"',
       id: {
         kind: 'youtube#video',
@@ -66,6 +39,13 @@ const successResponse = {
         },
         channelTitle: 'YouTube Spotlight',
         liveBroadcastContent: 'none'
+      },
+      statistics: {
+        viewCount: '1890045',
+        likeCount: '2304',
+        dislikeCount: '96',
+        favoriteCount: '0',
+        commentCount: '88'
       }
     },
     {
@@ -99,6 +79,13 @@ const successResponse = {
         },
         channelTitle: 'Chillhop Music',
         liveBroadcastContent: 'live'
+      },
+      statistics: {
+        viewCount: '1890045',
+        likeCount: '2304',
+        dislikeCount: '96',
+        favoriteCount: '0',
+        commentCount: '88'
       }
     },
     {
@@ -132,6 +119,13 @@ const successResponse = {
         },
         channelTitle: 'Bloomberg',
         liveBroadcastContent: 'live'
+      },
+      statistics: {
+        viewCount: '1890045',
+        likeCount: '2304',
+        dislikeCount: '96',
+        favoriteCount: '0',
+        commentCount: '88'
       }
     },
     {
@@ -165,6 +159,13 @@ const successResponse = {
         },
         channelTitle: '5-Minute Crafts',
         liveBroadcastContent: 'none'
+      },
+      statistics: {
+        viewCount: '1890045',
+        likeCount: '2304',
+        dislikeCount: '96',
+        favoriteCount: '0',
+        commentCount: '88'
       }
     }
   ]

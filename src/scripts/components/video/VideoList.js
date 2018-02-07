@@ -29,10 +29,12 @@ class VideoList extends Component {
   }
 
   render () {
-    const { isFetching, videos, nextPageToken } = this.props
+    const { isFetching, videos, nextPageToken, error } = this.props
 
     if (isFetching && !videos.length) {
       return <Loading />
+    } else if (error && !videos.length) {
+      return <div>{ error }</div>
     }
 
     return (
@@ -41,6 +43,7 @@ class VideoList extends Component {
           { this.renderVideoResult(videos) }
         </div>
         { isFetching && <Loading /> }
+        { error && <div>{ error }</div> }
         { !isFetching && nextPageToken &&
           <button onClick={this.loadMoreCallback} className='btn btn-secondary'>Load More</button>
         }
@@ -53,6 +56,7 @@ VideoList.propTypes = {
   isFetching: PropTypes.bool.isRequired,
   videos: PropTypes.array.isRequired,
   nextPageToken: PropTypes.string,
+  error: PropTypes.string,
   loadMoreCallback: PropTypes.func
 }
 

@@ -14,9 +14,11 @@ export default () => {
     return promise.then(
       response => {
         dispatch(fetchTrendingsSuccessAction(filterVideoResult(response.data)))
-      },
+      }
+    ).catch(
       error => {
         dispatch(fetchTrendingsErrorAction(error.message))
+        throw error
       }
     )
   }
@@ -36,7 +38,8 @@ export const fetchTrendingsSuccessAction = (response) => (
     type: FETCH_TRENDINGS_SUCCESS,
     payload: {
       isFetching: false,
-      ...response
+      ...response,
+      error: null
     }
   }
 )

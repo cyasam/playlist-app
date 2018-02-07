@@ -32,7 +32,7 @@ export class Searchpage extends Component {
   }
 
   render () {
-    const { searchResult: { isFetching, videos, nextPageToken } } = this.props
+    const { searchResult: { isFetching, videos, nextPageToken, error } } = this.props
 
     return (
       <Fragment>
@@ -40,6 +40,7 @@ export class Searchpage extends Component {
         <VideoList isFetching={isFetching}
           videos={videos}
           nextPageToken={nextPageToken}
+          error={error}
           loadMoreCallback={this.loadMore} />
       </Fragment>
     )

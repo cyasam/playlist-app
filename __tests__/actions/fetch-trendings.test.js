@@ -71,7 +71,8 @@ describe('Fetch Trendings Action', () => {
       type: FETCH_TRENDINGS_SUCCESS,
       payload: {
         isFetching: false,
-        ...successResponse
+        ...successResponse,
+        error: null
       }
     },
     error: {
@@ -123,7 +124,7 @@ describe('Fetch Trendings Action', () => {
     
     mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse);
 
-    return store.dispatch(fetchTrendings()).then(
+    return store.dispatch(fetchTrendings()).catch(
       () => {
         const receivedAction = store.getActions();
 

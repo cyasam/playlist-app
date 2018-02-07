@@ -14,17 +14,15 @@ export default (value, pageToken) => {
     return promise.then(
       response => {
         return getVideoDetails(response.data)
-      },
-      error => {
-        dispatch(loadmoreSearchErrorAction(error.message, value))
-        throw error
       }
     ).then(
       response => {
         dispatch(loadmoreSearchSuccessAction(filterVideoResult(response), value))
-      },
+      }
+    ).catch(
       error => {
         dispatch(loadmoreSearchErrorAction(error.message, value))
+        throw error
       }
     )
   }
@@ -46,7 +44,8 @@ export const loadmoreSearchSuccessAction = (response, value) => (
     payload: {
       isFetching: false,
       ...response,
-      query: value
+      query: value,
+      error: null
     }
   }
 )

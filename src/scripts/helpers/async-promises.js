@@ -10,9 +10,11 @@ export const axiosYoutubeSearch = (q, pageToken) => {
       type: 'video',
       regionCode: 'TR',
       maxResults: 24,
-      pageToken,
       key: YOUTUBE_API_KEY
     }
+  }
+  if (pageToken) {
+    axiosConfig.params.pageToken = pageToken
   }
   return axios.get(axiosUrl, axiosConfig)
 }
@@ -50,10 +52,7 @@ export const getVideoDetails = (data) => {
   dataClone.items.forEach((item, index) => {
     const promise = axiosYoutubeVideoById(item.id.videoId).then(
       video => {
-        const { id, statistics } = video.data.items[0]
-        dataClone.items[index].statistics = statistics
-        dataClone.items[index].id = id
-        return dataClone.items[index]
+        return addVideoStatistics(dataClone.items[index], video.data.items[0])
       }
     )
 
@@ -66,4 +65,11 @@ export const getVideoDetails = (data) => {
       return dataClone
     }
   )
+}
+
+export const addVideoStatistics = (dataItem, item) => {
+  const { id, statistics } = item
+  dataItem.statistics = statistics
+  dataItem.id = id
+  return dataItem
 }

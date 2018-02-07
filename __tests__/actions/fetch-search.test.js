@@ -5,7 +5,7 @@ import MockAdapter from 'axios-mock-adapter'
 import { filterVideoResult } from '../../src/scripts/helpers'
 import fetchSearch, { fetchSearchRequestAction, fetchSearchSuccessAction, fetchSearchErrorAction, 
 FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../../src/scripts/actions/fetch-search'
-import { getVideoDetails } from '../../src/scripts/helpers/async-promises'
+import { getVideoDetails, addVideoStatistics } from '../../src/scripts/helpers/async-promises'
 
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
 import successResponseJson from '../mockData/youtube-search.js'
@@ -26,16 +26,6 @@ const mockAxiosConfig = {
     key: YOUTUBE_API_KEY
   }
 }
-
-const mockAxiosVideosUrl = 'https://www.googleapis.com/youtube/v3/videos'
-const mockAxiosVideosConfig = (id) => ({
-  params: {
-    part: 'statistics',
-    id,
-    regionCode: 'TR',
-    key: YOUTUBE_API_KEY
-  }
-})
 
 const successVideoResponse = {
   kind: 'youtube#videoListResponse',
@@ -71,81 +61,102 @@ const manipulateResult = (data) => {
 }
 
 describe('Fetch Search Action', () => {
-  const value = 'youtube'
-
   const successResponse = filterVideoResult(manipulateResult(successResponseJson))
-  const expectedAction = {
-    request: {
-      type: FETCH_SEARCH_REQUEST,
-      payload: {
-        isFetching: true,
-        videos: [],
-        query: 'youtube'
-      }
-    },
-    success: {
-      type: FETCH_SEARCH_SUCCESS,
-      payload: {
-        isFetching: false,
-        ...successResponse,
-        query: 'youtube'
-      }
-    },
-    error: {
-      type: FETCH_SEARCH_ERROR,
-      payload: {
-        isFetching: false,
-        error: errorResponse,
-        query: 'youtube'
+  const setup = () => {
+    mock.reset()
+
+    const defaultState = { isFetching: true, videos: [] }
+    const store = createMockStore({ search: defaultState })
+
+    const value = 'youtube'
+    const expectedAction = {
+      request: {
+        type: FETCH_SEARCH_REQUEST,
+        payload: {
+          isFetching: true,
+          videos: [],
+          query: 'youtube'
+        }
+      },
+      success: {
+        type: FETCH_SEARCH_SUCCESS,
+        payload: {
+          isFetching: false,
+          ...successResponse,
+          query: 'youtube',
+          error: null
+        }
+      },
+      error: {
+        type: FETCH_SEARCH_ERROR,
+        payload: {
+          isFetching: false,
+          error: errorResponse,
+          query: 'youtube'
+        }
       }
     }
+
+    return {
+      expectedAction,
+      value,
+      store
+    }
   }
-
-  let store
-  
-  beforeEach(() => {
-    const defaultState = { isFetching: true, videos: [] }
-    store = createMockStore({ search: defaultState })
-  })
-
-  afterEach (() => {
-    mock.reset()
-  })
   
   it('return `FETCH_SEARCH_REQUEST` type action', () => {
+    const { expectedAction } = setup()
     expect(fetchSearchRequestAction(mockAxiosConfig.params.q)).toEqual(expectedAction.request)
   })
 
   it('return `FETCH_SEARCH_SUCCESS` type action', () => {
+    const { expectedAction } = setup()
     expect(fetchSearchSuccessAction(expectedAction.success.payload, mockAxiosConfig.params.q)).toEqual(expectedAction.success)
   })
 
   it('return `FETCH_SEARCH_ERROR` type action', () => {
+    const { expectedAction } = setup()
     expect(fetchSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q)).toEqual(expectedAction.error)
   })
 
   it('creates search request and get result successfully', () => {
+    const { expectedAction, value, store } = setup()
+    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(config => {
+      successResponseJson.items.forEach(item => {
+        const mockAxiosVideoUrl = 'https://www.googleapis.com/youtube/v3/videos'
+        const mockAxiosVideoConfig = {
+          params: {
+            part: 'statistics',
+            id: item.id.videoId,
+            regionCode: 'TR',
+            key: YOUTUBE_API_KEY
+          }
+        }
+        mock.onGet(mockAxiosVideoUrl, mockAxiosVideoConfig).reply(config => {
+          return [200, successVideoResponse]
+        });
+      })
+      
+      return [200, successResponseJson]
+    });
 
-    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(200, successResponseJson);
-    mock.onGet(mockAxiosVideosUrl, mockAxiosVideosConfig('MoylTKIuK1A')).reply(200, successVideoResponse);
-
-    return store.dispatch(fetchSearch(value))
-    .then((result) => {
+    return store.dispatch(fetchSearch(value)).then(() => {
       const receivedAction = store.getActions();
+
       expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
-      //expect(receivedAction[1]).toEqual(fetchSearchSuccessAction(successResponse, mockAxiosConfig.params.q))
+      expect(receivedAction[1]).toEqual(fetchSearchSuccessAction(successResponse, mockAxiosConfig.params.q))
     })
   })
 
   it('creates search request and returns error', () => {
-    
+    const { expectedAction, value, store } = setup()
     mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse);
-    return store.dispatch(fetchSearch(value)).then(
-      () => {
+
+    return store.dispatch(fetchSearch(value)).catch(() => {
         const receivedAction = store.getActions();
 
         expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
-        //expect(receivedAction[1]).toEqual(fetchSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q))
+        expect(receivedAction[1]).toEqual(fetchSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q))
       }
     )
   })

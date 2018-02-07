@@ -14,17 +14,15 @@ export default (value) => {
     return promise.then(
       response => {
         return getVideoDetails(response.data)
-      },
-      error => {
-        dispatch(fetchSearchErrorAction(error.message, value))
-        throw error
       }
     ).then(
       response => {
         dispatch(fetchSearchSuccessAction(filterVideoResult(response), value))
-      },
+      }
+    ).catch(
       error => {
         dispatch(fetchSearchErrorAction(error.message, value))
+        throw error
       }
     )
   }
@@ -47,7 +45,8 @@ export const fetchSearchSuccessAction = (response, value) => (
     payload: {
       isFetching: false,
       ...response,
-      query: value
+      query: value,
+      error: null
     }
   }
 )

@@ -10,13 +10,14 @@ export class Homepage extends Component {
   }
 
   render () {
-    const { trendings: { isFetching, videos } } = this.props
+    const { trendings: { isFetching, videos, error } } = this.props
 
     return (
       <Fragment>
         <h3 className='main-title'>Trend Videos</h3>
         <VideoList isFetching={isFetching}
-          videos={videos} />
+          videos={videos}
+          error={error} />
       </Fragment>
     )
   }
