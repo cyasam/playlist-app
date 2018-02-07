@@ -6,7 +6,7 @@ const baseConfig = require('./webpack.base');
 const config = {
   devtool: 'eval-source-map',
   output: {
-    filename: 'js/[name].[hash].js'
+    filename: 'assets/js/[name].[hash].js'
   },
   module: {
     rules: [
@@ -33,9 +33,6 @@ const config = {
     ]
   },
   devServer: {
-    proxy: {
-      'api.comeon.test': 'http://localhost:3000'
-    },
     contentBase: path.resolve(__dirname, 'dist'),
     port: 7885,
     historyApiFallback: true

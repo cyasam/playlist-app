@@ -3,6 +3,7 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const config = {
   entry: {
@@ -26,8 +27,7 @@ const config = {
           loader: 'file-loader',
           options: {
             name: "[name].[hash].[ext]",
-            publicPath: "../",
-            outputPath: "fonts/"
+            outputPath: "assets/fonts/"
           }
         }
       },
@@ -38,8 +38,7 @@ const config = {
           loader: 'file-loader',
           options: {
             name: "[name].[hash].[ext]",
-            publicPath: "../",
-            outputPath: "images/"
+            outputPath: "assets/images/"
           }
         }
       },
@@ -50,8 +49,7 @@ const config = {
           loader: 'file-loader',
           options: {
             name: "[name].[ext]",
-            publicPath: "../",
-            outputPath: "images/"
+            outputPath: "assets/images/"
           }
         }
       },
@@ -68,6 +66,25 @@ const config = {
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor'],
       minChunks: Infinity
+    }),
+    new FaviconsWebpackPlugin({
+      logo: './src/images/favicon.png',
+      prefix: 'assets/images/favicons/',
+      persistentCache: true,
+      inject: true,
+      title: 'Playlist App',
+      icons: {
+        android: false,
+        appleIcon: false,
+        appleStartup: false,
+        coast: false,
+        favicons: true,
+        firefox: false,
+        opengraph: false,
+        twitter: false,
+        yandex: false,
+        windows: false
+      }
     }),
     new HtmlWebpackPlugin({
       template: './src/template/index.html'

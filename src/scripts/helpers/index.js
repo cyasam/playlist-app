@@ -7,7 +7,7 @@ export const filterVideoResult = (result) => {
       viewCount: item.statistics.viewCount,
       publishedAt: item.snippet.publishedAt,
       description: item.snippet.description,
-      thumbnail: item.snippet.thumbnails.medium
+      thumbnail: item.snippet.thumbnails.high
     }
   })
 

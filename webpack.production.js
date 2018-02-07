@@ -7,7 +7,7 @@ const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const config = {
   devtool: false,
   output: {
-    filename: 'js/[name].[chunkhash].js'
+    filename: 'assets/js/[name].[chunkhash].js'
   },
   module: {
     rules: [
@@ -30,7 +30,7 @@ const config = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin('css/app.[hash].css'),
+    new ExtractTextPlugin('assets/css/app.[hash].css'),
     new UglifyJsPlugin()
   ]
 };
