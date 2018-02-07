@@ -6,6 +6,7 @@ describe('VideoList Component', () => {
   const setup = (propOverrides) => {
     const props = {
         isFetching: false,
+        error: null,
         videos: [
           {
             id: 'lZoA5ZX4wC0',
@@ -51,6 +52,14 @@ describe('VideoList Component', () => {
     expect(wrapper.find('Loading').exists()).toBe(true)
   })
 
+  it('renders error when error is defined', () => {
+    const { wrapper } = setup({
+      error: 'Error', videos: []
+    })
+    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('.error').exists()).toBe(true)
+  })
+
   it('creates two videos', () => {
     const { wrapper } = setup()
     expect(wrapper.find('VideoListItem').length).toBe(2)
@@ -66,18 +75,27 @@ describe('VideoList Component', () => {
     expect(wrapper.find('.btn').exists()).toBe(true)
   })
   
-  it('calls loadMoreCallback when clicking loadmore button', () => {
-    const { wrapper, props } = setup()
-    wrapper.find('.btn').simulate('click', {
-      preventDefault: () => {}
+  describe('When clicking loadmore button', () => {
+    it('calls loadMoreCallback', () => {
+      const { wrapper, props } = setup()
+      wrapper.find('.btn').simulate('click', {
+        preventDefault: () => {}
+      })
+      expect(props.loadMoreCallback).toHaveBeenCalledWith(props.nextPageToken)
     })
-    expect(props.loadMoreCallback).toHaveBeenCalledWith(props.nextPageToken)
-  })
-
-  it('show Loading when clicking loadmore button', () => {
-    const { wrapper, props } = setup({
-      isFetching: true
+  
+    it('show Loading', () => {
+      const { wrapper, props } = setup({
+        isFetching: true
+      })
+      expect(wrapper.find('Loading').exists()).toBe(true)
     })
-    expect(wrapper.find('Loading').exists()).toBe(true)
+  
+    it('renders error', () => {
+      const { wrapper, props } = setup({
+        error: 'Error'
+      })
+      expect(wrapper.find('.error').exists()).toBe(true)
+    })
   })
 })

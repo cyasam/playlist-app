@@ -34,7 +34,7 @@ class VideoList extends Component {
     if (isFetching && !videos.length) {
       return <Loading />
     } else if (error && !videos.length) {
-      return <div>{ error }</div>
+      return <div className='error'>{ error }</div>
     }
 
     return (
@@ -43,7 +43,7 @@ class VideoList extends Component {
           { this.renderVideoResult(videos) }
         </div>
         { isFetching && <Loading /> }
-        { error && <div>{ error }</div> }
+        { error && <div className='error'>{ error }</div> }
         { !isFetching && nextPageToken &&
           <button onClick={this.loadMoreCallback} className='btn btn-secondary'>Load More</button>
         }

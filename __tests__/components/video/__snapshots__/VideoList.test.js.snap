@@ -2,6 +2,14 @@
 
 exports[`VideoList Component renders Loading when isFetching is true 1`] = `<Loading />`;
 
+exports[`VideoList Component renders error when error is defined 1`] = `
+<div
+  className="error"
+>
+  Error
+</div>
+`;
+
 exports[`VideoList Component renders properly 1`] = `
 <div
   className="video-list"

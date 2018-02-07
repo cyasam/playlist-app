@@ -1,22 +1,33 @@
 import axios from 'axios'
 import { YOUTUBE_API_KEY } from '../config'
 
-export const axiosYoutubeSearch = (q, pageToken) => {
-  const axiosUrl = 'https://www.googleapis.com/youtube/v3/search'
-  const axiosConfig = {
-    params: {
-      part: 'snippet',
-      q,
-      type: 'video',
-      regionCode: 'TR',
-      maxResults: 24,
-      key: YOUTUBE_API_KEY
+export class AxiosYoutubeSearch {
+  constructor (q = null, pageToken = null) {
+    this.q = q
+    this.pageToken = pageToken
+    this.axiosUrl = 'https://www.googleapis.com/youtube/v3/search'
+  }
+
+  get () {
+    return axios.get(this.axiosUrl, this.axiosConfig(this.q, this.pageToken))
+  }
+
+  axiosConfig () {
+    const defaults = {
+      params: {
+        part: 'snippet',
+        q: this.q,
+        type: 'video',
+        regionCode: 'TR',
+        maxResults: 24,
+        key: YOUTUBE_API_KEY
+      }
     }
-  }
-  if (pageToken) {
-    axiosConfig.params.pageToken = pageToken
-  }
-  return axios.get(axiosUrl, axiosConfig)
+    if(this.pageToken) {
+      defaults.params.pageToken = this.pageToken
+    }
+    return defaults
+  }  
 }
 
 export const axiosYoutubeVideoById = (id) => {

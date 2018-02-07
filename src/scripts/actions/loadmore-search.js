@@ -1,5 +1,5 @@
 import { filterVideoResult } from '../helpers'
-import { axiosYoutubeSearch, getVideoDetails } from '../helpers/async-promises'
+import { AxiosYoutubeSearch, getVideoDetails } from '../helpers/async-promises'
 
 export const LOADMORE_SEARCH_REQUEST = 'LOADMORE_SEARCH_REQUEST'
 export const LOADMORE_SEARCH_SUCCESS = 'LOADMORE_SEARCH_SUCCESS'
@@ -9,9 +9,9 @@ export default (value, pageToken) => {
   return dispatch => {
     dispatch(loadmoreSearchRequestAction(value))
 
-    const promise = axiosYoutubeSearch(value, pageToken)
+    const promise = new AxiosYoutubeSearch(value, pageToken)
 
-    return promise.then(
+    return promise.get().then(
       response => {
         return getVideoDetails(response.data)
       }
