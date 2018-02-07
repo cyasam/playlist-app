@@ -23,11 +23,11 @@ export class AxiosYoutubeSearch {
         key: YOUTUBE_API_KEY
       }
     }
-    if(this.pageToken) {
+    if (this.pageToken) {
       defaults.params.pageToken = this.pageToken
     }
     return defaults
-  }  
+  }
 }
 
 export const axiosYoutubeVideoById = (id) => {
