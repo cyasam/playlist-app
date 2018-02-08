@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import { setDocumentTitle } from '../helpers'
 import fetchSearch from '../actions/fetch-search'
 import loadmoreSearch from '../actions/loadmore-search'
 import VideoList from '../components/video/VideoList'
@@ -32,7 +33,8 @@ export class Searchpage extends Component {
   }
 
   render () {
-    const { searchResult: { isFetching, videos, nextPageToken, error } } = this.props
+    const { searchResult: { query, isFetching, videos, nextPageToken, error } } = this.props
+    setDocumentTitle(`Search Result for ${query}`)
 
     return (
       <Fragment>

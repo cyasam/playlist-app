@@ -114,8 +114,8 @@ describe('Fetch Search Reducer', () => {
         }
       }
 
-      const expectedState = { 
-        ...loadmoreDefaultState, 
+      const expectedState = {
+        ...loadmoreDefaultState,
         ...expectedAction.payload
       }
 
@@ -141,10 +141,10 @@ describe('Fetch Search Reducer', () => {
         }
       }
       
-      const expectedState = { 
-        ...loadmoreDefaultState, 
-        videos: [ 
-          ...loadmoreDefaultState.videos, 
+      const expectedState = {
+        ...loadmoreDefaultState,
+        videos: [
+          ...loadmoreDefaultState.videos,
           {
             id: 'xyz',
             title: 'Video Title',
@@ -164,13 +164,13 @@ describe('Fetch Search Reducer', () => {
         payload: {
           isFetching: false,
           error: {
-            message: 'Error',
+            message: 'Error'
           }
         }
       }
 
-      const expectedState = { 
-        ...loadmoreDefaultState, 
+      const expectedState = {
+        ...loadmoreDefaultState,
         ...expectedAction.payload
       }
 

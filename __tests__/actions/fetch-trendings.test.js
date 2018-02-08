@@ -3,7 +3,7 @@ import thunk from 'redux-thunk'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { filterVideoResult } from '../../src/scripts/helpers'
-import fetchTrendings, { fetchTrendingsRequestAction, fetchTrendingsSuccessAction, fetchTrendingsErrorAction, 
+import fetchTrendings, { fetchTrendingsRequestAction, fetchTrendingsSuccessAction, fetchTrendingsErrorAction,
   FETCH_TRENDINGS_REQUEST, FETCH_TRENDINGS_SUCCESS, FETCH_TRENDINGS_ERROR } from '../../src/scripts/actions/fetch-trendings'
 
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
@@ -85,7 +85,6 @@ describe('Fetch Trendings Action', () => {
   }
 
   let store
-  
   beforeEach(() => {
     const defaultState = { isFetching: true }
     store = createMockStore({ trendings: defaultState })
@@ -94,7 +93,7 @@ describe('Fetch Trendings Action', () => {
   afterEach (() => {
     mock.reset()
   })
-  
+
   it('return `FETCH_TRENDINGS_REQUEST` type action', () => {
     expect(fetchTrendingsRequestAction()).toEqual(expectedAction.request)
   })
@@ -108,12 +107,11 @@ describe('Fetch Trendings Action', () => {
   })
 
   it('creates trendings request and get result successfully', () => {
-
-    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(200, successResponseJson);
+    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(200, successResponseJson)
 
     return store.dispatch(fetchTrendings()).then(
       () => {
-        const receivedAction = store.getActions();
+        const receivedAction = store.getActions()
         expect(receivedAction[0]).toEqual(fetchTrendingsRequestAction())
         expect(receivedAction[1]).toEqual(fetchTrendingsSuccessAction(successResponse))
       }
@@ -121,12 +119,11 @@ describe('Fetch Trendings Action', () => {
   })
 
   it('creates trendings request and returns error', () => {
-    
-    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse);
+    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse)
 
     return store.dispatch(fetchTrendings()).catch(
       () => {
-        const receivedAction = store.getActions();
+        const receivedAction = store.getActions()
 
         expect(receivedAction[0]).toEqual(fetchTrendingsRequestAction())
         expect(receivedAction[1]).toEqual(fetchTrendingsErrorAction(expectedAction.error.payload.error))

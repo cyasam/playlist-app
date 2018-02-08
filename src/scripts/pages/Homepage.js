@@ -1,6 +1,7 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { setDocumentTitle } from '../helpers'
 import fetchTrendings from '../actions/fetch-trendings'
 import VideoList from '../components/video/VideoList'
 
@@ -11,6 +12,7 @@ export class Homepage extends Component {
 
   render () {
     const { trendings: { isFetching, videos, error } } = this.props
+    setDocumentTitle('Home')
 
     return (
       <Fragment>

@@ -121,18 +121,17 @@ describe('Fetch Search Action', () => {
 
   it('creates search request and get result successfully', () => {
     const { expectedAction, value, store } = setup()
-    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(config => {
+    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(() => {
       successResponseJson.items.forEach(item => {
         const mockAxiosVideoUrl = 'https://www.googleapis.com/youtube/v3/videos'
         const mockAxiosVideoConfig = {
           params: {
-            part: 'statistics',
+            part: 'snippet,statistics',
             id: item.id.videoId,
-            regionCode: 'TR',
             key: YOUTUBE_API_KEY
           }
         }
-        mock.onGet(mockAxiosVideoUrl, mockAxiosVideoConfig).reply(config => {
+        mock.onGet(mockAxiosVideoUrl, mockAxiosVideoConfig).reply(() => {
           return [200, successVideoResponse]
         });
       })

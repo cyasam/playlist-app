@@ -1,20 +1,61 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VideoDetail Component renders properly 1`] = `
-<div>
-  <iframe
-    allow="encrypted-media"
-    allowFullScreen={true}
-    frameBorder="0"
-    height="315"
-    src="https://www.youtube.com/embed/g884wLr9gNc?autoplay=1"
-    width="560"
-  />
+exports[`VideoDetail Component renders Loading when isFetching is true 1`] = `<Loading />`;
+
+exports[`VideoDetail Component renders error when error is defined 1`] = `
+<div
+  className="error"
+>
+  Error
 </div>
 `;
 
-exports[`VideoDetail Component renders properly if videos prop is empty 1`] = `
-<div>
-  Error: Video not found.
+exports[`VideoDetail Component renders properly 1`] = `
+<div
+  className="video-detail"
+>
+  <div
+    className="embed-responsive embed-responsive-16by9"
+  >
+    <iframe
+      allow="encrypted-media"
+      allowFullScreen={true}
+      className="embed-responsive-item"
+      frameBorder="0"
+      src="https://www.youtube.com/embed/lZoA5ZX4wC0?autoplay=1"
+    />
+  </div>
+  <div
+    className="video-description"
+  >
+    <h4
+      className="card-title"
+    >
+      Ocean Beach Surfing Raw | San…cisco, CA
+    </h4>
+    <p>
+      Jeff Chavolla
+       - 
+      <TimeAgo
+        component="time"
+        date="2017-12-04T07:18:50.000Z"
+        formatter={[Function]}
+        live={true}
+        maxPeriod={Infinity}
+        minPeriod={0}
+        now={[Function]}
+      />
+       - 
+      121034
+    </p>
+  </div>
+</div>
+`;
+
+exports[`VideoDetail Component renders properly if any video is not found. 1`] = `
+<div
+  className="no-result"
+>
+  Video is not found
 </div>
 `;

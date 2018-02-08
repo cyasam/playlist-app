@@ -34,9 +34,8 @@ export const axiosYoutubeVideoById = (id) => {
   const axiosUrl = 'https://www.googleapis.com/youtube/v3/videos'
   const axiosConfig = {
     params: {
-      part: 'statistics',
+      part: 'snippet,statistics',
       id,
-      regionCode: 'TR',
       key: YOUTUBE_API_KEY
     }
   }

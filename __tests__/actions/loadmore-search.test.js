@@ -125,9 +125,8 @@ describe('Loadmore Search Action', () => {
         const mockAxiosVideoUrl = 'https://www.googleapis.com/youtube/v3/videos'
         const mockAxiosVideoConfig = {
           params: {
-            part: 'statistics',
+            part: 'snippet,statistics',
             id: item.id.videoId,
-            regionCode: 'TR',
             key: YOUTUBE_API_KEY
           }
         }
