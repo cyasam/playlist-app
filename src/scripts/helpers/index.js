@@ -1,7 +1,7 @@
 import { appTitle } from '../config'
 
 export const setDocumentTitle = title => {
-  document.title = title ? `${title} - ${appTitle}` : appTitle
+  return title ? `${title} - ${appTitle}` : appTitle
 }
 
 export const filterVideoResult = result => {

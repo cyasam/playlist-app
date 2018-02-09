@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import DocumentTitle from 'react-document-title'
 import { setDocumentTitle } from '../helpers'
 import VideoDetail from '../components/video/VideoDetail'
 import fetchVideoDetail from '../actions/fetch-video-detail'
@@ -11,15 +12,21 @@ export class VideoDetailPage extends Component {
   componentDidMount () {
     const { history, fetchVideoDetail } = this.props
     const queryStr = queryString.parse(history.location.search)
-    fetchVideoDetail(queryStr.v)
+    if (queryStr.v) {
+      fetchVideoDetail(queryStr.v)
+    } else {
+      history.push('/')
+    }
   }
 
   render () {
     const { videoDetail } = this.props
-    setDocumentTitle(videoDetail.video.title)
+    const title = setDocumentTitle(videoDetail.video.title)
 
     return (
-      <VideoDetail data={videoDetail} />
+      <DocumentTitle title={title}>
+        <VideoDetail data={videoDetail} />
+      </DocumentTitle>
     )
   }
 }

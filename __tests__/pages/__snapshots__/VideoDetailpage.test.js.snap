@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Video Detail Page calls fetchVideoDetail action when first page load 1`] = `
+<SideEffect(DocumentTitle)
+  title="Playlist App"
+>
+  <VideoDetail
+    data={
+      Object {
+        "isFetching": true,
+        "video": Object {},
+      }
+    }
+  />
+</SideEffect(DocumentTitle)>
+`;
+
+exports[`Video Detail Page renders properly 1`] = `
+<SideEffect(DocumentTitle)
+  title="Ocean Beach Surfing Raw | San…cisco, CA - Playlist App"
+>
+  <VideoDetail
+    data={
+      Object {
+        "error": null,
+        "isFetching": false,
+        "video": Object {
+          "channelTitle": "Jeff Chavolla",
+          "description": "Raw surfing video clips of Ocean Beach in San Francisco",
+          "id": "lZoA5ZX4wC0",
+          "publishedAt": "2017-12-04T07:18:50.000Z",
+          "thumbnail": Object {
+            "height": 360,
+            "url": "https://i.ytimg.com/vi/lZoA5ZX4wC0/hqdefault.jpg",
+            "width": 480,
+          },
+          "title": "Ocean Beach Surfing Raw | San…cisco, CA",
+          "viewCount": "121034",
+        },
+      }
+    }
+  />
+</SideEffect(DocumentTitle)>
+`;

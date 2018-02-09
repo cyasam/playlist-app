@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
+import DocumentTitle from 'react-document-title'
 import { setDocumentTitle } from '../helpers'
 import fetchSearch from '../actions/fetch-search'
 import loadmoreSearch from '../actions/loadmore-search'
@@ -24,7 +25,11 @@ export class Searchpage extends Component {
   mountPage () {
     const { history, fetchSearch } = this.props
     const queryStr = queryString.parse(history.location.search)
-    fetchSearch(queryStr.query)
+    if (queryStr.query) {
+      fetchSearch(queryStr.query)
+    } else {
+      history.push('/')
+    }
   }
 
   loadMore (nextPageToken) {
@@ -34,17 +39,19 @@ export class Searchpage extends Component {
 
   render () {
     const { searchResult: { query, isFetching, videos, nextPageToken, error } } = this.props
-    setDocumentTitle(`Search Result for ${query}`)
+    const title = setDocumentTitle(`Search Result for ${query}`)
 
     return (
-      <Fragment>
-        <h3 className='main-title'>Search Results</h3>
-        <VideoList isFetching={isFetching}
-          videos={videos}
-          nextPageToken={nextPageToken}
-          error={error}
-          loadMoreCallback={this.loadMore} />
-      </Fragment>
+      <DocumentTitle title={title}>
+        <Fragment>
+          <h3 className='main-title'>Search Results</h3>
+          <VideoList isFetching={isFetching}
+            videos={videos}
+            nextPageToken={nextPageToken}
+            error={error}
+            loadMoreCallback={this.loadMore} />
+        </Fragment>
+      </DocumentTitle>
     )
   }
 }
