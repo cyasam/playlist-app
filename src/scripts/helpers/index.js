@@ -10,7 +10,7 @@ export const filterVideoResult = result => {
       id: item.id,
       title: item.snippet.title,
       channelTitle: item.snippet.channelTitle,
-      viewCount: item.statistics.viewCount,
+      statistics: item.statistics,
       publishedAt: item.snippet.publishedAt,
       description: item.snippet.description,
       thumbnail: item.snippet.thumbnails.high
@@ -29,11 +29,11 @@ export const filterVideoDetailResult = result => {
   return {
     id: item.id,
     title: item.snippet.title,
+    channelId: item.snippet.channelId,
     channelTitle: item.snippet.channelTitle,
-    viewCount: item.statistics.viewCount,
+    statistics: item.statistics,
     publishedAt: item.snippet.publishedAt,
-    description: item.snippet.description,
-    thumbnail: item.snippet.thumbnails.high
+    description: item.snippet.description
   }
 }
 

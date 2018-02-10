@@ -4,14 +4,14 @@ exports[`VideoListItem Component renders properly 1`] = `
 <Link
   className="video-list-item col-xl-3 col-lg-4 col-md-6 col-sm-6"
   replace={false}
-  to="/watch?v=undefined"
+  to="/watch?v=mh45igK4Esw"
 >
   <div
     className="card"
   >
     <ProgressiveImage
       placeholder={null}
-      src="https://i.ytimg.com/vi/b6hoBp7Hk-A/default.jpg"
+      src="https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg"
     />
     <div
       className="card-body"
@@ -19,57 +19,41 @@ exports[`VideoListItem Component renders properly 1`] = `
       <h5
         className="card-title"
       >
-        Video Title
+        Elon Musk: How I Became The Real 'Iron Man'
       </h5>
       <p
         className="card-info"
       >
-         - 
-        <TimeAgo
-          component="time"
-          formatter={[Function]}
-          live={true}
-          maxPeriod={Infinity}
-          minPeriod={0}
-          now={[Function]}
+        Bloomberg
+      </p>
+      <p
+        className="card-info"
+      >
+        <VideoViews
+          format="summary"
+          viewCount="4277277"
         />
-         - 
+         • 
+        <t
+          ago={false}
+          calendar={false}
+          decimal={false}
+          element="time"
+          filter={[Function]}
+          fromNow={true}
+          interval={60000}
+          onChange={[Function]}
+          toNow={false}
+          unit={null}
+          unix={false}
+          utc={false}
+        >
+          2014-06-10T18:34:28.000Z
+        </t>
       </p>
     </div>
   </div>
 </Link>
 `;
 
-exports[`VideoListItem Component renders properly if video prop is also empty 1`] = `
-<Link
-  className="video-list-item col-xl-3 col-lg-4 col-md-6 col-sm-6"
-  replace={false}
-  to="/watch?v=undefined"
->
-  <div
-    className="card"
-  >
-    <div
-      className="card-body"
-    >
-      <h5
-        className="card-title"
-      />
-      <p
-        className="card-info"
-      >
-         - 
-        <TimeAgo
-          component="time"
-          formatter={[Function]}
-          live={true}
-          maxPeriod={Infinity}
-          minPeriod={0}
-          now={[Function]}
-        />
-         - 
-      </p>
-    </div>
-  </div>
-</Link>
-`;
+exports[`VideoListItem Component renders properly if video prop is also empty 1`] = `""`;

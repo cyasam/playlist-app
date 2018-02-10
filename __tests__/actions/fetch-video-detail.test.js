@@ -44,7 +44,6 @@ describe('Fetch Video Detail action', () => {
         type: FETCH_VIDEO_DETAIL_ERROR,
         payload: {
           isFetching: false,
-          video: {},
           error: errorResponse
         }
       }

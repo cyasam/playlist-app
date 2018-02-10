@@ -15,7 +15,7 @@ exports[`VideoDetail Component renders properly 1`] = `
   className="video-detail"
 >
   <div
-    className="embed-responsive embed-responsive-16by9"
+    className="video embed-responsive embed-responsive-16by9"
   >
     <iframe
       allow="encrypted-media"
@@ -26,7 +26,7 @@ exports[`VideoDetail Component renders properly 1`] = `
     />
   </div>
   <div
-    className="video-description"
+    className="video-details"
   >
     <h4
       className="card-title"
@@ -34,20 +34,48 @@ exports[`VideoDetail Component renders properly 1`] = `
       Ocean Beach Surfing Raw | San…cisco, CA
     </h4>
     <p>
-      Jeff Chavolla
-       - 
-      <TimeAgo
-        component="time"
-        date="2017-12-04T07:18:50.000Z"
-        formatter={[Function]}
-        live={true}
-        maxPeriod={Infinity}
-        minPeriod={0}
-        now={[Function]}
+      <VideoViews
+        format="numeric"
+        viewCount="121659"
       />
-       - 
-      121034
     </p>
+  </div>
+  <div
+    className="channel-info"
+  >
+    <div
+      className="media"
+    >
+      <div
+        className="media-body"
+      >
+        <h5>
+          Jeff Chavolla
+        </h5>
+        <p>
+          Published on 
+          <t
+            ago={false}
+            calendar={false}
+            date="2017-12-04T07:18:50.000Z"
+            decimal={false}
+            element="time"
+            filter={[Function]}
+            format="MMM D, YYYY"
+            fromNow={false}
+            interval={60000}
+            onChange={[Function]}
+            toNow={false}
+            unit={null}
+            unix={false}
+            utc={false}
+          />
+        </p>
+        <VideoDescription
+          text="Raw surfing video clips of Ocean Beach in San Francisco"
+        />
+      </div>
+    </div>
   </div>
 </div>
 `;

@@ -7,12 +7,22 @@ describe('VideoListItem Component', () => {
   const setup = (propOverrides) => {
     const props = {
       video: {
-        title: 'Video Title',
-        description: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur finibus dui libero, sit amet facilisis urna iaculis ac. Nulla vehicula magna pulvinar dolor placerat, eget consectetur purus porttitor. Nunc arcu quam, ornare sit amet ultrices ac, cursus pellentesque tortor.`,
+        id: 'mh45igK4Esw',
+        title: 'Elon Musk: How I Became The Real \'Iron Man\'',
+        channelTitle: 'Bloomberg',
+        statistics: {
+          viewCount: '4277277',
+          likeCount: '46304',
+          dislikeCount: '4421',
+          favoriteCount: '0',
+          commentCount: '3524'
+        },
+        publishedAt: '2014-06-10T18:34:28.000Z',
+        description: '"Bloomberg Risk Takers" profiles Elon Musk, the entrepreneur who helped create PayPal, built America\'s first viable fully electric car company, started the nation\'s biggest solar energy supplier,...',
         thumbnail: {
-          url: 'https://i.ytimg.com/vi/b6hoBp7Hk-A/default.jpg',
-          width: 120,
-          height: 90
+          url: 'https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg',
+          width: 480,
+          height: 360
         }
       },
       ...propOverrides

@@ -14,7 +14,6 @@ describe('Async Promise Helpers', () => {
         part: 'snippet',
         q: 'abc',
         type: 'video',
-        regionCode: 'TR',
         maxResults: 24,
         pageToken: 'pageToken',
         key: YOUTUBE_API_KEY

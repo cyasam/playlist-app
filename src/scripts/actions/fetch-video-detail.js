@@ -49,7 +49,6 @@ export const fetchVideoDetailErrorAction = (error) => (
     type: FETCH_VIDEO_DETAIL_ERROR,
     payload: {
       isFetching: false,
-      video: {},
       error
     }
   }

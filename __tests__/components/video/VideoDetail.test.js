@@ -12,14 +12,15 @@ describe('VideoDetail Component', () => {
           id: 'lZoA5ZX4wC0',
           title: 'Ocean Beach Surfing Raw | San…cisco, CA',
           channelTitle: 'Jeff Chavolla',
-          viewCount: '121034',
+          statistics: {
+            viewCount: '121659',
+            likeCount: '450',
+            dislikeCount: '47',
+            favoriteCount: '0',
+            commentCount: '100'
+          },
           publishedAt: '2017-12-04T07:18:50.000Z',
-          description: 'Raw surfing video clips of Ocean Beach in San Francisco',
-          thumbnail: {
-            url: 'https://i.ytimg.com/vi/lZoA5ZX4wC0/hqdefault.jpg',
-            width: 480,
-            height: 360
-          }
+          description: 'Raw surfing video clips of Ocean Beach in San Francisco'
         },
         ...dataPropOverrides
       }

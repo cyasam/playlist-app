@@ -1,3 +1,7 @@
+.bg-primary {
+  background-color: #2C3E50 !important;
+}
+
 .search-form {
   display: flex;
   align-items: stretch;
@@ -19,10 +23,6 @@
 }
 
 .video-list {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
   img {
     width: 100%;
     height: auto;
@@ -70,6 +70,11 @@
   }
 }
 
+.loadmore-btn-wrapper {
+  display: flex;
+  justify-content: center;
+}
+
 /* Layout */
 
 $header: 72px;
@@ -91,6 +96,38 @@ header {
   margin-top: $header;
 }
 
+/* Video Detail*/
+.video-detail {
+  .video {
+    background-color: #000;
+  }
+
+  .video-details {
+    margin-top: 20px
+  }
+
+  .channel-info {
+    font-size: 0.9em;
+    white-space: pre-line;
+
+    .description {
+      .text {
+        overflow: hidden;
+
+        &.collapsed {
+          height: 65px;
+        }
+      }
+
+      .more-btn {
+        margin-top: 20px;
+      }
+    }
+  }
+}
+
+
+/* Media Queries */
 @media (max-width: 575px) {
   $header: 128px;
   header {

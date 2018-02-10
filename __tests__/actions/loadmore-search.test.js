@@ -21,7 +21,6 @@ const mockAxiosConfig = {
     part: 'snippet',
     q: 'youtube',
     type: 'video',
-    regionCode: 'TR',
     maxResults: 24,
     key: YOUTUBE_API_KEY
   }

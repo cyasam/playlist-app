@@ -40,12 +40,16 @@ exports[`VideoList Component renders properly 1`] = `
       }
     />
   </div>
-  <button
-    className="btn btn-secondary"
-    onClick={[Function]}
+  <div
+    className="loadmore-btn-wrapper"
   >
-    Load More
-  </button>
+    <button
+      className="btn btn-secondary"
+      onClick={[Function]}
+    >
+      Load More
+    </button>
+  </div>
 </div>
 `;
 
@@ -62,11 +66,15 @@ exports[`VideoList Component renders properly if any video is not found. 1`] = `
       No result
     </div>
   </div>
-  <button
-    className="btn btn-secondary"
-    onClick={[Function]}
+  <div
+    className="loadmore-btn-wrapper"
   >
-    Load More
-  </button>
+    <button
+      className="btn btn-secondary"
+      onClick={[Function]}
+    >
+      Load More
+    </button>
+  </div>
 </div>
 `;

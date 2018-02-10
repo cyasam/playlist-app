@@ -2,7 +2,6 @@ const successResponse = {
   kind: 'youtube#searchListResponse',
   etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/7RMalZdVp1N5-IHkWxDRApKx1TQ"',
   nextPageToken: 'CAUQAA',
-  regionCode: 'TR',
   pageInfo: {
     totalResults: 1000000,
     resultsPerPage: 5

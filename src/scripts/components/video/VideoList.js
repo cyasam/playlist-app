@@ -45,7 +45,9 @@ class VideoList extends Component {
         { isFetching && <Loading /> }
         { error && <div className='error'>{ error }</div> }
         { !isFetching && nextPageToken &&
-          <button onClick={this.loadMoreCallback} className='btn btn-secondary'>Load More</button>
+          <div className='loadmore-btn-wrapper'>
+            <button onClick={this.loadMoreCallback} className='btn btn-secondary'>Load More</button>
+          </div>
         }
       </div>
     )
