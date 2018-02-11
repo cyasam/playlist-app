@@ -23,19 +23,18 @@
 }
 
 .video-list {
-  img {
-    width: 100%;
-    height: auto;
-    flex-shrink: 0;
-  }
-
   .video-list-item {
     display: flex;
     margin-bottom: 30px;
     color: inherit;
     text-decoration: none;
 
-    &:hover .card {
+    &.media-type, .media {
+      width: 100%;
+    }
+
+    &:hover .card,
+    &:hover .media {
       background-color: rgba(0,0,0, 0.03)
     }
   }

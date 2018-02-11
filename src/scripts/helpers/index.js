@@ -13,7 +13,7 @@ export const filterVideoResult = result => {
       statistics: item.statistics,
       publishedAt: item.snippet.publishedAt,
       description: item.snippet.description,
-      thumbnail: item.snippet.thumbnails.high
+      thumbnail: item.snippet.thumbnails.medium
     }
   })
 

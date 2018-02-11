@@ -4,14 +4,46 @@ exports[`Video Detail Page calls fetchVideoDetail action when first page load 1`
 <SideEffect(DocumentTitle)
   title="Playlist App"
 >
-  <VideoDetail
-    data={
-      Object {
-        "isFetching": true,
-        "video": Object {},
-      }
-    }
-  />
+  <div
+    className="row"
+  >
+    <div
+      className="col-8"
+    >
+      <VideoDetail
+        data={
+          Object {
+            "isFetching": true,
+            "video": Object {},
+          }
+        }
+      />
+    </div>
+    <div
+      className="col-4"
+    >
+      <VideoList
+        isFetching={false}
+        listType="media"
+        videos={
+          Array [
+            Object {
+              "description": "Lorem ipsum dolor sit amed.",
+              "id": "lZoA5ZX4wC0",
+              "thubmnail": "video-thumbnail.jpg",
+              "title": "Video Title",
+            },
+            Object {
+              "description": "Lorem ipsum dolor sit amed.",
+              "id": "lZoA5ZX4wC01",
+              "thubmnail": "video-thumbnail-2.jpg",
+              "title": "Video Title 2",
+            },
+          ]
+        }
+      />
+    </div>
+  </div>
 </SideEffect(DocumentTitle)>
 `;
 
@@ -19,26 +51,58 @@ exports[`Video Detail Page renders properly 1`] = `
 <SideEffect(DocumentTitle)
   title="Ocean Beach Surfing Raw | San…cisco, CA - Playlist App"
 >
-  <VideoDetail
-    data={
-      Object {
-        "error": null,
-        "isFetching": false,
-        "video": Object {
-          "channelTitle": "Jeff Chavolla",
-          "description": "Raw surfing video clips of Ocean Beach in San Francisco",
-          "id": "lZoA5ZX4wC0",
-          "publishedAt": "2017-12-04T07:18:50.000Z",
-          "thumbnail": Object {
-            "height": 360,
-            "url": "https://i.ytimg.com/vi/lZoA5ZX4wC0/hqdefault.jpg",
-            "width": 480,
-          },
-          "title": "Ocean Beach Surfing Raw | San…cisco, CA",
-          "viewCount": "121034",
-        },
-      }
-    }
-  />
+  <div
+    className="row"
+  >
+    <div
+      className="col-8"
+    >
+      <VideoDetail
+        data={
+          Object {
+            "error": null,
+            "isFetching": false,
+            "video": Object {
+              "channelTitle": "Jeff Chavolla",
+              "description": "Raw surfing video clips of Ocean Beach in San Francisco",
+              "id": "lZoA5ZX4wC0",
+              "publishedAt": "2017-12-04T07:18:50.000Z",
+              "thumbnail": Object {
+                "height": 360,
+                "url": "https://i.ytimg.com/vi/lZoA5ZX4wC0/hqdefault.jpg",
+                "width": 480,
+              },
+              "title": "Ocean Beach Surfing Raw | San…cisco, CA",
+              "viewCount": "121034",
+            },
+          }
+        }
+      />
+    </div>
+    <div
+      className="col-4"
+    >
+      <VideoList
+        isFetching={false}
+        listType="media"
+        videos={
+          Array [
+            Object {
+              "description": "Lorem ipsum dolor sit amed.",
+              "id": "lZoA5ZX4wC0",
+              "thubmnail": "video-thumbnail.jpg",
+              "title": "Video Title",
+            },
+            Object {
+              "description": "Lorem ipsum dolor sit amed.",
+              "id": "lZoA5ZX4wC01",
+              "thubmnail": "video-thumbnail-2.jpg",
+              "title": "Video Title 2",
+            },
+          ]
+        }
+      />
+    </div>
+  </div>
 </SideEffect(DocumentTitle)>
 `;

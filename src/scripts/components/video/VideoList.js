@@ -11,9 +11,10 @@ class VideoList extends Component {
 
   renderVideoResult (videos) {
     let result
+    const { listType } = this.props
     if (videos.length) {
       result = videos.map((video, index) => (
-        <VideoListItem key={index} video={video} />
+        <VideoListItem key={index} video={video} type={listType} />
       ))
     } else {
       result = <div className='no-result'>No result</div>
@@ -59,7 +60,8 @@ VideoList.propTypes = {
   videos: PropTypes.array.isRequired,
   nextPageToken: PropTypes.string,
   error: PropTypes.string,
-  loadMoreCallback: PropTypes.func
+  loadMoreCallback: PropTypes.func,
+  listType: PropTypes.string
 }
 
 export default VideoList

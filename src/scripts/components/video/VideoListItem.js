@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
@@ -6,34 +6,70 @@ import ProgressiveImage from 'react-progressive-image'
 import imagePlaceholder from '../../../images/icons/image-placeholder.jpg'
 import VideoViews from './VideoViews'
 
-const VideoListItem = ({video}) => {
-  if (!Object.keys(video).length) {
-    return null
-  }
-  return (
-    <Link to={`/watch?v=${video.id}`} className='video-list-item col-xl-3 col-lg-4 col-md-6 col-sm-6'>
-      <div className='card'>
-        { video.thumbnail &&
-          <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>
-            {(src) => <img className='card-img-top' src={src} alt={video.title} />}
-          </ProgressiveImage>
-        }
-        <div className='card-body'>
-          <h5 className='card-title'>{video.title}</h5>
-          <p className='card-info'>{video.channelTitle}</p>
-          <p className='card-info'>
-            { Object.keys(video.statistics).length &&
-            <VideoViews viewCount={video.statistics.viewCount} format='summary' />
-            } • <Moment fromNow>{video.publishedAt}</Moment>
-          </p>
+class VideoListItem extends Component {
+  renderMediaType (video) {
+    return (
+      <Link to={{ pathname: '/watch', search: `?v=${video.id}` }} className='video-list-item media-type'>
+        <div className='media'>
+          { video.thumbnail &&
+            <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>
+              {(src) => <img className='media-img col-6' src={src} alt={video.title} />}
+            </ProgressiveImage>
+          }
+          <div className='media-body'>
+            <h6 className='media-title mt-1'>{video.title}</h6>
+            <p className='card-info mb-2'>{video.channelTitle}</p>
+            <p className='card-info'>
+              { Object.keys(video.statistics).length &&
+              <VideoViews viewCount={video.statistics.viewCount} format='summary' />
+              } • <Moment fromNow>{video.publishedAt}</Moment>
+            </p>
+          </div>
         </div>
-      </div>
-    </Link>
-  )
+      </Link>
+    )
+  }
+
+  renderCardType (video) {
+    return (
+      <Link to={{ pathname: '/watch', search: `?v=${video.id}` }} className='video-list-item card-type col-xl-3 col-lg-4 col-md-6 col-sm-6'>
+        <div className='card'>
+          { video.thumbnail &&
+            <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>
+              {(src) => <img className='card-img-top' src={src} alt={video.title} />}
+            </ProgressiveImage>
+          }
+          <div className='card-body'>
+            <h5 className='card-title'>{video.title}</h5>
+            <p className='card-info'>{video.channelTitle}</p>
+            <p className='card-info'>
+              { Object.keys(video.statistics).length &&
+              <VideoViews viewCount={video.statistics.viewCount} format='summary' />
+              } • <Moment fromNow>{video.publishedAt}</Moment>
+            </p>
+          </div>
+        </div>
+      </Link>
+    )
+  }
+
+  render () {
+    const { video, type } = this.props
+    if (!Object.keys(video).length) {
+      return null
+    }
+
+    if (type === 'media') {
+      return this.renderMediaType(video)
+    }
+
+    return this.renderCardType(video)
+  }
 }
 
 VideoListItem.propTypes = {
-  video: PropTypes.object.isRequired
+  video: PropTypes.object.isRequired,
+  type: PropTypes.string
 }
 
 export default VideoListItem

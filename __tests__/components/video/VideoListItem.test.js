@@ -30,7 +30,7 @@ describe('VideoListItem Component', () => {
 
     const descStr = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur finibus dui l...'
 
-    const wrapper = shallow(<VideoListItem video={props.video} />)
+    const wrapper = shallow(<VideoListItem {...props} />)
     return {
       wrapper,
       props,
@@ -41,11 +41,13 @@ describe('VideoListItem Component', () => {
   it('renders properly', () => {
     const { wrapper } = setup()
     expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('.card').exists()).toBe(true)
   })
 
-  it('has div with card class name', () => {
-    const { wrapper } = setup()
-    expect(wrapper.find('.card').exists()).toBe(true)
+  it('renders properly if type props is media', () => {
+    const { wrapper } = setup({ type: 'media' })
+    expect(wrapper).toMatchSnapshot()
+    expect(wrapper.find('.media').exists()).toBe(true)
   })
 
   it('renders properly if video prop is also empty', () => {
@@ -54,15 +56,28 @@ describe('VideoListItem Component', () => {
   })
 
   describe('Video Item', () => {
+    const { wrapper, props } = setup()
+
     it('has thumbnail', () => {
-      const { wrapper, props } = setup()
       expect(wrapper.find('ProgressiveImage').props().src).toEqual(props.video.thumbnail.url)
-      expect(wrapper.find('ProgressiveImage').props().children().props.className).toEqual('card-img-top')
+      expect(wrapper.find('ProgressiveImage').props().children().props.className.includes('card-img-top')).toBe(true)
     })
 
     it('has title', () => {
-      const { wrapper, props } = setup()
       expect(wrapper.find('.card-title').text()).toEqual(props.video.title)
+    })
+  })
+
+  describe('Video Item with type props equal to media', () => {
+    const { wrapper, props } = setup({ type: 'media' })
+
+    it('has thumbnail', () => {
+      expect(wrapper.find('ProgressiveImage').props().src).toEqual(props.video.thumbnail.url)
+      expect(wrapper.find('ProgressiveImage').props().children().props.className.includes('media-img')).toBe(true)
+    })
+
+    it('has title', () => {
+      expect(wrapper.find('.media-title').text()).toEqual(props.video.title)
     })
   })
 })
