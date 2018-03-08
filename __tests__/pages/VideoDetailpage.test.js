@@ -50,12 +50,15 @@ describe('Video Detail Page', () => {
       ...propOverrides
     }
 
+    const nextProps = { match: { params: { id: 'lZoA5ZX4wC01' } } }
+
     const wrapper = shallow(<VideoDetailPage {...props} />)
     wrapper.instance().historyListener = jest.fn()
 
     return {
       wrapper,
-      props
+      props,
+      nextProps
     }
   }
 
@@ -69,6 +72,26 @@ describe('Video Detail Page', () => {
 
     wrapper.instance().componentDidMount()
     expect(wrapper).toMatchSnapshot()
+  })
+
+  it('calls fetchVideoDetail when page doesn\'t changed.', () => {
+    const { wrapper, props } = setup()
+    const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
+
+    wrapper.instance().componentWillReceiveProps(props)
+
+    expect(wrapper).toMatchSnapshot()
+    expect(mockFetchData).not.toHaveBeenCalled()
+  })
+
+  it('calls fetchVideoDetail when page changed.', () => {
+    const { wrapper, nextProps } = setup()
+    const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
+
+    wrapper.instance().componentWillReceiveProps(nextProps)
+
+    expect(wrapper).toMatchSnapshot()
+    expect(mockFetchData).toHaveBeenCalled()
   })
 
   it('returns videoDetail object when initialize component', () => {

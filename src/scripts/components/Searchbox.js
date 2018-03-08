@@ -31,7 +31,7 @@ export class Searchbox extends Component {
   render () {
     return (
       <form className='search-form mr-auto' onSubmit={this.handleSubmit}>
-        <input type='text' className='form-control' value={this.state.input} onChange={(e) => this.setState({input: e.target.value})} placeholder='Search videos on youtube' />
+        <input type='text' className='form-control' defaultValue={this.state.input} onChange={(e) => this.setState({input: e.target.value})} placeholder='Search videos on youtube' />
         <button className='btn btn-secondary my-sm-0' type='submit'><img src={searchIcon} alt='Search' width='16' height='16' /></button>
       </form>
     )

@@ -11,12 +11,20 @@ import fetchVideoDetail from '../actions/fetch-video-detail'
 
 export class VideoDetailPage extends Component {
   componentDidMount () {
-    this.fetchData()
+    const { match: { params: { id } } } = this.props
+    this.fetchData(id)
   }
 
-  fetchData () {
+  componentWillReceiveProps (nextProps) {
+    if (this.props.match.params.id !== nextProps.match.params.id) {
+      const { match: { params: { id } } } = nextProps
+      this.fetchData(id)
+    }
+  }
+
+  fetchData (id) {
     window.scrollTo(0, 0)
-    const { match: { params: { id } }, fetchVideoDetail, fetchTrendings } = this.props
+    const { fetchVideoDetail, fetchTrendings } = this.props
 
     fetchVideoDetail(id)
     fetchTrendings()

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Route, Redirect } from 'react-router-dom'
+import { Route, Switch, Redirect } from 'react-router-dom'
 import Header from './components/header'
 import Container from './components/container'
 
@@ -12,10 +12,12 @@ const App = () => {
     <div className='wrapper'>
       <Header />
       <Container>
-        <Route path='/' exact component={Homepage} />
-        <Route path='/search/:query' component={Searchpage} />
-        <Route path='/watch/:id' component={VideoDetailpage} />
-        <Redirect to='/' />
+        <Switch>
+          <Route path='/' exact component={Homepage} />
+          <Route path='/search/:query' component={Searchpage} />
+          <Route path='/watch/:id' component={VideoDetailpage} />
+          <Redirect to='/' />
+        </Switch>
       </Container>
     </div>
   )

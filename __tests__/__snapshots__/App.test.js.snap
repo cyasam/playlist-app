@@ -6,23 +6,25 @@ exports[`App Component renders properly 1`] = `
 >
   <Header />
   <Container>
-    <Route
-      component={[Function]}
-      exact={true}
-      path="/"
-    />
-    <Route
-      component={[Function]}
-      path="/search/:query"
-    />
-    <Route
-      component={[Function]}
-      path="/watch/:id"
-    />
-    <Redirect
-      push={false}
-      to="/"
-    />
+    <Switch>
+      <Route
+        component={[Function]}
+        exact={true}
+        path="/"
+      />
+      <Route
+        component={[Function]}
+        path="/search/:query"
+      />
+      <Route
+        component={[Function]}
+        path="/watch/:id"
+      />
+      <Redirect
+        push={false}
+        to="/"
+      />
+    </Switch>
   </Container>
 </div>
 `;
