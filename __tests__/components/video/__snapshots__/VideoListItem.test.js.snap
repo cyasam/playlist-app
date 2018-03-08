@@ -4,12 +4,7 @@ exports[`VideoListItem Component renders properly 1`] = `
 <Link
   className="video-list-item card-type col-xl-3 col-lg-4 col-md-6 col-sm-6"
   replace={false}
-  to={
-    Object {
-      "pathname": "/watch",
-      "search": "?v=mh45igK4Esw",
-    }
-  }
+  to="/watch/mh45igK4Esw"
 >
   <div
     className="card"
@@ -65,12 +60,7 @@ exports[`VideoListItem Component renders properly if type props is media 1`] = `
 <Link
   className="video-list-item media-type"
   replace={false}
-  to={
-    Object {
-      "pathname": "/watch",
-      "search": "?v=mh45igK4Esw",
-    }
-  }
+  to="/watch/mh45igK4Esw"
 >
   <div
     className="media"

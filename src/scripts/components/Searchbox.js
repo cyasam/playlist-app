@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
-import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import fetchSearch from '../actions/fetch-search'
@@ -10,19 +9,13 @@ export class Searchbox extends Component {
   constructor () {
     super()
 
-    this.state = {
-      input: ''
-    }
-
+    this.state = { input: '' }
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   componentDidMount () {
-    const { history } = this.props
-    if (history.location.pathname.includes('/search') && history.location.search.includes('query=')) {
-      const queryStr = queryString.parse(history.location.search)
-      this.setState({ input: queryStr.query })
-    }
+    const { match: { params: { query } } } = this.props
+    this.setState({ input: query })
   }
 
   handleSubmit (e) {
@@ -30,11 +23,7 @@ export class Searchbox extends Component {
 
     if (this.state.input.length) {
       const { history, fetchSearch } = this.props
-      const historyPush = {
-        pathname: '/search',
-        search: `?query=${this.state.input}`
-      }
-      history.push(historyPush)
+      history.push(`/search/${this.state.input}`)
       fetchSearch(this.state.input)
     }
   }
@@ -51,7 +40,8 @@ export class Searchbox extends Component {
 
 Searchbox.propTypes = {
   fetchSearch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired,
+  match: PropTypes.object.isRequired
 }
 
 export default withRouter(connect(null, { fetchSearch })(Searchbox))

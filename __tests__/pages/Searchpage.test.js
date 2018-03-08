@@ -32,7 +32,10 @@ describe('SearchPage Component', () => {
       fetchSearch: jest.fn(),
       loadmoreSearch: jest.fn(),
       history: {
-        location: { search: '?query=serdar' }
+        push: jest.fn()
+      },
+      match: {
+        params: { query: 'abc' }
       },
       ...propOverrides
     }
@@ -57,24 +60,10 @@ describe('SearchPage Component', () => {
     expect(mockMountPage.mock.calls).toHaveLength(1)
   })
 
-  it('pushs history to Homepage action when search query id is not defined in query string', () => {
-    const { wrapper, props } = setup({
-      history: {
-        push: jest.fn(),
-        location: {
-          search: '?query='
-        }
-      }
-    }, { search: { isFetching: true, videos: [] } })
-
-    wrapper.instance().componentDidMount()
-    expect(props.history.push).toHaveBeenCalled()
-  })
-
   it('renders properly when search query is not exist', () => {
     const { props } = setup({
-      history: {
-        location: { search: null }
+      match: {
+        params: { query: null }
       }
     })
     expect(props.fetchSearch()).toMatchSnapshot()

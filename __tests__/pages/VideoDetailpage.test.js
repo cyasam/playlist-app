@@ -6,9 +6,10 @@ describe('Video Detail Page', () => {
   const setup = (propOverrides) => {
     const props = {
       history: {
-        listen: jest.fn(),
-        push: jest.fn(),
-        location: { pathname: '/watch', search: `?v=yG-9XIIELk4` }
+        push: jest.fn()
+      },
+      match: {
+        params: { id: 'ZoA5ZX4wC0' }
       },
       videoDetail: {
         isFetching: false,
@@ -73,44 +74,5 @@ describe('Video Detail Page', () => {
   it('returns videoDetail object when initialize component', () => {
     const { props } = setup()
     expect(mapStateToProps(props).videoDetail).toEqual(props.videoDetail)
-  })
-
-  it('remove history listen when calling WillUnmount', () => {
-    const { wrapper } = setup()
-    wrapper.instance().componentWillUnmount()
-
-    const mockHistoryListener = jest.spyOn(wrapper.instance(), 'historyListener')
-    expect(mockHistoryListener).toHaveBeenCalled()
-  })
-
-  it('pushs history to Homepage action when video id is not defined in query string', () => {
-    const { wrapper, props } = setup({
-      history: {
-        listen: jest.fn(),
-        push: jest.fn(),
-        location: {
-          pathname: '/watch',
-          search: '?v='
-        }
-      },
-      videoDetail: { isFetching: true, video: {} }
-    })
-
-    wrapper.instance().componentDidMount()
-    expect(props.history.push).toHaveBeenCalled()
-  })
-
-  it('returns nothing if the page is not video detail', () => {
-    const { wrapper } = setup({
-      history: {
-        listen: jest.fn(),
-        push: jest.fn(),
-        location: {
-          pathname: '/'
-        }
-      }
-    })
-
-    expect(wrapper.instance().fetchData()).toEqual(null)
   })
 })

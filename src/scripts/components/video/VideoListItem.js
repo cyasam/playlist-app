@@ -9,7 +9,7 @@ import VideoViews from './VideoViews'
 class VideoListItem extends Component {
   renderMediaType (video) {
     return (
-      <Link to={{ pathname: '/watch', search: `?v=${video.id}` }} className='video-list-item media-type'>
+      <Link to={`/watch/${video.id}`} className='video-list-item media-type'>
         <div className='media'>
           { video.thumbnail &&
             <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>
@@ -32,7 +32,7 @@ class VideoListItem extends Component {
 
   renderCardType (video) {
     return (
-      <Link to={{ pathname: '/watch', search: `?v=${video.id}` }} className='video-list-item card-type col-xl-3 col-lg-4 col-md-6 col-sm-6'>
+      <Link to={`/watch/${video.id}`} className='video-list-item card-type col-xl-3 col-lg-4 col-md-6 col-sm-6'>
         <div className='card'>
           { video.thumbnail &&
             <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>

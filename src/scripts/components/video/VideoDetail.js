@@ -13,7 +13,7 @@ const VideoDetail = ({ data }) => {
   } else if (error && !Object.keys(video).length) {
     return <div className='error'>{ error }</div>
   } else if (!isFetching && !Object.keys(video).length) {
-    return <div className='no-result'>Video is not found</div>
+    return null
   }
 
   return (

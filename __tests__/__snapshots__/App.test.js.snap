@@ -13,11 +13,15 @@ exports[`App Component renders properly 1`] = `
     />
     <Route
       component={[Function]}
-      path="/search"
+      path="/search/:query"
     />
     <Route
       component={[Function]}
-      path="/watch"
+      path="/watch/:id"
+    />
+    <Redirect
+      push={false}
+      to="/"
     />
   </Container>
 </div>

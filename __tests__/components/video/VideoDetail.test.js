@@ -41,7 +41,6 @@ describe('VideoDetail Component', () => {
   it('renders properly if any video is not found.', () => {
     const { wrapper } = setup({ video: {} })
     expect(wrapper).toMatchSnapshot()
-    expect(wrapper.find('.no-result').exists()).toBe(true)
   })
 
   it('renders Loading when isFetching is true', () => {

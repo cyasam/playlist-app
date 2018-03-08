@@ -1,5 +1,5 @@
 import { appTitle } from '../../src/scripts/config'
-import { shorthenText, setDocumentTitle } from '../../src/scripts/helpers'
+import { shorthenText, setDocumentTitle, filterVideoDetailResult } from '../../src/scripts/helpers'
 
 describe('Helpers', () => {
   describe('setDocumentTitle helper', () => {
@@ -43,6 +43,12 @@ describe('Helpers', () => {
       const desc = 'Lorem ipsum dolor sit amet'
       const { description } = setup(desc)
       expect(shorthenText(description, 80)).toEqual(desc)
+    })
+  })
+
+  describe('filterVideoDetailResult helper', () => {
+    it('returns empty object when items is empty', () => {
+      expect(filterVideoDetailResult({ items: [] })).toEqual({})
     })
   })
 })

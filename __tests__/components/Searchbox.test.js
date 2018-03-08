@@ -7,8 +7,10 @@ describe('Searchbox Component', () => {
     const props = {
       fetchSearch: jest.fn(),
       history: {
-        location: { pathname: '/' },
         push: jest.fn()
+      },
+      match: {
+        params: { query: 'abc' }
       },
       ...propsOverride
     }
@@ -45,7 +47,7 @@ describe('Searchbox Component', () => {
 
   describe('Form input element', () => {
     it('loads initial state', () => {
-      const { wrapper } = setup()
+      const { wrapper } = setup({ match: { params: { query: '' } } })
       expect(wrapper.state().input).toEqual('')
     })
 

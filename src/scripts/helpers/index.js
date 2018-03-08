@@ -26,6 +26,10 @@ export const filterVideoResult = result => {
 export const filterVideoDetailResult = result => {
   const item = result.items[0]
 
+  if (!item) {
+    return {}
+  }
+
   return {
     id: item.id,
     title: item.snippet.title,

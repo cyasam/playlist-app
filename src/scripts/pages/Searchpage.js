@@ -1,6 +1,5 @@
 import React, { Component, Fragment } from 'react'
 import PropTypes from 'prop-types'
-import queryString from 'query-string'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
 import DocumentTitle from 'react-document-title'
@@ -16,20 +15,12 @@ export class Searchpage extends Component {
   }
 
   componentDidMount () {
-    const { searchResult: { query } } = this.props
-    if (!query) {
-      this.mountPage()
-    }
+    this.mountPage()
   }
 
   mountPage () {
-    const { history, fetchSearch } = this.props
-    const queryStr = queryString.parse(history.location.search)
-    if (queryStr.query) {
-      fetchSearch(queryStr.query)
-    } else {
-      history.push('/')
-    }
+    const { match: { params: { query } }, fetchSearch } = this.props
+    fetchSearch(query)
   }
 
   loadMore (nextPageToken) {
@@ -60,7 +51,7 @@ Searchpage.propTypes = {
   searchResult: PropTypes.object.isRequired,
   fetchSearch: PropTypes.func.isRequired,
   loadmoreSearch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired
+  match: PropTypes.object.isRequired
 }
 
 export const mapStateToProps = state => ({
