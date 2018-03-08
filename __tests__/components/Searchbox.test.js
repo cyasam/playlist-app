@@ -6,10 +6,11 @@ describe('Searchbox Component', () => {
   const setup = (propsOverride) => {
     const props = {
       fetchSearch: jest.fn(),
-      history: { 
+      history: {
         location: { pathname: '/' },
         push: jest.fn()
-      }, ...propsOverride
+      },
+      ...propsOverride
     }
     const wrapper = shallow(<Searchbox {...props} />)
 
@@ -47,10 +48,10 @@ describe('Searchbox Component', () => {
       const { wrapper } = setup()
       expect(wrapper.state().input).toEqual('')
     })
-    
+
     it('loads initial state if page is search', () => {
-      const { wrapper, props } = setup({
-        history: { 
+      const { wrapper } = setup({
+        history: {
           location: {
             pathname: '/search',
             search: `?query=abc`
@@ -72,19 +73,19 @@ describe('Searchbox Component', () => {
       const { wrapper, props } = setup()
       wrapper.find('input').simulate('change', {target: { value: '' }})
       wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
-      
-      expect(props.history.push.mock.calls.length).toBe(0)
-      expect(wrapper.state().input.length).toBe(0)
-      expect(props.fetchSearch.mock.calls.length).toBe(0)
+
+      expect(props.history.push.mock.calls).toHaveLength(0)
+      expect(wrapper.state().input).toHaveLength(0)
+      expect(props.fetchSearch.mock.calls).toHaveLength(0)
     })
 
     it('fire handleSubmit event when submitting', () => {
       const { wrapper, props } = setup()
       wrapper.find('input').simulate('change', {target: { value: 'abc' }})
       wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
-      
+
       expect(props.history.push).toHaveBeenCalled()
-      expect(wrapper.state().input.length).toBe(3)
+      expect(wrapper.state().input).toHaveLength(3)
       expect(props.fetchSearch).toHaveBeenCalledWith(wrapper.state().input)
     })
   })

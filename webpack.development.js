@@ -1,7 +1,6 @@
-const webpack = require('webpack');
-const path = require('path');
-const merge = require('webpack-merge');
-const baseConfig = require('./webpack.base');
+const path = require('path')
+const merge = require('webpack-merge')
+const baseConfig = require('./webpack.base')
 
 const config = {
   devtool: 'eval-source-map',
@@ -16,13 +15,13 @@ const config = {
         use: [
           'style-loader',
           {
-            loader: 'css-loader', 
+            loader: 'css-loader',
             options: {
               sourceMap: true
             }
           },
           {
-            loader: 'resolve-url-loader', 
+            loader: 'resolve-url-loader',
             options: {
               keepQuery: true
             }
@@ -37,6 +36,6 @@ const config = {
     port: 7885,
     historyApiFallback: true
   }
-};
+}
 
-module.exports = merge(config, baseConfig);
+module.exports = merge(config, baseConfig)

@@ -2,7 +2,7 @@ import { AxiosYoutubeSearch } from '../../src/scripts/helpers/async-promises'
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
 
 describe('Async Promise Helpers', () => {
-  it('adds pageToken property into axiosConfig object in AxiosYoutubeSearch if pageToken is defined', () => {
+  it('adds pageToken property into axiosConfig object in AxiosYoutubeSearch if props is not defined', () => {
     const promise = new AxiosYoutubeSearch(undefined, undefined)
     expect(promise.q).toEqual(null)
     expect(promise.pageToken).toEqual(null)

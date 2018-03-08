@@ -3,9 +3,8 @@ import thunk from 'redux-thunk'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { filterVideoResult } from '../../src/scripts/helpers'
-import loadmoreSearch, { loadmoreSearchRequestAction, loadmoreSearchSuccessAction, loadmoreSearchErrorAction, 
-LOADMORE_SEARCH_REQUEST, LOADMORE_SEARCH_SUCCESS, LOADMORE_SEARCH_ERROR } from '../../src/scripts/actions/loadmore-search'
-import { getVideoDetails, addVideoStatistics } from '../../src/scripts/helpers/async-promises'
+import loadmoreSearch, { loadmoreSearchRequestAction, loadmoreSearchSuccessAction, loadmoreSearchErrorAction,
+  LOADMORE_SEARCH_REQUEST, LOADMORE_SEARCH_SUCCESS, LOADMORE_SEARCH_ERROR } from '../../src/scripts/actions/loadmore-search'
 
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
 import successResponseJson from '../mockData/youtube-search.js'
@@ -55,7 +54,7 @@ const manipulateResult = (data) => {
     const { id, statistics } = successVideoResponse.items[0]
     newItem.items[index].statistics = statistics
     newItem.items[index].id = id
-  });
+  })
   return newItem
 }
 
@@ -101,7 +100,7 @@ describe('Loadmore Search Action', () => {
       store
     }
   }
-  
+
   it('return `LOADMORE_SEARCH_REQUEST` type action', () => {
     const { expectedAction } = setup()
     expect(loadmoreSearchRequestAction(mockAxiosConfig.params.q)).toEqual(expectedAction.request)
@@ -118,7 +117,7 @@ describe('Loadmore Search Action', () => {
   })
 
   it('creates search request and get result successfully', () => {
-    const { expectedAction, value, store } = setup()
+    const { value, store } = setup()
     mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(config => {
       successResponseJson.items.forEach(item => {
         const mockAxiosVideoUrl = 'https://www.googleapis.com/youtube/v3/videos'
@@ -131,14 +130,14 @@ describe('Loadmore Search Action', () => {
         }
         mock.onGet(mockAxiosVideoUrl, mockAxiosVideoConfig).reply(config => {
           return [200, successVideoResponse]
-        });
+        })
       })
-      
+
       return [200, successResponseJson]
-    });
+    })
 
     return store.dispatch(loadmoreSearch(value)).then(() => {
-      const receivedAction = store.getActions();
+      const receivedAction = store.getActions()
 
       expect(receivedAction[0]).toEqual(loadmoreSearchRequestAction(mockAxiosConfig.params.q))
       expect(receivedAction[1]).toEqual(loadmoreSearchSuccessAction(successResponse, mockAxiosConfig.params.q))
@@ -147,14 +146,13 @@ describe('Loadmore Search Action', () => {
 
   it('creates search request and returns error', () => {
     const { expectedAction, value, store } = setup()
-    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse);
+    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse)
 
     return store.dispatch(loadmoreSearch(value)).catch(() => {
-        const receivedAction = store.getActions();
+      const receivedAction = store.getActions()
 
-        expect(receivedAction[0]).toEqual(loadmoreSearchRequestAction(mockAxiosConfig.params.q))
-        expect(receivedAction[1]).toEqual(loadmoreSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q))
-      }
-    )
+      expect(receivedAction[0]).toEqual(loadmoreSearchRequestAction(mockAxiosConfig.params.q))
+      expect(receivedAction[1]).toEqual(loadmoreSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q))
+    })
   })
 })

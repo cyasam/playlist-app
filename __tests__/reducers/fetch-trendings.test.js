@@ -1,6 +1,5 @@
 import { FETCH_TRENDINGS_REQUEST, FETCH_TRENDINGS_SUCCESS, FETCH_TRENDINGS_ERROR } from '../../src/scripts/actions/fetch-trendings'
 import fetchTrendingsReducer from '../../src/scripts/reducers/fetch-trendings'
-import { successResponse } from '../mockData/youtube-trendings.js'
 
 describe('Fetch Trendings Reducer', () => {
   const defaultState = { isFetching: true, videos: [] }

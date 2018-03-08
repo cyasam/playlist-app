@@ -3,9 +3,8 @@ import thunk from 'redux-thunk'
 import axios from 'axios'
 import MockAdapter from 'axios-mock-adapter'
 import { filterVideoResult } from '../../src/scripts/helpers'
-import fetchSearch, { fetchSearchRequestAction, fetchSearchSuccessAction, fetchSearchErrorAction, 
-FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../../src/scripts/actions/fetch-search'
-import { getVideoDetails, addVideoStatistics } from '../../src/scripts/helpers/async-promises'
+import fetchSearch, { fetchSearchRequestAction, fetchSearchSuccessAction, fetchSearchErrorAction,
+  FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../../src/scripts/actions/fetch-search'
 
 import { YOUTUBE_API_KEY } from '../../src/scripts/config'
 import successResponseJson from '../mockData/youtube-search.js'
@@ -55,7 +54,7 @@ const manipulateResult = (data) => {
     const { id, statistics } = successVideoResponse.items[0]
     newItem.items[index].statistics = statistics
     newItem.items[index].id = id
-  });
+  })
   return newItem
 }
 
@@ -102,7 +101,7 @@ describe('Fetch Search Action', () => {
       store
     }
   }
-  
+
   it('return `FETCH_SEARCH_REQUEST` type action', () => {
     const { expectedAction } = setup()
     expect(fetchSearchRequestAction(mockAxiosConfig.params.q)).toEqual(expectedAction.request)
@@ -119,7 +118,7 @@ describe('Fetch Search Action', () => {
   })
 
   it('creates search request and get result successfully', () => {
-    const { expectedAction, value, store } = setup()
+    const { value, store } = setup()
     mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(() => {
       successResponseJson.items.forEach(item => {
         const mockAxiosVideoUrl = 'https://www.googleapis.com/youtube/v3/videos'
@@ -132,14 +131,14 @@ describe('Fetch Search Action', () => {
         }
         mock.onGet(mockAxiosVideoUrl, mockAxiosVideoConfig).reply(() => {
           return [200, successVideoResponse]
-        });
+        })
       })
-      
+
       return [200, successResponseJson]
-    });
+    })
 
     return store.dispatch(fetchSearch(value)).then(() => {
-      const receivedAction = store.getActions();
+      const receivedAction = store.getActions()
 
       expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
       expect(receivedAction[1]).toEqual(fetchSearchSuccessAction(successResponse, mockAxiosConfig.params.q))
@@ -148,14 +147,13 @@ describe('Fetch Search Action', () => {
 
   it('creates search request and returns error', () => {
     const { expectedAction, value, store } = setup()
-    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse);
+    mock.onGet(mockAxiosUrl, mockAxiosConfig).reply(400, errorResponse)
 
     return store.dispatch(fetchSearch(value)).catch(() => {
-        const receivedAction = store.getActions();
+      const receivedAction = store.getActions()
 
-        expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
-        expect(receivedAction[1]).toEqual(fetchSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q))
-      }
-    )
+      expect(receivedAction[0]).toEqual(fetchSearchRequestAction(mockAxiosConfig.params.q))
+      expect(receivedAction[1]).toEqual(fetchSearchErrorAction(expectedAction.error.payload.error, mockAxiosConfig.params.q))
+    })
   })
 })

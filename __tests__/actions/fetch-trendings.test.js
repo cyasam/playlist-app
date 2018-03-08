@@ -53,7 +53,7 @@ const manipulateResult = (data) => {
     const { id, statistics } = successVideoResponse.items[0]
     newItem.items[index].statistics = statistics
     newItem.items[index].id = id
-  });
+  })
   return newItem
 }
 
@@ -89,7 +89,7 @@ describe('Fetch Trendings Action', () => {
     store = createMockStore({ trendings: defaultState })
   })
 
-  afterEach (() => {
+  afterEach(() => {
     mock.reset()
   })
 

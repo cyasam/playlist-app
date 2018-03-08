@@ -1,7 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import VideoListItem from '../../../src/scripts/components/video/VideoListItem'
-import { truncate } from 'fs';
 
 describe('VideoListItem Component', () => {
   const setup = (propOverrides) => {

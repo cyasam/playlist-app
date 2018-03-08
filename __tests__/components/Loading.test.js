@@ -3,13 +3,13 @@ import { shallow } from 'enzyme'
 import Loading from '../../src/scripts/components/Loading'
 
 describe('Loading Component', () => {
-    const wrapper = shallow(<Loading />)
+  const wrapper = shallow(<Loading />)
 
-    it('renders correctly', () => {
-        expect(wrapper).toMatchSnapshot()
-    })
+  it('renders correctly', () => {
+    expect(wrapper).toMatchSnapshot()
+  })
 
-    it('has loading class div', () => {
-        expect(wrapper.find('.loading').exists()).toBe(true)
-    })
+  it('has loading class div', () => {
+    expect(wrapper.find('.loading').exists()).toBe(true)
+  })
 })

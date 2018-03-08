@@ -1,8 +1,6 @@
-const webpack = require('webpack');
-const path = require('path');
-const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const webpack = require('webpack')
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const config = {
@@ -26,8 +24,8 @@ const config = {
         use: {
           loader: 'file-loader',
           options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "assets/fonts/"
+            name: '[name].[hash].[ext]',
+            outputPath: 'assets/fonts/'
           }
         }
       },
@@ -37,8 +35,8 @@ const config = {
         use: {
           loader: 'file-loader',
           options: {
-            name: "[name].[hash].[ext]",
-            outputPath: "assets/images/"
+            name: '[name].[hash].[ext]',
+            outputPath: 'assets/images/'
           }
         }
       },
@@ -48,21 +46,21 @@ const config = {
         use: {
           loader: 'file-loader',
           options: {
-            name: "[name].[ext]",
-            outputPath: "assets/images/"
+            name: '[name].[ext]',
+            outputPath: 'assets/images/'
           }
         }
       },
       {
-        test:/\.html$/,
+        test: /\.html$/,
         loader: 'html-loader'
       }
     ]
   },
   resolve: {
-    extensions: ['.js', '.css', '/\.(jpe?g|png|gif|svg|ico)$/']
+    extensions: ['.js', '.css', '/.(jpe?g|png|gif|svg|ico)$/']
   },
-  plugins:[
+  plugins: [
     new webpack.optimize.CommonsChunkPlugin({
       names: ['vendor'],
       minChunks: Infinity
@@ -90,6 +88,6 @@ const config = {
       template: './src/template/index.html'
     })
   ]
-};
+}
 
-module.exports = config;
+module.exports = config

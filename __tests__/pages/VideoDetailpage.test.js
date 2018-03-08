@@ -49,7 +49,7 @@ describe('Video Detail Page', () => {
       ...propOverrides
     }
 
-    const wrapper = shallow(<VideoDetailPage { ...props } />)
+    const wrapper = shallow(<VideoDetailPage {...props} />)
     wrapper.instance().historyListener = jest.fn()
 
     return {
@@ -64,19 +64,15 @@ describe('Video Detail Page', () => {
   })
 
   it('calls fetchVideoDetail action when first page load', () => {
-    const { wrapper, props } = setup({ videoDetail: { isFetching: true, video: {} } })
+    const { wrapper } = setup({ videoDetail: { isFetching: true, video: {} } })
 
     wrapper.instance().componentDidMount()
     expect(wrapper).toMatchSnapshot()
   })
 
   it('returns videoDetail object when initialize component', () => {
-    const { wrapper, props } = setup()
+    const { props } = setup()
     expect(mapStateToProps(props).videoDetail).toEqual(props.videoDetail)
-  })
-
-  it('calls fetchData when calling history listen', () => {
-  
   })
 
   it('remove history listen when calling WillUnmount', () => {
@@ -88,7 +84,7 @@ describe('Video Detail Page', () => {
   })
 
   it('pushs history to Homepage action when video id is not defined in query string', () => {
-    const { wrapper, props } = setup({ 
+    const { wrapper, props } = setup({
       history: {
         listen: jest.fn(),
         push: jest.fn(),
@@ -105,7 +101,7 @@ describe('Video Detail Page', () => {
   })
 
   it('returns nothing if the page is not video detail', () => {
-    const { wrapper, props } = setup({ 
+    const { wrapper } = setup({
       history: {
         listen: jest.fn(),
         push: jest.fn(),

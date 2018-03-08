@@ -24,4 +24,4 @@ describe('Header Component', () => {
     const { wrapper } = setup()
     expect(wrapper.find('.login-btn').exists()).toBe(true)
   })
-});
+})

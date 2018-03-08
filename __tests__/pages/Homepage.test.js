@@ -14,7 +14,6 @@ describe('Homepage Component', () => {
             description: 'Lorem ipsum dolor sit amed.',
             thubmnail: 'video-thumbnail.jpg'
           },
-          
           {
             id: 'lZoA5ZX4wC01',
             title: 'Video Title 2',
@@ -30,14 +29,14 @@ describe('Homepage Component', () => {
       fetchTrendings: jest.fn(),
       ...propsOverride
     }
-    const wrapper = shallow(<Homepage { ...props } />)
+    const wrapper = shallow(<Homepage {...props} />)
     return {
       wrapper,
       props,
       state
     }
   }
-  
+
   it('renders properly', () => {
     const { wrapper } = setup()
     expect(wrapper).toMatchSnapshot()

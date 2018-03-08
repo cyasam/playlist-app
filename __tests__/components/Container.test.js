@@ -11,13 +11,12 @@ describe('Container Component', () => {
   }
 
   it('renders properly', () => {
-    const { wrapper } = setup();
+    const { wrapper } = setup()
     expect(wrapper).toMatchSnapshot()
-  });
+  })
 
   it('has div called container', () => {
-    const { wrapper } = setup();
-    expect(wrapper.find('.container').exists()).toBe(true);
-  });
-
+    const { wrapper } = setup()
+    expect(wrapper.find('.container').exists()).toBe(true)
+  })
 })

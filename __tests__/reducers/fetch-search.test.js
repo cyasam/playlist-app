@@ -8,7 +8,7 @@ describe('Fetch Search Reducer', () => {
       defaultState
     }
   }
-  
+
   it('returns initial state handling with unknown type', () => {
     const { defaultState } = setup()
     expect(fetchSearchReducer(undefined, {})).toEqual(defaultState)
@@ -71,7 +71,7 @@ describe('Fetch Search Reducer', () => {
       isFetching: false,
       videos: [],
       error: {
-        message: 'Error',
+        message: 'Error'
       }
     }
 
@@ -80,7 +80,7 @@ describe('Fetch Search Reducer', () => {
       payload: {
         isFetching: false,
         error: {
-          message: 'Error',
+          message: 'Error'
         }
       }
     }
@@ -102,7 +102,7 @@ describe('Fetch Search Reducer', () => {
       nextPageToken: 'abcxy23'
     }
     const loadmoreSetup = setup(loadmoreDefaultState)
-  
+
     it('returns state of `LOADMORE_SEARCH_REQUEST` type action', () => {
       const { defaultState } = loadmoreSetup
 
@@ -140,7 +140,7 @@ describe('Fetch Search Reducer', () => {
           nextPageToken: loadmoreDefaultState.nextPageToken
         }
       }
-      
+
       const expectedState = {
         ...loadmoreDefaultState,
         videos: [

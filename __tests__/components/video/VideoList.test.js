@@ -61,7 +61,7 @@ describe('VideoList Component', () => {
 
   it('creates two videos', () => {
     const { wrapper } = setup()
-    expect(wrapper.find('VideoListItem').length).toBe(2)
+    expect(wrapper.find('VideoListItem')).toHaveLength(2)
   })
 
   it('does`nt return loadmore button if nextPageToken is undefined', () => {
@@ -73,7 +73,7 @@ describe('VideoList Component', () => {
     const { wrapper } = setup()
     expect(wrapper.find('.btn').exists()).toBe(true)
   })
-  
+
   describe('When clicking loadmore button', () => {
     it('calls loadMoreCallback', () => {
       const { wrapper, props } = setup()
@@ -84,14 +84,14 @@ describe('VideoList Component', () => {
     })
 
     it('show Loading', () => {
-      const { wrapper, props } = setup({
+      const { wrapper } = setup({
         isFetching: true
       })
       expect(wrapper.find('Loading').exists()).toBe(true)
     })
 
     it('renders error', () => {
-      const { wrapper, props } = setup({
+      const { wrapper } = setup({
         error: 'Error'
       })
       expect(wrapper.find('.error').exists()).toBe(true)

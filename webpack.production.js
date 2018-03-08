@@ -1,8 +1,7 @@
-const webpack = require('webpack');
-const merge = require('webpack-merge');
-const baseConfig = require('./webpack.base');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const merge = require('webpack-merge')
+const baseConfig = require('./webpack.base')
+const ExtractTextPlugin = require('extract-text-webpack-plugin')
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const config = {
   devtool: false,
@@ -33,6 +32,6 @@ const config = {
     new ExtractTextPlugin('assets/css/app.[hash].css'),
     new UglifyJsPlugin()
   ]
-};
+}
 
-module.exports = merge(config, baseConfig);
+module.exports = merge(config, baseConfig)

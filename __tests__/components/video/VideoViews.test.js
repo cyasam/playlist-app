@@ -28,7 +28,7 @@ describe('VideoViews Component', () => {
       })
       expect(wrapper.instance().formatSummary(props.viewCount)).toEqual('604')
     })
-  
+
     it('renders with K if viewCount is greater equal than 1K', () => {
       const { wrapper, props } = setup({
         viewCount: '11604',
@@ -36,7 +36,7 @@ describe('VideoViews Component', () => {
       })
       expect(wrapper.instance().formatSummary(props.viewCount)).toEqual('11K')
     })
-  
+
     it('renders with K if viewCount is greater equal than 1M', () => {
       const { wrapper, props } = setup({
         viewCount: '12322751',
@@ -44,7 +44,7 @@ describe('VideoViews Component', () => {
       })
       expect(wrapper.instance().formatSummary(props.viewCount)).toEqual('12.3M')
     })
-  
+
     it('renders with K if viewCount is greater equal than 1B', () => {
       const { wrapper, props } = setup({
         viewCount: '2392751038',
@@ -61,21 +61,21 @@ describe('VideoViews Component', () => {
       })
       expect(wrapper.instance().formatSummary(props.viewCount)).toEqual('604')
     })
-  
+
     it('renders if viewCount is greater equal than 1K', () => {
       const { wrapper, props } = setup({
         viewCount: '11604'
       })
       expect(wrapper.instance().formatNumeric(props.viewCount)).toEqual('11,604')
     })
-  
+
     it('renders if viewCount is greater equal than 1M', () => {
       const { wrapper, props } = setup({
         viewCount: '12322751'
       })
       expect(wrapper.instance().formatNumeric(props.viewCount)).toEqual('12,322,751')
     })
-  
+
     it('renders if viewCount is greater equal than 1B', () => {
       const { wrapper, props } = setup({
         viewCount: '2392751038'

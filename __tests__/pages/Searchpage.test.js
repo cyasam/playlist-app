@@ -8,19 +8,18 @@ describe('SearchPage Component', () => {
       search: {
         isFetching: false,
         videos: [
-            {
-              id: 'lZoA5ZX4wC0',
-              title: 'Video Title',
-              description: 'Lorem ipsum dolor sit amed.',
-              thubmnail: 'video-thumbnail.jpg'
-            },
-            
-            {
-              id: 'lZoA5ZX4wC01',
-              title: 'Video Title 2',
-              description: 'Lorem ipsum dolor sit amed.',
-              thubmnail: 'video-thumbnail-2.jpg'
-            }
+          {
+            id: 'lZoA5ZX4wC0',
+            title: 'Video Title',
+            description: 'Lorem ipsum dolor sit amed.',
+            thubmnail: 'video-thumbnail.jpg'
+          },
+          {
+            id: 'lZoA5ZX4wC01',
+            title: 'Video Title 2',
+            description: 'Lorem ipsum dolor sit amed.',
+            thubmnail: 'video-thumbnail-2.jpg'
+          }
         ],
         query: 'abc',
         nextPageToken: 'CBgQAA'
@@ -32,19 +31,19 @@ describe('SearchPage Component', () => {
       searchResult: state.search,
       fetchSearch: jest.fn(),
       loadmoreSearch: jest.fn(),
-      history: { 
-        location: { search: '?query=serdar' },
+      history: {
+        location: { search: '?query=serdar' }
       },
       ...propOverrides
     }
-    const wrapper = shallow(<Searchpage { ...props } />)
+    const wrapper = shallow(<Searchpage {...props} />)
     return {
       wrapper,
       props,
       state
     }
   }
-  
+
   it('renders properly', () => {
     const { wrapper } = setup()
     expect(wrapper).toMatchSnapshot()
@@ -55,11 +54,11 @@ describe('SearchPage Component', () => {
     const mockMountPage = jest.spyOn(wrapper.instance(), 'mountPage')
 
     wrapper.instance().componentDidMount()
-    expect(mockMountPage.mock.calls.length).toEqual(1)
+    expect(mockMountPage.mock.calls).toHaveLength(1)
   })
 
   it('pushs history to Homepage action when search query id is not defined in query string', () => {
-    const { wrapper, props } = setup({ 
+    const { wrapper, props } = setup({
       history: {
         push: jest.fn(),
         location: {
@@ -73,16 +72,16 @@ describe('SearchPage Component', () => {
   })
 
   it('renders properly when search query is not exist', () => {
-    const { wrapper, props } = setup({
-      history: { 
+    const { props } = setup({
+      history: {
         location: { search: null }
-      },
+      }
     })
     expect(props.fetchSearch()).toMatchSnapshot()
   })
 
   it('returns searchResult object when initialize component', () => {
-    const { wrapper, state } = setup()
+    const { state } = setup()
     expect(mapStateToProps(state).searchResult).toEqual(state.search)
   })
 
