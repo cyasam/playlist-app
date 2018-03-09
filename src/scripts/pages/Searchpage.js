@@ -47,6 +47,10 @@ export class Searchpage extends Component {
   }
 }
 
+export const loadSearchData = (store) => {
+  return Promise.all([ store.dispatch(fetchSearch()) ])
+}
+
 Searchpage.propTypes = {
   searchResult: PropTypes.object.isRequired,
   fetchSearch: PropTypes.func.isRequired,

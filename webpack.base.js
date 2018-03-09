@@ -1,5 +1,7 @@
 const webpack = require('webpack')
 const path = require('path')
+const merge = require('webpack-merge')
+const commonConfig = require('./webpack.base.config')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
@@ -11,55 +13,6 @@ const config = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        use: ['babel-loader', 'eslint-loader']
-      },
-      {
-        test: /\.(ttf|woff|eot|otf)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[hash].[ext]',
-            outputPath: 'assets/fonts/'
-          }
-        }
-      },
-      {
-        test: /\.(jpe?g|png|gif|svg)$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[hash].[ext]',
-            outputPath: 'assets/images/'
-          }
-        }
-      },
-      {
-        test: /\.ico$/,
-        exclude: /node_modules/,
-        use: {
-          loader: 'file-loader',
-          options: {
-            name: '[name].[ext]',
-            outputPath: 'assets/images/'
-          }
-        }
-      },
-      {
-        test: /\.html$/,
-        loader: 'html-loader'
-      }
-    ]
-  },
-  resolve: {
-    extensions: ['.js', '.css', '/.(jpe?g|png|gif|svg|ico)$/']
   },
   plugins: [
     new webpack.optimize.CommonsChunkPlugin({
@@ -91,4 +44,4 @@ const config = {
   ]
 }
 
-module.exports = config
+module.exports = merge(config, commonConfig)

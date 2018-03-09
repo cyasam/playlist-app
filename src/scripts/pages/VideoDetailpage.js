@@ -58,6 +58,12 @@ export const mapStateToProps = state => ({
   trendings: state.trendings
 })
 
+export const loadVideoDetailData = (store) => {
+  const promises = [ store.dispatch(fetchVideoDetail('NsFna-Z1MjU')), store.dispatch(fetchTrendings()) ]
+
+  return Promise.all(promises)
+}
+
 VideoDetailPage.propTypes = {
   match: PropTypes.object.isRequired,
   videoDetail: PropTypes.object.isRequired,

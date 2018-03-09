@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
-import ProgressiveImage from 'react-progressive-image'
-import imagePlaceholder from '../../../images/icons/image-placeholder.jpg'
 import VideoViews from './VideoViews'
 
 class VideoListItem extends Component {
@@ -12,9 +10,7 @@ class VideoListItem extends Component {
       <Link to={`/watch/${video.id}`} className='video-list-item media-type'>
         <div className='media'>
           { video.thumbnail &&
-            <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>
-              {(src) => <img className='media-img col-6' src={src} alt={video.title} />}
-            </ProgressiveImage>
+            <img className='media-img col-6' src={video.thumbnail.url} alt={video.title} />
           }
           <div className='media-body'>
             <h6 className='media-title mt-1'>{video.title}</h6>
@@ -35,9 +31,7 @@ class VideoListItem extends Component {
       <Link to={`/watch/${video.id}`} className='video-list-item card-type col-xl-3 col-lg-4 col-md-6 col-sm-6'>
         <div className='card'>
           { video.thumbnail &&
-            <ProgressiveImage src={video.thumbnail.url} placeholder={imagePlaceholder}>
-              {(src) => <img className='card-img-top' src={src} alt={video.title} />}
-            </ProgressiveImage>
+            <img className='card-img-top' src={video.thumbnail.url} alt={video.title} />
           }
           <div className='card-body'>
             <h5 className='card-title'>{video.title}</h5>

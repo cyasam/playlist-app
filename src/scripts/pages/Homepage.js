@@ -32,6 +32,10 @@ export const mapStateToProps = state => ({
   trendings: state.trendings
 })
 
+export const loadHomeData = (store) => {
+  return Promise.all([ store.dispatch(fetchTrendings()) ])
+}
+
 Homepage.propTypes = {
   trendings: PropTypes.object.isRequired,
   fetchTrendings: PropTypes.func.isRequired
