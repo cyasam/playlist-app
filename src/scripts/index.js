@@ -13,10 +13,15 @@ import '../styles/app.scss'
 const preloadedStore = window.__PRELOADED_STATE__
 delete window.__PRELOADED_STATE__
 
+const middlewares = [thunk]
+if (process.env.NODE_ENV === 'development') {
+  middlewares.push(logger)
+}
+
 const store = createStore(
   rootReducer,
   preloadedStore,
-  applyMiddleware(thunk, logger)
+  applyMiddleware(...middlewares)
 )
 
 hydrate(
