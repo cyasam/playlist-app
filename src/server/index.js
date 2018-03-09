@@ -16,8 +16,8 @@ app.get('**', (req, res) => {
     applyMiddleware(thunk)
   )
 
-  const matched = matchRoutes(Routes, req.path).map(({ route }) => {
-    return route.loadData ? route.loadData(store) : null
+  const matched = matchRoutes(Routes, req.path).map(({ route, match }) => {
+    return route.loadData ? route.loadData(store, match) : null
   })
 
   Promise.all(matched).then(() => {

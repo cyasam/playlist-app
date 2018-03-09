@@ -10,8 +10,12 @@ import App from './App'
 
 import '../styles/app.scss'
 
+const preloadedStore = window.__PRELOADED_STATE__
+delete window.__PRELOADED_STATE__
+
 const store = createStore(
   rootReducer,
+  preloadedStore,
   applyMiddleware(thunk, logger)
 )
 

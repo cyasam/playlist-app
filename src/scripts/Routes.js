@@ -1,23 +1,20 @@
-import Homepage, { loadHomeData } from './pages/Homepage'
-import Searchpage, { loadSearchData } from './pages/Searchpage'
-import VideoDetailpage, { loadVideoDetailData } from './pages/VideoDetailpage'
+import Homepage from './pages/Homepage'
+import Searchpage from './pages/Searchpage'
+import VideoDetailpage from './pages/VideoDetailpage'
 
 const Routes = [
   {
-    loadData: loadHomeData,
+    ...Homepage,
     path: '/',
-    component: Homepage,
     exact: true
   },
   {
-    loadData: loadSearchData,
-    path: '/search/:query',
-    component: Searchpage
+    ...Searchpage,
+    path: '/search/:query'
   },
   {
-    loadData: loadVideoDetailData,
-    path: '/watch/:id',
-    component: VideoDetailpage
+    ...VideoDetailpage,
+    path: '/watch/:id'
   }
 ]
 

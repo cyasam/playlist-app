@@ -8,23 +8,26 @@ exports[`App Component renders properly 1`] = `
   <Container>
     <Switch>
       <Route
-        component={[Function]}
         exact={true}
+        key="0"
         path="/"
+        render={[Function]}
       />
       <Route
-        component={[Function]}
+        key="1"
         path="/search/:query"
+        render={[Function]}
       />
       <Route
-        component={[Function]}
+        key="2"
         path="/watch/:id"
-      />
-      <Redirect
-        push={false}
-        to="/"
+        render={[Function]}
       />
     </Switch>
+    <Redirect
+      push={false}
+      to="/"
+    />
   </Container>
 </div>
 `;

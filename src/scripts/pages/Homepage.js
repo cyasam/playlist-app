@@ -8,6 +8,7 @@ import VideoList from '../components/video/VideoList'
 
 export class Homepage extends Component {
   componentDidMount () {
+    window.scrollTo(0, 0)
     this.props.fetchTrendings()
   }
 
@@ -32,7 +33,7 @@ export const mapStateToProps = state => ({
   trendings: state.trendings
 })
 
-export const loadHomeData = (store) => {
+export const loadData = (store) => {
   return Promise.all([ store.dispatch(fetchTrendings()) ])
 }
 
@@ -41,4 +42,7 @@ Homepage.propTypes = {
   fetchTrendings: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps, { fetchTrendings })(Homepage)
+export default {
+  loadData,
+  component: connect(mapStateToProps, { fetchTrendings })(Homepage)
+}

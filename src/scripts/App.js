@@ -1,5 +1,4 @@
 import React from 'react'
-import { Redirect } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import Routes from './Routes'
 import Header from './components/header'
@@ -11,7 +10,6 @@ const App = () => {
       <Header />
       <Container>
         { renderRoutes(Routes) }
-        <Redirect to='/' />
       </Container>
     </div>
   )

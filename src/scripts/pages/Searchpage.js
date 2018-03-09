@@ -15,12 +15,9 @@ export class Searchpage extends Component {
   }
 
   componentDidMount () {
-    this.mountPage()
-  }
-
-  mountPage () {
-    const { match: { params: { query } }, fetchSearch } = this.props
-    fetchSearch(query)
+    window.scrollTo(0, 0)
+    const { match: { params: { query } }, searchResult, fetchSearch } = this.props
+    if (!searchResult.videos.length) fetchSearch(query)
   }
 
   loadMore (nextPageToken) {
@@ -47,8 +44,8 @@ export class Searchpage extends Component {
   }
 }
 
-export const loadSearchData = (store) => {
-  return Promise.all([ store.dispatch(fetchSearch()) ])
+export const loadData = (store, match) => {
+  return Promise.all([ store.dispatch(fetchSearch(match.params.query)) ])
 }
 
 Searchpage.propTypes = {
@@ -62,4 +59,7 @@ export const mapStateToProps = state => ({
   searchResult: state.search
 })
 
-export default withRouter(connect(mapStateToProps, { fetchSearch, loadmoreSearch })(Searchpage))
+export default {
+  loadData,
+  component: withRouter(connect(mapStateToProps, { fetchSearch, loadmoreSearch })(Searchpage))
+}

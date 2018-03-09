@@ -58,8 +58,8 @@ describe('VideoListItem Component', () => {
     const { wrapper, props } = setup()
 
     it('has thumbnail', () => {
-      expect(wrapper.find('ProgressiveImage').props().src).toEqual(props.video.thumbnail.url)
-      expect(wrapper.find('ProgressiveImage').props().children().props.className.includes('card-img-top')).toBe(true)
+      expect(wrapper.find('img').props().src).toEqual(props.video.thumbnail.url)
+      expect(wrapper.find('img').props().className.includes('card-img-top')).toBe(true)
     })
 
     it('has title', () => {
@@ -71,8 +71,8 @@ describe('VideoListItem Component', () => {
     const { wrapper, props } = setup({ type: 'media' })
 
     it('has thumbnail', () => {
-      expect(wrapper.find('ProgressiveImage').props().src).toEqual(props.video.thumbnail.url)
-      expect(wrapper.find('ProgressiveImage').props().children().props.className.includes('media-img')).toBe(true)
+      expect(wrapper.find('img').props().src).toEqual(props.video.thumbnail.url)
+      expect(wrapper.find('img').props().className.includes('media-img')).toBe(true)
     })
 
     it('has title', () => {

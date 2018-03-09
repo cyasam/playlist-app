@@ -11,19 +11,20 @@ import fetchVideoDetail from '../actions/fetch-video-detail'
 
 export class VideoDetailPage extends Component {
   componentDidMount () {
+    window.scrollTo(0, 0)
     const { match: { params: { id } } } = this.props
     this.fetchData(id)
   }
 
   componentWillReceiveProps (nextProps) {
     if (this.props.match.params.id !== nextProps.match.params.id) {
+      window.scrollTo(0, 0)
       const { match: { params: { id } } } = nextProps
       this.fetchData(id)
     }
   }
 
   fetchData (id) {
-    window.scrollTo(0, 0)
     const { fetchVideoDetail, fetchTrendings } = this.props
 
     fetchVideoDetail(id)
@@ -58,8 +59,8 @@ export const mapStateToProps = state => ({
   trendings: state.trendings
 })
 
-export const loadVideoDetailData = (store) => {
-  const promises = [ store.dispatch(fetchVideoDetail('NsFna-Z1MjU')), store.dispatch(fetchTrendings()) ]
+export const loadData = (store, match) => {
+  const promises = [ store.dispatch(fetchVideoDetail(match.params.id)), store.dispatch(fetchTrendings()) ]
 
   return Promise.all(promises)
 }
@@ -72,4 +73,7 @@ VideoDetailPage.propTypes = {
   fetchTrendings: PropTypes.func.isRequired
 }
 
-export default withRouter(connect(mapStateToProps, { fetchVideoDetail, fetchTrendings })(VideoDetailPage))
+export default {
+  loadData,
+  component: withRouter(connect(mapStateToProps, { fetchVideoDetail, fetchTrendings })(VideoDetailPage))
+}

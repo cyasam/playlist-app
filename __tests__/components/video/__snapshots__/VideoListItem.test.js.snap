@@ -9,8 +9,9 @@ exports[`VideoListItem Component renders properly 1`] = `
   <div
     className="card"
   >
-    <ProgressiveImage
-      placeholder={null}
+    <img
+      alt="Elon Musk: How I Became The Real 'Iron Man'"
+      className="card-img-top"
       src="https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg"
     />
     <div
@@ -65,8 +66,9 @@ exports[`VideoListItem Component renders properly if type props is media 1`] = `
   <div
     className="media"
   >
-    <ProgressiveImage
-      placeholder={null}
+    <img
+      alt="Elon Musk: How I Became The Real 'Iron Man'"
+      className="media-img col-6"
       src="https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg"
     />
     <div
