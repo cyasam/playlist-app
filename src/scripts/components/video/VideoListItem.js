@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
+import { convertYouTubeDuration } from '../../helpers'
 import VideoViews from './VideoViews'
 
 class VideoListItem extends Component {
@@ -10,7 +11,12 @@ class VideoListItem extends Component {
       <Link to={`/watch/${video.id}`} className='video-list-item media-type'>
         <div className='media'>
           { video.thumbnail &&
-            <img className='media-img col-6' src={video.thumbnail.url} alt={video.title} />
+            <div className='card-thumbnail col-6'>
+              <div className='media-img-wrapper'>
+                <img className='media-img' src={video.thumbnail.url} alt={video.title} />
+                <div className='duration'>{ convertYouTubeDuration(video.duration) }</div>
+              </div>
+            </div>
           }
           <div className='media-body'>
             <h6 className='media-title mt-1'>{video.title}</h6>
@@ -31,7 +37,12 @@ class VideoListItem extends Component {
       <Link to={`/watch/${video.id}`} className='video-list-item card-type col-xl-3 col-lg-4 col-md-6 col-sm-6'>
         <div className='card'>
           { video.thumbnail &&
-            <img className='card-img-top' src={video.thumbnail.url} alt={video.title} />
+            <div className='card-thumbnail'>
+              <div className='media-img-wrapper'>
+                <img className='card-img-top' src={video.thumbnail.url} alt={video.title} />
+                <div className='duration'>{ convertYouTubeDuration(video.duration) }</div>
+              </div>
+            </div>
           }
           <div className='card-body'>
             <h5 className='card-title'>{video.title}</h5>

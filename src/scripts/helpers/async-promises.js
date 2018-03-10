@@ -33,7 +33,7 @@ export const axiosYoutubeVideoById = (id) => {
   const axiosUrl = 'https://www.googleapis.com/youtube/v3/videos'
   const axiosConfig = {
     params: {
-      part: 'snippet,statistics',
+      part: 'snippet,statistics,contentDetails',
       id,
       key: YOUTUBE_API_KEY
     }
@@ -76,8 +76,9 @@ export const getVideoDetails = (data) => {
 }
 
 export const addVideoStatistics = (dataItem, item) => {
-  const { id, statistics } = item
+  const { id, statistics, contentDetails } = item
   dataItem.statistics = statistics
+  dataItem.contentDetails = contentDetails
   dataItem.id = id
   return dataItem
 }
