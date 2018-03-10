@@ -1,12 +1,13 @@
 import React from 'react'
 import { hydrate } from 'react-dom'
 import { BrowserRouter as Router } from 'react-router-dom'
+import { renderRoutes } from 'react-router-config'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import rootReducer from './reducers'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import App from './App'
+import Routes from './Routes'
 
 import '../styles/app.scss'
 
@@ -27,6 +28,6 @@ const store = createStore(
 hydrate(
   <Provider store={store}>
     <Router>
-      <App />
+      { renderRoutes(Routes) }
     </Router>
   </Provider>, document.getElementById('app'))

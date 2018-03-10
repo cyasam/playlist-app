@@ -39,10 +39,10 @@ export class VideoDetailPage extends Component {
     return (
       <DocumentTitle title={title}>
         <div className='row'>
-          <div className='col-8'>
+          <div className='video-detail-box col-8'>
             <VideoDetail data={videoDetail} />
           </div>
-          <div className='col-4'>
+          <div className='list-box col-4'>
             <VideoList isFetching={trendings.isFetching}
               videos={trendings.videos}
               error={trendings.error}

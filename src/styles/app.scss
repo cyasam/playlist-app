@@ -148,3 +148,40 @@ header {
     margin-top: $header;
   }
 }
+
+@media screen and (max-width: 1199.98px) {
+  .video-list .video-list-item {
+    .media {
+      display: block;
+
+      .media-img {
+        max-width: 100%;
+        margin-bottom: 15px;
+        padding: 0;
+      }
+
+      .media-body {
+        padding: 0 15px;
+      }
+    }
+  }
+}
+
+@media (max-width: 767.98px) {
+  .main {
+    .row {
+      display: block;
+      margin: 0;
+    }
+
+    .video-detail-box, .list-box {
+      max-width: 100%;
+      flex: 1;
+      padding: 0;
+    }
+
+    .video-detail-box {
+      margin-bottom: 40px;
+    }
+  }
+}
