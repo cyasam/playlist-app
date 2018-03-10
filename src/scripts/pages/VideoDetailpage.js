@@ -12,8 +12,8 @@ import fetchVideoDetail from '../actions/fetch-video-detail'
 export class VideoDetailPage extends Component {
   componentDidMount () {
     window.scrollTo(0, 0)
-    const { match: { params: { id } } } = this.props
-    this.fetchData(id)
+    const { match: { params: { id } }, videoDetail: { video } } = this.props
+    if (!Object.keys(video).length || video.id !== id) this.fetchData(id)
   }
 
   componentWillReceiveProps (nextProps) {

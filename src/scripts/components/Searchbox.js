@@ -14,8 +14,14 @@ export class Searchbox extends Component {
   }
 
   componentDidMount () {
-    const { match: { params: { query } } } = this.props
-    this.setState({ input: query })
+    const { search: { query } } = this.props
+    if (query) this.setState({ input: query })
+  }
+
+  componentWillReceiveProps (nextProps) {
+    const { search: { query }, history: { location: { pathname } } } = nextProps
+    const input = pathname.includes('search') ? query : ''
+    this.setState({ input })
   }
 
   handleSubmit (e) {
@@ -31,17 +37,21 @@ export class Searchbox extends Component {
   render () {
     return (
       <form className='search-form mr-auto' onSubmit={this.handleSubmit}>
-        <input type='text' className='form-control' defaultValue={this.state.input} onChange={(e) => this.setState({input: e.target.value})} placeholder='Search videos on youtube' />
+        <input type='text' className='form-control' value={this.state.input} onChange={(e) => this.setState({input: e.target.value})} placeholder='Search videos on youtube' />
         <button className='btn btn-secondary my-sm-0' type='submit'><img src={searchIcon} alt='Search' width='16' height='16' /></button>
       </form>
     )
   }
 }
 
+const mapStateToProps = state => ({
+  search: state.search
+})
+
 Searchbox.propTypes = {
+  search: PropTypes.object.isRequired,
   fetchSearch: PropTypes.func.isRequired,
-  history: PropTypes.object.isRequired,
-  match: PropTypes.object.isRequired
+  history: PropTypes.object.isRequired
 }
 
-export default withRouter(connect(null, { fetchSearch })(Searchbox))
+export default withRouter(connect(mapStateToProps, { fetchSearch })(Searchbox))

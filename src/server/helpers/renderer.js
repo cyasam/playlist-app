@@ -21,7 +21,7 @@ export default (req, store) => {
 
   const htmlFile = fs.readFileSync(path.resolve(__dirname, '../dist/index.html'), 'utf8')
   const html = htmlFile.replace('<div id=app></div>',
-    `<div id="app">${content}</div>
+    `<div id=app>${content}</div>
       <script>
         window.__PRELOADED_STATE__ = ${serialize(preloadedState)}
       </script>
