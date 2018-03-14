@@ -62,9 +62,7 @@ export const mapStateToProps = state => ({
 })
 
 export const loadData = (store, match) => {
-  const promises = [ store.dispatch(fetchVideoDetail(match.params.id)), store.dispatch(fetchTrendings()) ]
-
-  return Promise.all(promises)
+  return Promise.all([ store.dispatch(fetchVideoDetail(match.params.id)), store.dispatch(fetchTrendings()) ])
 }
 
 VideoDetailPage.propTypes = {

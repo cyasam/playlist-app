@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Searchbox } from '../../src/scripts/components/Searchbox'
+import { Searchbox, mapStateToProps } from '../../src/scripts/components/Searchbox'
 
 describe('Searchbox Component', () => {
   const setup = (propsOverride) => {
@@ -116,5 +116,12 @@ describe('Searchbox Component', () => {
       expect(wrapper.state().input).toHaveLength(3)
       expect(props.fetchSearch).toHaveBeenCalledWith(wrapper.state().input)
     })
+  })
+
+  it('returns search state from mapStateToProps', () => {
+    const { props } = setup()
+    const result = { search: props.search }
+
+    expect(mapStateToProps(props)).toEqual(result)
   })
 })

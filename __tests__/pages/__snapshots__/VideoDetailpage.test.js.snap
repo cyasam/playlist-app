@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Video Detail Page calls fetchVideoDetail action when first page load 1`] = `
+exports[`Video Detail Page componentDidMount call calls fetchVideoDetail action when first page load 1`] = `
 <SideEffect(DocumentTitle)
   title="Playlist App"
 >
@@ -51,7 +51,7 @@ exports[`Video Detail Page calls fetchVideoDetail action when first page load 1`
 </SideEffect(DocumentTitle)>
 `;
 
-exports[`Video Detail Page calls fetchVideoDetail when page changed. 1`] = `
+exports[`Video Detail Page componentWillReceiveProps call calls fetchVideoDetail when page changed. 1`] = `
 <SideEffect(DocumentTitle)
   title="Ocean Beach Surfing Raw | San…cisco, CA - Playlist App"
 >
@@ -115,7 +115,7 @@ exports[`Video Detail Page calls fetchVideoDetail when page changed. 1`] = `
 </SideEffect(DocumentTitle)>
 `;
 
-exports[`Video Detail Page calls fetchVideoDetail when page doesn't changed. 1`] = `
+exports[`Video Detail Page componentWillReceiveProps call calls fetchVideoDetail when page doesn't changed. 1`] = `
 <SideEffect(DocumentTitle)
   title="Ocean Beach Surfing Raw | San…cisco, CA - Playlist App"
 >

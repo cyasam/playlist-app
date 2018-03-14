@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Homepage, mapStateToProps } from '../../src/scripts/pages/Homepage'
+import { Homepage, mapStateToProps, loadData } from '../../src/scripts/pages/Homepage'
 
 describe('Homepage Component', () => {
   const setup = (propsOverride) => {
@@ -45,5 +45,12 @@ describe('Homepage Component', () => {
   it('returns trendings object when initialize component', () => {
     const { state } = setup()
     expect(mapStateToProps(state).trendings).toEqual(state.trendings)
+  })
+
+  it('checks loadData function', () => {
+    const store = {
+      dispatch: jest.fn()
+    }
+    expect(loadData(store)).toEqual(Promise.all([ store.dispatch() ]))
   })
 })

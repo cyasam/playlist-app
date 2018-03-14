@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { Searchpage, mapStateToProps } from '../../src/scripts/pages/Searchpage'
+import { Searchpage, mapStateToProps, loadData } from '../../src/scripts/pages/Searchpage'
 
 describe('SearchPage Component', () => {
   const setup = (propOverrides, stateOverrides) => {
@@ -66,9 +66,30 @@ describe('SearchPage Component', () => {
     expect(mapStateToProps(state).searchResult).toEqual(state.search)
   })
 
+  it('calls fetchSearch if video length is 0', () => {
+    const { wrapper, props, state } = setup(null, {
+      search: {
+        isFetching: false,
+        videos: [],
+        query: 'abc'
+      }
+    })
+
+    wrapper.instance().componentDidMount()
+    expect(props.fetchSearch).toHaveBeenCalledWith(state.search.query)
+  })
+
   it('calls loadmoreSearch when calling loadMore', () => {
     const { wrapper, props, state } = setup()
     wrapper.instance().loadMore('abc')
     expect(props.loadmoreSearch).toHaveBeenCalledWith(state.search.query, 'abc')
+  })
+
+  it('checks loadData function', () => {
+    const { props } = setup()
+    const store = {
+      dispatch: jest.fn()
+    }
+    expect(loadData(store, props.match)).toEqual(Promise.all([ store.dispatch() ]))
   })
 })

@@ -1,6 +1,6 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { VideoDetailPage, mapStateToProps } from '../../src/scripts/pages/VideoDetailpage'
+import { VideoDetailPage, mapStateToProps, loadData } from '../../src/scripts/pages/VideoDetailpage'
 
 describe('Video Detail Page', () => {
   const setup = (propOverrides) => {
@@ -9,7 +9,7 @@ describe('Video Detail Page', () => {
         push: jest.fn()
       },
       match: {
-        params: { id: 'ZoA5ZX4wC0' }
+        params: { id: 'lZoA5ZX4wC0' }
       },
       videoDetail: {
         isFetching: false,
@@ -53,7 +53,6 @@ describe('Video Detail Page', () => {
     const nextProps = { match: { params: { id: 'lZoA5ZX4wC01' } } }
 
     const wrapper = shallow(<VideoDetailPage {...props} />)
-    wrapper.instance().historyListener = jest.fn()
 
     return {
       wrapper,
@@ -67,35 +66,57 @@ describe('Video Detail Page', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('calls fetchVideoDetail action when first page load', () => {
-    const { wrapper } = setup({ videoDetail: { isFetching: true, video: {} } })
+  describe('componentDidMount call', () => {
+    it('calls fetchVideoDetail action when first page load', () => {
+      const { wrapper, props } = setup({ videoDetail: { isFetching: true, video: {} } })
+      const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
 
-    wrapper.instance().componentDidMount()
-    expect(wrapper).toMatchSnapshot()
+      wrapper.instance().componentDidMount()
+      expect(wrapper).toMatchSnapshot()
+      expect(mockFetchData).toHaveBeenCalledWith(props.match.params.id)
+    })
+
+    it('calls fetchVideoDetail action if video id is not equal to match params id', () => {
+      const { wrapper, props } = setup()
+      const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
+
+      wrapper.instance().componentDidMount()
+      expect(mockFetchData).toHaveBeenCalledWith(props.match.params.id)
+    })
   })
 
-  it('calls fetchVideoDetail when page doesn\'t changed.', () => {
-    const { wrapper, props } = setup()
-    const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
+  describe('componentWillReceiveProps call', () => {
+    it('calls fetchVideoDetail when page doesn\'t changed.', () => {
+      const { wrapper, props } = setup()
+      const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
 
-    wrapper.instance().componentWillReceiveProps(props)
+      wrapper.instance().componentWillReceiveProps(props)
 
-    expect(wrapper).toMatchSnapshot()
-    expect(mockFetchData).not.toHaveBeenCalled()
-  })
+      expect(wrapper).toMatchSnapshot()
+      expect(mockFetchData.mock.calls).toHaveLength(1)
+    })
 
-  it('calls fetchVideoDetail when page changed.', () => {
-    const { wrapper, nextProps } = setup()
-    const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
+    it('calls fetchVideoDetail when page changed.', () => {
+      const { wrapper, nextProps } = setup()
+      const mockFetchData = jest.spyOn(VideoDetailPage.prototype, 'fetchData')
 
-    wrapper.instance().componentWillReceiveProps(nextProps)
+      wrapper.instance().componentWillReceiveProps(nextProps)
 
-    expect(wrapper).toMatchSnapshot()
-    expect(mockFetchData).toHaveBeenCalled()
+      expect(wrapper).toMatchSnapshot()
+      expect(mockFetchData.mock.calls).toHaveLength(2)
+    })
   })
 
   it('returns videoDetail object when initialize component', () => {
     const { props } = setup()
     expect(mapStateToProps(props).videoDetail).toEqual(props.videoDetail)
+  })
+
+  it('checks loadData function', () => {
+    const { props } = setup()
+    const store = {
+      dispatch: jest.fn()
+    }
+    expect(loadData(store, props.match)).toEqual(Promise.all([ store.dispatch() ]))
   })
 })
