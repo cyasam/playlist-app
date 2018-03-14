@@ -1,8 +1,8 @@
 import { FETCH_TRENDINGS_REQUEST, FETCH_TRENDINGS_SUCCESS, FETCH_TRENDINGS_ERROR } from '../../src/scripts/actions/fetch-trendings'
-import fetchTrendingsReducer from '../../src/scripts/reducers/fetch-trendings'
+import fetchTrendingsReducer, { INITIAL_STATE } from '../../src/scripts/reducers/fetch-trendings'
 
 describe('Fetch Trendings Reducer', () => {
-  const defaultState = { isFetching: true, videos: [] }
+  const defaultState = INITIAL_STATE
 
   it('returns initial state handling with unknown type', () => {
     expect(fetchTrendingsReducer(undefined, {})).toEqual(defaultState)

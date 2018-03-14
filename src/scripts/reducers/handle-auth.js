@@ -1,6 +1,6 @@
 import { AUTH_LOADING, AUTH_SUCCESS, AUTH_FAILED } from '../actions/handle-auth'
 
-const INITIAL_STATE = {
+export const INITIAL_STATE = {
   loading: false,
   auth: null,
   error: ''

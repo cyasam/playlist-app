@@ -16,7 +16,7 @@ export default (email, password, history) => dispatch => {
         payload: user
       })
 
-      history.push('/')
+      setTimeout(() => history.push('/'), 1000)
     })
     .catch((error) => {
       dispatch({

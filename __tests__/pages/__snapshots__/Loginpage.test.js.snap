@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Loginpage Component renders properly 1`] = `
+Object {
+  "wrapper": <SideEffect(DocumentTitle)
+    title="Login - Playlist App"
+  >
+    <withRouter(Connect(LoginForm)) />
+  </SideEffect(DocumentTitle)>,
+}
+`;

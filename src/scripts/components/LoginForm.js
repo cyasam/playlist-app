@@ -25,14 +25,26 @@ export class LoginForm extends Component {
     this.props.handleAuth(email, password, history)
   }
 
+  renderLoginSuccess () {
+    return (
+      <div className='success-message alert alert-success' role='alert'>You have logged in successfully.</div>
+    )
+  }
+
+  renderLoginError (error) {
+    return (
+      <div className='error-message alert alert-danger' role='alert'>{ error }</div>
+    )
+  }
+
   render () {
     const { loading, auth, error } = this.props
     return (
       <Fragment>
         { loading && <Loading /> }
         <form onSubmit={this.handleSubmit} style={{ display: loading ? 'none' : 'block' }}>
-          { auth && <div>Logged in</div> }
-          { error && <div>{ error }</div> }
+          { auth && this.renderLoginSuccess() }
+          { error && this.renderLoginError(error) }
           <div className='form-group'>
             <label>Email</label>
             <input type='email' className='form-control' value={this.state.email} onChange={(e) => this.setState({email: e.target.value})} />

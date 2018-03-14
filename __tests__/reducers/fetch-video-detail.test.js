@@ -1,8 +1,8 @@
 import { FETCH_VIDEO_DETAIL_REQUEST, FETCH_VIDEO_DETAIL_SUCCESS, FETCH_VIDEO_DETAIL_ERROR } from '../../src/scripts/actions/fetch-video-detail'
-import fetchVideoDetailReducer from '../../src/scripts/reducers/fetch-video-detail'
+import fetchVideoDetailReducer, { INITIAL_STATE } from '../../src/scripts/reducers/fetch-video-detail'
 
 describe('Fetch VideoDetail Reducer', () => {
-  const defaultState = { isFetching: true, video: {} }
+  const defaultState = INITIAL_STATE
 
   it('returns initial state handling with unknown type', () => {
     expect(fetchVideoDetailReducer(undefined, {})).toEqual(defaultState)

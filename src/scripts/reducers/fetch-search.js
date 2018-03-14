@@ -1,7 +1,9 @@
 import { FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../actions/fetch-search'
 import { LOADMORE_SEARCH_REQUEST, LOADMORE_SEARCH_SUCCESS, LOADMORE_SEARCH_ERROR } from '../actions/loadmore-search'
 
-export default (state = { isFetching: true, videos: [] }, action) => {
+export const INITIAL_STATE = { isFetching: true, videos: [] }
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_SEARCH_REQUEST:
       return { ...state, ...action.payload }

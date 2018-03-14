@@ -1,40 +1,198 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`LoginForm Component Response elements shows error if error message exits 1`] = `
+<React.Fragment>
+  <form
+    onSubmit={[Function]}
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    <div
+      className="error-message alert alert-danger"
+      role="alert"
+    >
+      abc
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Email
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Password
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-secondary"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</React.Fragment>
+`;
+
+exports[`LoginForm Component Response elements shows loading if loading is true 1`] = `
+<React.Fragment>
+  <Loading />
+  <form
+    onSubmit={[Function]}
+    style={
+      Object {
+        "display": "none",
+      }
+    }
+  >
+    <div
+      className="form-group"
+    >
+      <label>
+        Email
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Password
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-secondary"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</React.Fragment>
+`;
+
+exports[`LoginForm Component Response elements shows you login successfully if auth is ok 1`] = `
+<React.Fragment>
+  <form
+    onSubmit={[Function]}
+    style={
+      Object {
+        "display": "block",
+      }
+    }
+  >
+    <div
+      className="success-message alert alert-success"
+      role="alert"
+    >
+      You have logged in successfully.
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Email
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Password
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-secondary"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</React.Fragment>
+`;
+
 exports[`LoginForm Component renders properly 1`] = `
-<form
-  onSubmit={[Function]}
->
-  <div
-    className="form-group"
+<React.Fragment>
+  <form
+    onSubmit={[Function]}
+    style={
+      Object {
+        "display": "block",
+      }
+    }
   >
-    <label>
-      Email
-    </label>
-    <input
-      className="form-control"
-      onChange={[Function]}
-      type="email"
-      value=""
-    />
-  </div>
-  <div
-    className="form-group"
-  >
-    <label>
-      Password
-    </label>
-    <input
-      className="form-control"
-      onChange={[Function]}
-      type="password"
-      value=""
-    />
-  </div>
-  <button
-    className="btn btn-secondary"
-    type="submit"
-  >
-    Login
-  </button>
-</form>
+    <div
+      className="form-group"
+    >
+      <label>
+        Email
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="email"
+        value=""
+      />
+    </div>
+    <div
+      className="form-group"
+    >
+      <label>
+        Password
+      </label>
+      <input
+        className="form-control"
+        onChange={[Function]}
+        type="password"
+        value=""
+      />
+    </div>
+    <button
+      className="btn btn-secondary"
+      type="submit"
+    >
+      Login
+    </button>
+  </form>
+</React.Fragment>
 `;

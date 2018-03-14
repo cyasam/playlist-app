@@ -1,6 +1,11 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 import { Searchpage, mapStateToProps, loadData } from '../../src/scripts/pages/Searchpage'
+import fetchSearch from '../../src/scripts/actions/fetch-search'
+
+const createMockStore = configureMockStore([thunk])
 
 describe('SearchPage Component', () => {
   const setup = (propOverrides, stateOverrides) => {
@@ -27,6 +32,8 @@ describe('SearchPage Component', () => {
       ...stateOverrides
     }
 
+    const store = createMockStore(state)
+
     const props = {
       searchResult: state.search,
       fetchSearch: jest.fn(),
@@ -40,10 +47,12 @@ describe('SearchPage Component', () => {
       ...propOverrides
     }
     const wrapper = shallow(<Searchpage {...props} />)
+
     return {
       wrapper,
       props,
-      state
+      state,
+      store
     }
   }
 
@@ -86,10 +95,7 @@ describe('SearchPage Component', () => {
   })
 
   it('checks loadData function', () => {
-    const { props } = setup()
-    const store = {
-      dispatch: jest.fn()
-    }
-    expect(loadData(store, props.match)).toEqual(Promise.all([ store.dispatch() ]))
+    const { store, props } = setup()
+    expect(loadData(store, props.match)).toEqual(Promise.all([ store.dispatch(fetchSearch(props.match.params.query)) ]))
   })
 })

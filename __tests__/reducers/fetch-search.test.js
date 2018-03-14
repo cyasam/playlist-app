@@ -1,9 +1,9 @@
 import { FETCH_SEARCH_REQUEST, FETCH_SEARCH_SUCCESS, FETCH_SEARCH_ERROR } from '../../src/scripts/actions/fetch-search'
 import { LOADMORE_SEARCH_REQUEST, LOADMORE_SEARCH_SUCCESS, LOADMORE_SEARCH_ERROR } from '../../src/scripts/actions/loadmore-search'
-import fetchSearchReducer from '../../src/scripts/reducers/fetch-search'
+import fetchSearchReducer, { INITIAL_STATE } from '../../src/scripts/reducers/fetch-search'
 
 describe('Fetch Search Reducer', () => {
-  const setup = (defaultState = { isFetching: true, videos: [] }) => {
+  const setup = (defaultState = INITIAL_STATE) => {
     return {
       defaultState
     }

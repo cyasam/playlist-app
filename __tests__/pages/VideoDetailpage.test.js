@@ -1,16 +1,16 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 import { VideoDetailPage, mapStateToProps, loadData } from '../../src/scripts/pages/VideoDetailpage'
+import fetchTrendings from '../../src/scripts/actions/fetch-trendings'
+import fetchVideoDetail from '../../src/scripts/actions/fetch-video-detail'
+
+const createMockStore = configureMockStore([thunk])
 
 describe('Video Detail Page', () => {
   const setup = (propOverrides) => {
-    const props = {
-      history: {
-        push: jest.fn()
-      },
-      match: {
-        params: { id: 'lZoA5ZX4wC0' }
-      },
+    const state = {
       videoDetail: {
         isFetching: false,
         error: null,
@@ -28,7 +28,6 @@ describe('Video Detail Page', () => {
           }
         }
       },
-      fetchVideoDetail: jest.fn(),
       trendings: {
         isFetching: false,
         videos: [
@@ -45,7 +44,20 @@ describe('Video Detail Page', () => {
             thubmnail: 'video-thumbnail-2.jpg'
           }
         ]
+      }
+    }
+    const store = createMockStore(state)
+
+    const props = {
+      videoDetail: state.videoDetail,
+      trendings: state.trendings,
+      history: {
+        push: jest.fn()
       },
+      match: {
+        params: { id: 'lZoA5ZX4wC0' }
+      },
+      fetchVideoDetail: jest.fn(),
       fetchTrendings: jest.fn(),
       ...propOverrides
     }
@@ -57,7 +69,9 @@ describe('Video Detail Page', () => {
     return {
       wrapper,
       props,
-      nextProps
+      nextProps,
+      store,
+      state
     }
   }
 
@@ -113,10 +127,7 @@ describe('Video Detail Page', () => {
   })
 
   it('checks loadData function', () => {
-    const { props } = setup()
-    const store = {
-      dispatch: jest.fn()
-    }
-    expect(loadData(store, props.match)).toEqual(Promise.all([ store.dispatch() ]))
+    const { store, props } = setup()
+    expect(loadData(store, props.match)).toEqual(Promise.all([ store.dispatch(fetchVideoDetail(props.match.params.id)), store.dispatch(fetchTrendings()) ]))
   })
 })

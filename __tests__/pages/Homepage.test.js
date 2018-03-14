@@ -1,6 +1,11 @@
 import React from 'react'
 import { shallow } from 'enzyme'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
 import { Homepage, mapStateToProps, loadData } from '../../src/scripts/pages/Homepage'
+import fetchTrendings from '../../src/scripts/actions/fetch-trendings'
+
+const createMockStore = configureMockStore([thunk])
 
 describe('Homepage Component', () => {
   const setup = (propsOverride) => {
@@ -24,6 +29,8 @@ describe('Homepage Component', () => {
       }
     }
 
+    const store = createMockStore(state)
+
     const props = {
       trendings: state.trendings,
       fetchTrendings: jest.fn(),
@@ -33,6 +40,7 @@ describe('Homepage Component', () => {
     return {
       wrapper,
       props,
+      store,
       state
     }
   }
@@ -43,14 +51,12 @@ describe('Homepage Component', () => {
   })
 
   it('returns trendings object when initialize component', () => {
-    const { state } = setup()
-    expect(mapStateToProps(state).trendings).toEqual(state.trendings)
+    const { store, state } = setup()
+    expect(mapStateToProps(store.getState()).trendings).toEqual(state.trendings)
   })
 
   it('checks loadData function', () => {
-    const store = {
-      dispatch: jest.fn()
-    }
-    expect(loadData(store)).toEqual(Promise.all([ store.dispatch() ]))
+    const { store } = setup()
+    expect(loadData(store)).toEqual(Promise.all([ store.dispatch(fetchTrendings()) ]))
   })
 })

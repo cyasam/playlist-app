@@ -1,6 +1,8 @@
 import { FETCH_VIDEO_DETAIL_REQUEST, FETCH_VIDEO_DETAIL_SUCCESS, FETCH_VIDEO_DETAIL_ERROR } from '../actions/fetch-video-detail'
 
-export default (state = { isFetching: true, video: {} }, action) => {
+export const INITIAL_STATE = { isFetching: true, video: {} }
+
+export default (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FETCH_VIDEO_DETAIL_REQUEST:
       return { ...state, ...action.payload }
