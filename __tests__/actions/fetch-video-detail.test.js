@@ -6,7 +6,7 @@ import { filterVideoDetailResult } from '../../src/scripts/helpers'
 import fetchVideoDetail, { fetchVideoDetailRequestAction, fetchVideoDetailSuccessAction, fetchVideoDetailErrorAction,
   FETCH_VIDEO_DETAIL_REQUEST, FETCH_VIDEO_DETAIL_SUCCESS, FETCH_VIDEO_DETAIL_ERROR } from '../../src/scripts/actions/fetch-video-detail'
 
-import { YOUTUBE_API_KEY } from '../../src/scripts/config'
+import { youtubeApiKey } from '../../src/scripts/config'
 import successResponseJson from '../mockData/youtube-video-detail.js'
 
 const mock = new MockAdapter(axios)
@@ -17,9 +17,9 @@ describe('Fetch Video Detail action', () => {
     const mockAxiosUrl = 'https://www.googleapis.com/youtube/v3/videos'
     const mockAxiosConfig = {
       params: {
-        part: 'snippet,statistics',
+        part: 'snippet,statistics,contentDetails',
         id: 'oiKj0Z_Xnjc',
-        key: YOUTUBE_API_KEY
+        key: youtubeApiKey
       }
     }
     const successResponse = filterVideoDetailResult(successResponseJson)

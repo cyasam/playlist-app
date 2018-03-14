@@ -46,49 +46,57 @@ export const shorthenText = (text, maxLength = 100) => {
   return (text && text.length > maxLength) ? `${text.substr(0, maxLength)}...` : text
 }
 
-export const convertYouTubeDuration = duration => {
-  let hours = 0
-  let minutes = 0
-  let seconds = 0
-  let hoursSplit, minutesSplit, secondsSplit
-  let hoursStr = ''
-  let minutesStr = ''
-  let secondsStr = ''
-
-  duration = duration.replace('PT', '')
-
-  if (duration.indexOf('H') > -1) {
-    hoursSplit = duration.split('H')
-    hours = parseInt(hoursSplit[0])
-    duration = hoursSplit[1]
+export class ConvertYouTubeDuration {
+  constructor (duration) {
+    this.hours = 0
+    this.minutes = 0
+    this.seconds = 0
+    this.duration = duration.replace('PT', '')
+    this.hoursSplit = ''
+    this.minutesSplit = ''
+    this.hoursStr = ''
+    this.minutesStr = ''
+    this.secondsStr = ''
   }
 
-  if (duration.indexOf('M') > -1) {
-    minutesSplit = duration.split('M')
-    minutes = parseInt(minutesSplit[0])
-    duration = minutesSplit[1]
+  extractor () {
+    const timeExtractor = /([0-9]*H)?([0-9]*M)?([0-9]*S)?$/
+    return timeExtractor.exec(this.duration)
   }
 
-  if (duration.indexOf('S') > -1) {
-    secondsSplit = duration.split('S')
-    seconds = parseInt(secondsSplit[0])
+  convert () {
+    this.hours = this.getHours()
+    this.minutes = this.getMinutes()
+    this.seconds = this.getSeconds()
+
+    if (this.hours > 0) {
+      this.hoursStr = `${this.hours}:`
+    }
+
+    if (this.minutes <= 9 && this.minutes >= 0 && this.hours > 0) {
+      this.minutesStr = `0${this.minutes}`
+    } else {
+      this.minutesStr = this.minutes
+    }
+
+    if (this.seconds <= 9 && this.seconds >= 0) {
+      this.secondsStr = `0${this.seconds}`
+    } else {
+      this.secondsStr = this.seconds
+    }
+
+    return `${this.hoursStr}${this.minutesStr}:${this.secondsStr}`
   }
 
-  if (hours > 0) {
-    hoursStr = `${hours}:`
+  getHours () {
+    return parseInt(this.extractor()[1], 10) || 0
   }
 
-  if (minutes <= 9 && minutes >= 0 && hours > 0) {
-    minutesStr = `0${minutes}`
-  } else {
-    minutesStr = minutes
+  getMinutes () {
+    return parseInt(this.extractor()[2], 10) || 0
   }
 
-  if (seconds > 9) {
-    secondsStr = seconds
-  } else if (seconds <= 9 && seconds >= 0) {
-    secondsStr = `0${seconds}`
+  getSeconds () {
+    return parseInt(this.extractor()[3], 10) || 0
   }
-
-  return `${hoursStr}${minutesStr}:${secondsStr}`
 }

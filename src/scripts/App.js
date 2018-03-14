@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import Header from './components/header'
 import Container from './components/container'
 
-const App = ({ route }) => {
+export const App = ({ route }) => {
   return (
     <div className='wrapper'>
       <Header />

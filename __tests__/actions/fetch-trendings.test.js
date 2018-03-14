@@ -6,7 +6,7 @@ import { filterVideoResult } from '../../src/scripts/helpers'
 import fetchTrendings, { fetchTrendingsRequestAction, fetchTrendingsSuccessAction, fetchTrendingsErrorAction,
   FETCH_TRENDINGS_REQUEST, FETCH_TRENDINGS_SUCCESS, FETCH_TRENDINGS_ERROR } from '../../src/scripts/actions/fetch-trendings'
 
-import { YOUTUBE_API_KEY } from '../../src/scripts/config'
+import { youtubeApiKey } from '../../src/scripts/config'
 import successResponseJson from '../mockData/youtube-trendings.js'
 
 const errorResponse = 'Request failed with status code 400'
@@ -17,10 +17,10 @@ const mock = new MockAdapter(axios)
 const mockAxiosUrl = 'https://www.googleapis.com/youtube/v3/videos'
 const mockAxiosConfig = {
   params: {
-    part: 'snippet,contentDetails,statistics',
+    part: 'snippet,statistics,contentDetails',
     chart: 'mostPopular',
     maxResults: 24,
-    key: YOUTUBE_API_KEY
+    key: youtubeApiKey
   }
 }
 
@@ -36,6 +36,19 @@ const successVideoResponse = {
       kind: 'youtube#video',
       etag: '"Wu2llbfqCdxIVjGbVPm2DslKPCA/15xGMSiz4CowqfgWYnpcjEE4W_I"',
       id: 'MoylTKIuK1A',
+      contentDetails: {
+        duration: 'PT3M55S',
+        dimension: '2d',
+        definition: 'hd',
+        caption: 'true',
+        licensedContent: true,
+        regionRestriction: {
+          blocked: [
+            'CW'
+          ]
+        },
+        projection: 'rectangular'
+      },
       statistics: {
         viewCount: '1890045',
         likeCount: '2304',

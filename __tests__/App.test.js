@@ -1,9 +1,10 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import App from '../src/scripts/app'
+import Routes from '../src/scripts/Routes'
+import { App } from '../src/scripts/App'
 
 describe('App Component', () => {
-  const wrapper = shallow(<App />)
+  const wrapper = shallow(<App route={{ route: { Routes } }} />)
 
   it('renders properly', () => {
     expect(wrapper).toMatchSnapshot()

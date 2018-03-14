@@ -5,6 +5,9 @@ import { Searchbox } from '../../src/scripts/components/Searchbox'
 describe('Searchbox Component', () => {
   const setup = (propsOverride) => {
     const props = {
+      search: {
+        query: 'abc'
+      },
       fetchSearch: jest.fn(),
       history: {
         push: jest.fn()
@@ -47,20 +50,43 @@ describe('Searchbox Component', () => {
 
   describe('Form input element', () => {
     it('loads initial state', () => {
-      const { wrapper } = setup({ match: { params: { query: '' } } })
+      const { wrapper } = setup({ search: {
+        query: ''
+      },
+      match: { params: { query: '' } } })
       expect(wrapper.state().input).toEqual('')
     })
 
-    it('loads initial state if page is search', () => {
-      const { wrapper } = setup({
+    it('states input if page is search page', () => {
+      const { wrapper, props } = setup()
+
+      wrapper.instance().componentWillReceiveProps({
+        search: {
+          query: 'abc'
+        },
         history: {
           location: {
-            pathname: '/search',
-            search: `?query=abc`
+            pathname: '/search'
           }
         }
       })
-      expect(wrapper.state().input).toEqual('abc')
+      expect(wrapper.state().input).toEqual(props.search.query)
+    })
+
+    it('states input as `` if page is not search page', () => {
+      const { wrapper } = setup()
+
+      wrapper.instance().componentWillReceiveProps({
+        search: {
+          query: 'abc'
+        },
+        history: {
+          location: {
+            pathname: '/'
+          }
+        }
+      })
+      expect(wrapper.state().input).toEqual('')
     })
 
     it('saves input value into state when typing', () => {

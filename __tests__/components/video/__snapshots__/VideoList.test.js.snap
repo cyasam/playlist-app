@@ -22,6 +22,7 @@ exports[`VideoList Component renders properly 1`] = `
       video={
         Object {
           "description": "Lorem ipsum dolor sit amed.",
+          "duration": "PT3M55S",
           "id": "lZoA5ZX4wC0",
           "thubmnail": "video-thumbnail.jpg",
           "title": "Video Title",
@@ -33,6 +34,7 @@ exports[`VideoList Component renders properly 1`] = `
       video={
         Object {
           "description": "Lorem ipsum dolor sit amed.",
+          "duration": "PT3M55S",
           "id": "lZoA5ZX4wC01",
           "thubmnail": "video-thumbnail-2.jpg",
           "title": "Video Title 2",

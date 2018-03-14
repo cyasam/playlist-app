@@ -11,12 +11,14 @@ describe('VideoList Component', () => {
         {
           id: 'lZoA5ZX4wC0',
           title: 'Video Title',
+          duration: 'PT3M55S',
           description: 'Lorem ipsum dolor sit amed.',
           thubmnail: 'video-thumbnail.jpg'
         },
         {
           id: 'lZoA5ZX4wC01',
           title: 'Video Title 2',
+          duration: 'PT3M55S',
           description: 'Lorem ipsum dolor sit amed.',
           thubmnail: 'video-thumbnail-2.jpg'
         }

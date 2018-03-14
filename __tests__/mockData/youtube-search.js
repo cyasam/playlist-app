@@ -38,13 +38,6 @@ const successResponse = {
         },
         channelTitle: 'YouTube Spotlight',
         liveBroadcastContent: 'none'
-      },
-      statistics: {
-        viewCount: '1890045',
-        likeCount: '2304',
-        dislikeCount: '96',
-        favoriteCount: '0',
-        commentCount: '88'
       }
     },
     {
@@ -78,13 +71,6 @@ const successResponse = {
         },
         channelTitle: 'Chillhop Music',
         liveBroadcastContent: 'live'
-      },
-      statistics: {
-        viewCount: '1890045',
-        likeCount: '2304',
-        dislikeCount: '96',
-        favoriteCount: '0',
-        commentCount: '88'
       }
     },
     {
@@ -118,13 +104,6 @@ const successResponse = {
         },
         channelTitle: 'Bloomberg',
         liveBroadcastContent: 'live'
-      },
-      statistics: {
-        viewCount: '1890045',
-        likeCount: '2304',
-        dislikeCount: '96',
-        favoriteCount: '0',
-        commentCount: '88'
       }
     },
     {
@@ -158,13 +137,6 @@ const successResponse = {
         },
         channelTitle: '5-Minute Crafts',
         liveBroadcastContent: 'none'
-      },
-      statistics: {
-        viewCount: '1890045',
-        likeCount: '2304',
-        dislikeCount: '96',
-        favoriteCount: '0',
-        commentCount: '88'
       }
     }
   ]

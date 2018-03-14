@@ -1,5 +1,5 @@
 import { appTitle } from '../../src/scripts/config'
-import { shorthenText, setDocumentTitle, filterVideoDetailResult } from '../../src/scripts/helpers'
+import { shorthenText, setDocumentTitle, filterVideoDetailResult, ConvertYouTubeDuration } from '../../src/scripts/helpers'
 
 describe('Helpers', () => {
   describe('setDocumentTitle helper', () => {
@@ -49,6 +49,45 @@ describe('Helpers', () => {
   describe('filterVideoDetailResult helper', () => {
     it('returns empty object when items is empty', () => {
       expect(filterVideoDetailResult({ items: [] })).toEqual({})
+    })
+  })
+
+  describe('ConvertYouTubeDuration helper', () => {
+    const setup = (duration = 'PT2H8M24S') => {
+      return new ConvertYouTubeDuration(duration)
+    }
+
+    it('returns duration if duration hour is bigger than 0', () => {
+      const instance = setup()
+      expect(instance.convert()).toEqual('2:08:24')
+    })
+
+    it('returns duration if duration second is less than 10', () => {
+      const instance = setup('PT2H8M9S')
+      expect(instance.convert()).toEqual('2:08:09')
+    })
+
+    it('returns duration if duration PT8M6S', () => {
+      const instance = setup('PT8M6S')
+      expect(instance.convert()).toEqual('8:06')
+    })
+
+    it('returns duration if duration PT12M10S', () => {
+      const instance = setup('PT12M10S')
+      expect(instance.getMinutes()).toEqual(12)
+      expect(instance.convert()).toEqual('12:10')
+    })
+
+    it('returns duration if duration PT10S', () => {
+      const instance = setup('PT10S')
+      expect(instance.getMinutes()).toEqual(0)
+      expect(instance.convert()).toEqual('0:10')
+    })
+
+    it('returns duration if duration PT0S', () => {
+      const instance = setup('PT0S')
+      expect(instance.getSeconds()).toEqual(0)
+      expect(instance.convert()).toEqual('0:00')
     })
   })
 })

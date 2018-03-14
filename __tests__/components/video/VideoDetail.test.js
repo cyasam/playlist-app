@@ -12,6 +12,7 @@ describe('VideoDetail Component', () => {
           id: 'lZoA5ZX4wC0',
           title: 'Ocean Beach Surfing Raw | San…cisco, CA',
           channelTitle: 'Jeff Chavolla',
+          duration: 'PT3M55S',
           statistics: {
             viewCount: '121659',
             likeCount: '450',

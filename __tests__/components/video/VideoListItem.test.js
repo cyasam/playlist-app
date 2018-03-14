@@ -9,6 +9,7 @@ describe('VideoListItem Component', () => {
         id: 'mh45igK4Esw',
         title: 'Elon Musk: How I Became The Real \'Iron Man\'',
         channelTitle: 'Bloomberg',
+        duration: 'PT3M55S',
         statistics: {
           viewCount: '4277277',
           likeCount: '46304',

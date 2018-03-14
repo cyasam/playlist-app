@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { YOUTUBE_API_KEY } from '../config'
+import { youtubeApiKey } from '../config'
 
 export class AxiosYoutubeSearch {
   constructor (q = null, pageToken = null) {
@@ -19,7 +19,7 @@ export class AxiosYoutubeSearch {
         q: this.q,
         type: 'video',
         maxResults: 24,
-        key: YOUTUBE_API_KEY
+        key: youtubeApiKey
       }
     }
     if (this.pageToken) {
@@ -35,7 +35,7 @@ export const axiosYoutubeVideoById = (id) => {
     params: {
       part: 'snippet,statistics,contentDetails',
       id,
-      key: YOUTUBE_API_KEY
+      key: youtubeApiKey
     }
   }
   return axios.get(axiosUrl, axiosConfig)
@@ -45,10 +45,10 @@ export const axiosYoutubeMostPopular = () => {
   const axiosUrl = 'https://www.googleapis.com/youtube/v3/videos'
   const axiosConfig = {
     params: {
-      part: 'snippet,contentDetails,statistics',
+      part: 'snippet,statistics,contentDetails',
       chart: 'mostPopular',
       maxResults: 24,
-      key: YOUTUBE_API_KEY
+      key: youtubeApiKey
     }
   }
   return axios.get(axiosUrl, axiosConfig)

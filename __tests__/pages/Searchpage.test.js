@@ -52,14 +52,6 @@ describe('SearchPage Component', () => {
     expect(wrapper).toMatchSnapshot()
   })
 
-  it('calls mountPage method when first page load', () => {
-    const { wrapper } = setup(null, { search: { isFetching: true, videos: [] } })
-    const mockMountPage = jest.spyOn(wrapper.instance(), 'mountPage')
-
-    wrapper.instance().componentDidMount()
-    expect(mockMountPage.mock.calls).toHaveLength(1)
-  })
-
   it('renders properly when search query is not exist', () => {
     const { props } = setup({
       match: {

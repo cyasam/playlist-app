@@ -56,6 +56,19 @@ const successResponse = {
           description: 'papaoutai (official video / clip officiel)\nalbum √ (racine carrée) http://po.st/RacineCiT\n---\nhttp://www.stromae.net\nhttp://www.facebook.com/stromae\nhttp://twitter.com/stromae'
         }
       },
+      contentDetails: {
+        duration: 'PT3M55S',
+        dimension: '2d',
+        definition: 'hd',
+        caption: 'true',
+        licensedContent: true,
+        regionRestriction: {
+          blocked: [
+            'CW'
+          ]
+        },
+        projection: 'rectangular'
+      },
       statistics: {
         viewCount: '505509615',
         likeCount: '2325906',

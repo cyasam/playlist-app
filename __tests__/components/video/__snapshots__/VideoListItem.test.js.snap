@@ -9,11 +9,24 @@ exports[`VideoListItem Component renders properly 1`] = `
   <div
     className="card"
   >
-    <img
-      alt="Elon Musk: How I Became The Real 'Iron Man'"
-      className="card-img-top"
-      src="https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg"
-    />
+    <div
+      className="card-thumbnail"
+    >
+      <div
+        className="media-img-wrapper"
+      >
+        <img
+          alt="Elon Musk: How I Became The Real 'Iron Man'"
+          className="card-img-top"
+          src="https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg"
+        />
+        <div
+          className="duration"
+        >
+          3:55
+        </div>
+      </div>
+    </div>
     <div
       className="card-body"
     >
@@ -66,11 +79,24 @@ exports[`VideoListItem Component renders properly if type props is media 1`] = `
   <div
     className="media"
   >
-    <img
-      alt="Elon Musk: How I Became The Real 'Iron Man'"
-      className="media-img col-6"
-      src="https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg"
-    />
+    <div
+      className="card-thumbnail col-6"
+    >
+      <div
+        className="media-img-wrapper"
+      >
+        <img
+          alt="Elon Musk: How I Became The Real 'Iron Man'"
+          className="media-img"
+          src="https://i.ytimg.com/vi/mh45igK4Esw/hqdefault.jpg"
+        />
+        <div
+          className="duration"
+        >
+          3:55
+        </div>
+      </div>
+    </div>
     <div
       className="media-body"
     >

@@ -2,11 +2,12 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Moment from 'react-moment'
 import { Link } from 'react-router-dom'
-import { convertYouTubeDuration } from '../../helpers'
+import { ConvertYouTubeDuration } from '../../helpers'
 import VideoViews from './VideoViews'
 
 class VideoListItem extends Component {
   renderMediaType (video) {
+    const duration = new ConvertYouTubeDuration(video.duration)
     return (
       <Link to={`/watch/${video.id}`} className='video-list-item media-type'>
         <div className='media'>
@@ -14,7 +15,7 @@ class VideoListItem extends Component {
             <div className='card-thumbnail col-6'>
               <div className='media-img-wrapper'>
                 <img className='media-img' src={video.thumbnail.url} alt={video.title} />
-                <div className='duration'>{ convertYouTubeDuration(video.duration) }</div>
+                <div className='duration'>{ duration.convert() }</div>
               </div>
             </div>
           }
@@ -33,6 +34,7 @@ class VideoListItem extends Component {
   }
 
   renderCardType (video) {
+    const duration = new ConvertYouTubeDuration(video.duration)
     return (
       <Link to={`/watch/${video.id}`} className='video-list-item card-type col-xl-3 col-lg-4 col-md-6 col-sm-6'>
         <div className='card'>
@@ -40,7 +42,7 @@ class VideoListItem extends Component {
             <div className='card-thumbnail'>
               <div className='media-img-wrapper'>
                 <img className='card-img-top' src={video.thumbnail.url} alt={video.title} />
-                <div className='duration'>{ convertYouTubeDuration(video.duration) }</div>
+                <div className='duration'>{ duration.convert() }</div>
               </div>
             </div>
           }
