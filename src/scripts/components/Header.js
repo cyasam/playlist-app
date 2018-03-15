@@ -3,8 +3,9 @@ import { Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Searchbox from './Searchbox'
+import { signOut } from '../actions/handle-auth'
 
-export const Header = ({ auth }) => {
+export const Header = ({ auth, signOut }) => {
   return (
     <header>
       <nav className='navbar navbar-expand-lg navbar-dark bg-primary'>
@@ -12,7 +13,12 @@ export const Header = ({ auth }) => {
         <Searchbox />
 
         { auth ? (
-          <Link to='/logout' className='logout-btn btn btn-secondary'>Logout</Link>
+          <button
+            className='logout-btn btn btn-secondary'
+            onClick={() => signOut()}
+          >
+            Logout
+          </button>
         ) : (
           <Link to='/login' className='login-btn btn btn-secondary'>Login</Link>
         )}
@@ -26,7 +32,8 @@ export const mapStateToProps = state => ({
 })
 
 Header.propTypes = {
-  auth: PropTypes.object
+  auth: PropTypes.bool.isRequired,
+  signOut: PropTypes.func.isRequired
 }
 
-export default connect(mapStateToProps)(Header)
+export default connect(mapStateToProps, { signOut })(Header)

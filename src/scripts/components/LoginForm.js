@@ -68,7 +68,7 @@ export const mapStateToProps = state => ({
 
 LoginForm.propTypes = {
   loading: PropTypes.bool.isRequired,
-  auth: PropTypes.object,
+  auth: PropTypes.bool.isRequired,
   error: PropTypes.string,
   submitLogin: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired

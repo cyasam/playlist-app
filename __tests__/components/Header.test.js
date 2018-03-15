@@ -3,23 +3,21 @@ import { shallow } from 'enzyme'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { Header, mapStateToProps } from '../../src/scripts/components/Header'
+import { INITIAL_STATE as handleAuthInitialState } from '../../src/scripts/reducers/handle-auth'
 
 const createMockStore = configureMockStore([thunk])
 
 describe('Header Component', () => {
   const setup = (propOverrides) => {
     const state = {
-      authentication: {
-        loading: false,
-        auth: null,
-        error: ''
-      }
+      authentication: handleAuthInitialState
     }
 
     const store = createMockStore(state)
 
     const props = {
-      auth: state.auth,
+      auth: state.authentication.auth,
+      signOut: jest.fn(),
       ...propOverrides
     }
 
@@ -42,14 +40,20 @@ describe('Header Component', () => {
     expect(wrapper.find('withRouter(Connect(Searchbox))').exists()).toBe(true)
   })
 
-  it('has login button if auth is null', () => {
+  it('has login button if auth is false', () => {
     const { wrapper } = setup()
     expect(wrapper.find('.login-btn').exists()).toBe(true)
   })
 
-  it('has logout button if auth is not null', () => {
-    const { wrapper } = setup({ auth: { user: 'abc' } })
+  it('has logout button if auth is true', () => {
+    const { wrapper } = setup({ auth: true })
     expect(wrapper.find('.logout-btn').exists()).toBe(true)
+  })
+
+  it('calls signOut when clicking logout button', () => {
+    const { wrapper, props } = setup({ auth: true })
+    wrapper.find('.logout-btn').simulate('click')
+    expect(props.signOut).toHaveBeenCalled()
   })
 
   it('returns state from mapStateToProps', () => {

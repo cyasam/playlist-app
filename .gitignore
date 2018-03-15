@@ -1,5 +1,6 @@
 .idea
 src/scripts/config/index.js
+src/server/config/service-key.js
 
 # dependencies
 /node_modules

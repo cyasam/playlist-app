@@ -35,7 +35,7 @@ describe('Fetch Trendings Reducer', () => {
       payload: 'Error'
     }
 
-    const expectedState = { ...defaultState, loading: false, auth: null, error: expectedAction.payload }
+    const expectedState = { ...defaultState, loading: false, auth: false, error: expectedAction.payload }
 
     expect(handleAuthReducer(defaultState, expectedAction)).toEqual(expectedState)
   })
