@@ -11,7 +11,7 @@ describe('App Component', () => {
   })
 
   it('has Header Component', () => {
-    expect(wrapper.find('Header').exists()).toBe(true)
+    expect(wrapper.find('Connect(Header)').exists()).toBe(true)
   })
 
   it('has Container Component', () => {

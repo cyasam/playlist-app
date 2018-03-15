@@ -4,10 +4,13 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { renderRoutes } from 'react-router-config'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import firebase from 'firebase'
+import { firebaseConfig } from './config'
 import rootReducer from './reducers'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import Routes from './Routes'
+import { checkAuth } from './actions/handle-auth'
 
 import '../styles/app.scss'
 
@@ -24,6 +27,9 @@ const store = createStore(
   preloadedStore,
   applyMiddleware(...middlewares)
 )
+
+firebase.initializeApp(firebaseConfig)
+store.dispatch(checkAuth())
 
 hydrate(
   <Provider store={store}>

@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import Loading from '../components/Loading'
-import handleAuth from '../actions/handle-auth'
+import { submitLogin } from '../actions/handle-auth'
 
 export class LoginForm extends Component {
   constructor () {
@@ -22,7 +22,7 @@ export class LoginForm extends Component {
 
     const { history } = this.props
     const { email, password } = this.state
-    this.props.handleAuth(email, password, history)
+    this.props.submitLogin(email, password, history)
   }
 
   renderLoginSuccess () {
@@ -60,7 +60,7 @@ export class LoginForm extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+export const mapStateToProps = state => ({
   loading: state.authentication.loading,
   auth: state.authentication.auth,
   error: state.authentication.error
@@ -70,8 +70,8 @@ LoginForm.propTypes = {
   loading: PropTypes.bool.isRequired,
   auth: PropTypes.object,
   error: PropTypes.string,
-  handleAuth: PropTypes.func.isRequired,
+  submitLogin: PropTypes.func.isRequired,
   history: PropTypes.object.isRequired
 }
 
-export default withRouter(connect(mapStateToProps, { handleAuth })(LoginForm))
+export default withRouter(connect(mapStateToProps, { submitLogin })(LoginForm))

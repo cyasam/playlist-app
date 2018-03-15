@@ -1,14 +1,28 @@
 import React from 'react'
 import { shallow } from 'enzyme'
-import { LoginForm } from '../../src/scripts/components/LoginForm'
+import configureMockStore from 'redux-mock-store'
+import thunk from 'redux-thunk'
+import { LoginForm, mapStateToProps } from '../../src/scripts/components/LoginForm'
+
+const createMockStore = configureMockStore([thunk])
 
 describe('LoginForm Component', () => {
-  const setup = (propOverrides) => {
-    const props = {
+  const state = {
+    authentication: {
       loading: false,
       auth: null,
-      error: '',
-      handleAuth: jest.fn(),
+      error: ''
+    }
+  }
+
+  const store = createMockStore(state)
+
+  const setup = (propOverrides) => {
+    const props = {
+      loading: state.authentication.loading,
+      auth: state.authentication.auth,
+      error: state.authentication.error,
+      submitLogin: jest.fn(),
       history: {},
       ...propOverrides
     }
@@ -16,7 +30,10 @@ describe('LoginForm Component', () => {
     const wrapper = shallow(<LoginForm {...props} />)
 
     return {
-      wrapper
+      wrapper,
+      props,
+      store,
+      state
     }
   }
 
@@ -30,6 +47,7 @@ describe('LoginForm Component', () => {
       const { wrapper } = setup({ loading: true })
       expect(wrapper).toMatchSnapshot()
       expect(wrapper.find('Loading').exists()).toBe(true)
+      expect(wrapper.find('form').props().style.display).toEqual('none')
     })
 
     it('shows you login successfully if auth is ok', () => {
@@ -38,6 +56,7 @@ describe('LoginForm Component', () => {
 
       const successEl = wrapper.find('.success-message')
       expect(successEl.exists()).toBe(true)
+      expect(wrapper.find('form').props().style.display).toEqual('block')
     })
 
     it('shows error if error message exits', () => {
@@ -47,6 +66,7 @@ describe('LoginForm Component', () => {
       const errorEl = wrapper.find('.error-message')
       expect(errorEl.exists()).toBe(true)
       expect(errorEl.text()).toEqual('abc')
+      expect(wrapper.find('form').props().style.display).toEqual('block')
     })
   })
 
@@ -93,5 +113,16 @@ describe('LoginForm Component', () => {
 
       wrapper.find('form').simulate('submit', { preventDefault: jest.fn() })
     })
+  })
+
+  it('returns state from mapStateToProps', () => {
+    const { store, state } = setup()
+    const result = {
+      loading: state.authentication.loading,
+      auth: state.authentication.auth,
+      error: state.authentication.error
+    }
+
+    expect(mapStateToProps(store.getState())).toEqual(result)
   })
 })
