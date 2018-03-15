@@ -16,7 +16,7 @@ export const submitLogin = (email, password, history) => dispatch => {
 
         firebase.auth().currentUser.getIdToken(true)
           .then(idToken => {
-            cookie.set('token', idToken)
+            cookie.set('token', idToken, { expires: new Date(new Date().getTime() + 60 * 60 * 1000) })
           })
 
         setTimeout(() => history.push('/'), 1000)
@@ -29,24 +29,12 @@ export const submitLogin = (email, password, history) => dispatch => {
     })
 }
 
-export const checkAuth = () => dispatch => {
-  dispatch(authLoading())
-
-  firebase.auth().onAuthStateChanged(user => {
-    if (user) {
-      dispatch(authSuccess(true))
-    } else {
-      dispatch(authSuccess(false))
-    }
-  })
-}
-
 export const signOut = () => dispatch => {
   dispatch(authLoading())
 
   firebase.auth().signOut()
     .then(() => {
-      dispatch(authSuccess(false))
+      dispatch(authSuccess(null))
       cookie.remove('token')
     }).catch(error => {
       dispatch(authError())

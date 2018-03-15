@@ -46,12 +46,12 @@ describe('Header Component', () => {
   })
 
   it('has logout button if auth is true', () => {
-    const { wrapper } = setup({ auth: true })
+    const { wrapper } = setup({ auth: { uid: 'dd' } })
     expect(wrapper.find('.logout-btn').exists()).toBe(true)
   })
 
   it('calls signOut when clicking logout button', () => {
-    const { wrapper, props } = setup({ auth: true })
+    const { wrapper, props } = setup({ auth: { uid: 'dd' } })
     wrapper.find('.logout-btn').simulate('click')
     expect(props.signOut).toHaveBeenCalled()
   })

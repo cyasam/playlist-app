@@ -9,6 +9,7 @@ import rootReducer from '../scripts/reducers'
 import thunk from 'redux-thunk'
 import Routes from '../scripts/Routes'
 import renderer from './helpers/renderer'
+import { authSuccess } from '../scripts/actions/handle-auth'
 
 admin.initializeApp({
   credential: admin.credential.cert(serviceAccount),
@@ -31,12 +32,12 @@ app.get('**', async (req, res) => {
 
   try {
     if (token) {
-      const decodedToken = await admin.auth().verifyIdToken(token)
+      const decodedToken = await admin.auth().verifyIdToken(token, true)
 
       if (!decodedToken) {
-        store.dispatch({ type: 'AUTH_SUCCESS', payload: false })
+        store.dispatch(authSuccess(null))
       } else {
-        store.dispatch({ type: 'AUTH_SUCCESS', payload: true })
+        store.dispatch(authSuccess(decodedToken))
       }
     }
   } catch (error) {
@@ -58,9 +59,9 @@ app.post('/api/login', (req, res) => {
   admin.auth().getUser(uid)
     .then(userRecord => {
       if (Object.keys(userRecord).length) {
-        res.send({ auth: true })
+        res.send({ auth: userRecord })
       } else {
-        res.send({ auth: false })
+        res.send({ auth: null })
       }
     })
 })

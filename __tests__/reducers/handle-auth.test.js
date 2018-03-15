@@ -21,7 +21,7 @@ describe('Fetch Trendings Reducer', () => {
   it('returns state of `AUTH_SUCCESS` type action', () => {
     const expectedAction = {
       type: AUTH_SUCCESS,
-      payload: { user: 'abc' }
+      payload: { uid: 'dd' }
     }
 
     const expectedState = { ...defaultState, loading: false, auth: expectedAction.payload, error: '' }
@@ -35,7 +35,7 @@ describe('Fetch Trendings Reducer', () => {
       payload: 'Error'
     }
 
-    const expectedState = { ...defaultState, loading: false, auth: false, error: expectedAction.payload }
+    const expectedState = { ...defaultState, loading: false, auth: null, error: expectedAction.payload }
 
     expect(handleAuthReducer(defaultState, expectedAction)).toEqual(expectedState)
   })

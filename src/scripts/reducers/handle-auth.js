@@ -2,7 +2,7 @@ import { AUTH_LOADING, AUTH_SUCCESS, AUTH_FAILED } from '../actions/handle-auth'
 
 export const INITIAL_STATE = {
   loading: false,
-  auth: false,
+  auth: null,
   error: ''
 }
 

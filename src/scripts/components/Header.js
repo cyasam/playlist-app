@@ -32,7 +32,7 @@ export const mapStateToProps = state => ({
 })
 
 Header.propTypes = {
-  auth: PropTypes.bool.isRequired,
+  auth: PropTypes.object,
   signOut: PropTypes.func.isRequired
 }
 
