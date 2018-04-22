@@ -23,7 +23,12 @@ export const submitLogin = (email, password, history) => dispatch => {
       })
     })
     .catch((error) => {
-      dispatch(authError('Authentication failed.'))
+      let errorMessage = 'Authentication failed.'
+      if (error.code === 'auth/wrong-password' || error.code === 'auth/invalid-email') {
+        errorMessage = 'Wrong Username or Password.'
+      }
+
+      dispatch(authError(errorMessage))
 
       throw error
     })

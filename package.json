@@ -78,10 +78,10 @@
     "rmFolders": "rimraf ./dist ./server",
     "prod:server": "webpack --config webpack.server.js --progress --watch",
     "prod:start": "webpack -p --config webpack.production.js --progress --watch",
-    "prod:server:start": "nodemon ./server/index.js --watch",
-    "prod": "npm-run-all -p rmFolders prod:start prod:server prod:server:start",
+    "prod:server:start": "nodemon ./server/index.js --inspect",
+    "prod": "npm-run-all -p rmFolders prod:**",
     "dev:start": "webpack-dev-server --config webpack.development.js --progress --host 0.0.0.0",
-    "start": "npm-run-all -p dev:*",
+    "start": "npm-run-all dev:**",
     "test": "jest --watchAll"
   },
   "jest": {

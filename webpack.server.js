@@ -1,6 +1,4 @@
 const path = require('path')
-const merge = require('webpack-merge')
-const commonConfig = require('./webpack.base.config')
 const nodeExternals = require('webpack-node-externals')
 
 const config = {
@@ -14,7 +12,26 @@ const config = {
     filename: 'index.js',
     path: path.resolve(__dirname, 'server')
   },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        exclude: /node_modules/,
+        use: ['babel-loader', 'eslint-loader']
+      },
+      {
+        test: /\.(jpe?g|png|gif|svg)$/,
+        exclude: /node_modules/,
+        use: {
+          loader: 'url-loader'
+        }
+      }
+    ]
+  },
+  resolve: {
+    extensions: ['.js']
+  },
   externals: [nodeExternals()]
 }
 
-module.exports = merge(config, commonConfig)
+module.exports = config
