@@ -3,16 +3,13 @@ import { shallow } from 'enzyme'
 import configureMockStore from 'redux-mock-store'
 import thunk from 'redux-thunk'
 import { LoginForm, mapStateToProps } from '../../src/scripts/components/LoginForm'
+import { INITIAL_STATE as handleAuthInitialState } from '../../src/scripts/reducers/handle-auth'
 
 const createMockStore = configureMockStore([thunk])
 
 describe('LoginForm Component', () => {
   const state = {
-    authentication: {
-      loading: false,
-      auth: null,
-      error: ''
-    }
+    authentication: handleAuthInitialState
   }
 
   const store = createMockStore(state)
@@ -50,8 +47,8 @@ describe('LoginForm Component', () => {
       expect(wrapper.find('form').props().style.display).toEqual('none')
     })
 
-    it('shows you login successfully if auth is ok', () => {
-      const { wrapper } = setup({ loading: false, auth: {} })
+    it('shows you login successfully if auth is true', () => {
+      const { wrapper } = setup({ loading: false, auth: true })
       expect(wrapper).toMatchSnapshot()
 
       const successEl = wrapper.find('.success-message')

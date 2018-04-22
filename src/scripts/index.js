@@ -6,11 +6,11 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import firebase from 'firebase'
 import { firebaseConfig } from './config'
+import cookie from 'js-cookie'
 import rootReducer from './reducers'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import Routes from './Routes'
-import { checkAuth } from './actions/handle-auth'
 
 import '../styles/app.scss'
 
@@ -29,7 +29,16 @@ const store = createStore(
 )
 
 firebase.initializeApp(firebaseConfig)
-store.dispatch(checkAuth())
+firebase.auth().onAuthStateChanged(user => {
+  if (user && !cookie.get('token')) {
+    user.getIdToken(true)
+      .then(idToken => {
+        cookie.set('token', idToken, { expires: new Date(new Date().getTime() + 60 * 60 * 1000) })
+      }).catch(error => {
+        throw error
+      })
+  }
+})
 
 hydrate(
   <Provider store={store}>

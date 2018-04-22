@@ -11,9 +11,9 @@ export default (state = INITIAL_STATE, action) => {
     case AUTH_LOADING:
       return { ...INITIAL_STATE, loading: true }
     case AUTH_SUCCESS:
-      return { ...state, loading: false, auth: action.payload, error: '' }
+      return { ...INITIAL_STATE, auth: action.payload }
     case AUTH_FAILED:
-      return { ...state, loading: false, auth: null, error: action.payload }
+      return { ...INITIAL_STATE, error: action.payload }
     default:
       return state
   }
