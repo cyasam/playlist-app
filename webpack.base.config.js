@@ -14,7 +14,7 @@ const commonConfig = {
           options: {
             name: '[name].[hash].[ext]',
             outputPath: 'assets/images/',
-            publicPath: '/'
+            publicPath: '/assets/images/'
           }
         }
       },
@@ -26,7 +26,7 @@ const commonConfig = {
           options: {
             name: '[name].[ext]',
             outputPath: 'assets/images/',
-            publicPath: '/'
+            publicPath: '/assets/images/'
           }
         }
       },
