@@ -34,7 +34,12 @@ class VideoViews extends Component {
   }
 
   render () {
-    const { format } = this.props
+    const { viewCount, format } = this.props
+
+    if (!viewCount) {
+      return false
+    }
+
     return (
       <span>{this.selectFormat(format)} views</span>
     )
@@ -42,7 +47,7 @@ class VideoViews extends Component {
 }
 
 VideoViews.propTypes = {
-  viewCount: PropTypes.string.isRequired,
+  viewCount: PropTypes.string,
   format: PropTypes.string
 }
 

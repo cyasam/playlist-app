@@ -25,7 +25,7 @@ class VideoListItem extends Component {
             <p className='card-info'>
               { Object.keys(video.statistics).length &&
               <VideoViews viewCount={video.statistics.viewCount} format='summary' />
-              } • <Moment fromNow>{video.publishedAt}</Moment>
+              } <Moment fromNow>{video.publishedAt}</Moment>
             </p>
           </div>
         </div>
@@ -52,7 +52,7 @@ class VideoListItem extends Component {
             <p className='card-info'>
               { Object.keys(video.statistics).length &&
               <VideoViews viewCount={video.statistics.viewCount} format='summary' />
-              } • <Moment fromNow>{video.publishedAt}</Moment>
+              } <Moment fromNow>{video.publishedAt}</Moment>
             </p>
           </div>
         </div>

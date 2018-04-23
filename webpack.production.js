@@ -5,6 +5,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin')
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin')
 
 const config = {
+  mode: 'production',
   devtool: false,
   output: {
     filename: 'assets/js/[name].[chunkhash].js'

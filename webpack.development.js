@@ -1,9 +1,9 @@
 const webpack = require('webpack')
-const path = require('path')
 const merge = require('webpack-merge')
 const baseConfig = require('./webpack.base')
 
 const config = {
+  mode: 'development',
   devtool: 'eval-source-map',
   output: {
     filename: 'assets/js/[name].[hash].js'
@@ -21,21 +21,10 @@ const config = {
               sourceMap: true
             }
           },
-          {
-            loader: 'resolve-url-loader',
-            options: {
-              keepQuery: true
-            }
-          },
           'sass-loader'
         ]
       }
     ]
-  },
-  devServer: {
-    contentBase: path.resolve(__dirname, 'dist'),
-    port: 7885,
-    historyApiFallback: true
   },
   plugins: [
     new webpack.DefinePlugin({

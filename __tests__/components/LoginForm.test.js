@@ -47,8 +47,8 @@ describe('LoginForm Component', () => {
       expect(wrapper.find('form').props().style.display).toEqual('none')
     })
 
-    it('shows you login successfully if auth is true', () => {
-      const { wrapper } = setup({ loading: false, auth: true })
+    it('shows you login successfully if auth is not null', () => {
+      const { wrapper } = setup({ loading: false, auth: {} })
       expect(wrapper).toMatchSnapshot()
 
       const successEl = wrapper.find('.success-message')

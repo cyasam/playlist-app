@@ -1,4 +1,3 @@
-const webpack = require('webpack')
 const path = require('path')
 const merge = require('webpack-merge')
 const commonConfig = require('./webpack.base.config')
@@ -7,18 +6,25 @@ const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
 
 const config = {
   entry: {
-    app: ['babel-polyfill', './src/scripts/index.js'],
-    vendor: ['react', 'react-dom', 'react-router-dom', 'react-redux', 'redux', 'redux-thunk']
+    app: './src/scripts/index.js',
+    vendor: ['babel-polyfill', 'react', 'react-dom', 'react-router-dom', 'react-redux', 'redux', 'redux-thunk']
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
     publicPath: '/'
   },
+  optimization: {
+    splitChunks: {
+      cacheGroups: {
+        commons: {
+          test: /node_modules/,
+          name: 'vendor',
+          chunks: 'all'
+        }
+      }
+    }
+  },
   plugins: [
-    new webpack.optimize.CommonsChunkPlugin({
-      names: ['vendor'],
-      minChunks: Infinity
-    }),
     new FaviconsWebpackPlugin({
       logo: './src/images/favicon.png',
       prefix: 'assets/images/favicons/',

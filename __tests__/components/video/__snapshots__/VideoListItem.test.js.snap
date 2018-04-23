@@ -47,7 +47,7 @@ exports[`VideoListItem Component renders properly 1`] = `
           format="summary"
           viewCount="4277277"
         />
-         • 
+         
         <t
           ago={false}
           calendar={false}
@@ -117,7 +117,7 @@ exports[`VideoListItem Component renders properly if type props is media 1`] = `
           format="summary"
           viewCount="4277277"
         />
-         • 
+         
         <t
           ago={false}
           calendar={false}

@@ -99,7 +99,7 @@ exports[`LoginForm Component Response elements shows loading if loading is true 
 </React.Fragment>
 `;
 
-exports[`LoginForm Component Response elements shows you login successfully if auth is true 1`] = `
+exports[`LoginForm Component Response elements shows you login successfully if auth is not null 1`] = `
 <React.Fragment>
   <form
     onSubmit={[Function]}
